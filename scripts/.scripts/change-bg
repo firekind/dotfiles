@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [[ "$1" == "" ]]
+then
+   wal -i ~/Pictures/Wallpapers/new -n
+else
+   wal -i $1 -n
+fi
+
+# set and save wallpaper
+nitrogen $(cat ~/.cache/wal/wal) --set-zoom-fill --save
+
+# update Xresouces
+cp ~/.cache/wal/colors.Xresources ~/.Xresources
+
+# reload Xresouces
+xrdb ~/.Xresources
+
+# kill any instances of dunst and restart it
+pkill dunst
+dunst &> /dev/null &
+

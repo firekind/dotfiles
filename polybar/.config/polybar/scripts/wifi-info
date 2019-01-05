@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ "$(pgrep -f 'dzen2 -title-name wifi-info')" ]]
+then
+   pkill -f "dzen2 -title-name wifi-info"
+   exit 0
+fi
+
+source $HOME/.cache/wal/colors.sh
+text=$(iw dev wlo1 link | egrep "SSID|signal" | sed -e 's/^[[:space:]]*//' | sed -e 's/s/S/g')
+(echo -e "Wifi Info:\n$text") | dzen2 \
+   -title-name "wifi-info" \
+   -bg "$color0" \
+   -fg "$color7" \
+   -x 1720 \
+   -y 45 \
+   -h 40 \
+   -w 190 \
+   -l 2 \
+   -fn "Source Code Pro" \
+   -e "onstart=uncollapse;entertitle=grabkeys;enterslave=grabkeys;leaveslave=ungrabkeys;button3=exit;key_Escape=exit,ungrabkeys" \
+   -ta c \
+   -sa c \
+   -p &

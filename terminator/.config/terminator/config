@@ -1,0 +1,43 @@
+[global_config]
+  borderless = True
+  dbus = False
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#1e272b"
+    background_darkness = 0.0
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    cursor_shape = underline
+    foreground_color = "#ebdbb2"
+    palette = "#000000:#685742:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    scrollbar_position = hidden
+    show_titlebar = False
+  [[dark]]
+    cursor_color = "#aaaaaa"
+    cursor_shape = underline
+    font = Source Code Pro 11
+    icon_bell = False
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False
+  [[opaque]]
+    background_color = "#1e272b"
+    cursor_color = "#aaaaaa"
+    cursor_shape = underline
+    font = Source Code Pro 11
+    foreground_color = "#ebdbb2"
+    icon_bell = False
+    palette = "#000000:#685742:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+F="/home/ouroboros/.scripts/.loc"
+function ping_gw (){
+   ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` &> /dev/null && return 0 || return -1
+}
+
+ping_gw
+
+if [[ $? != 0 ]]
+then
+   echo "using stored location"
+   i=0
+   while IFS='' read -r line || [[ -n "$line" ]]; do
+      coords[i]=$line
+      ((i++))
+   done < $F
+else
+   echo "obtaining location from net"
+   coords=($(whereami -r | egrep "latitude|longitude" | sed 's/.*: \(.*\),/\1/'))
+   echo -e "${coords[0]}\n${coords[1]}" > $F
+fi
+redshift -l ${coords[0]}:${coords[1]}

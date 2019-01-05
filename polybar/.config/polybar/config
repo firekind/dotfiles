@@ -1,0 +1,224 @@
+[bar/top]
+	monitor = ${env:MONITOR:}
+	width = 100%
+	;width = 30%
+	height = 27
+	;radius = 0
+	radius = 7
+	fixed-center = true
+
+	background = ${xrdb:color0}
+	foreground = ${xrdb:color7}
+
+	;line-size = 3
+	line-size = 0
+	;line-color =
+
+	border-size = 8
+	border-color = #00ffffff
+
+	padding-left = 0
+	padding-right = 1
+
+	module-margin-left = 1
+	module-margin-right = 2
+
+	font-0 = "Source Code Pro Semibold:pixelsize=11;1"
+	font-1 = "Font Awesome 5 Pro:style=Solid:pixelsize=13;3.5"
+	font-2 = "Font Awesome 5 Brands:pixelsize=10;1"
+
+	modules-left = i3
+	modules-center = date
+	modules-right = weather eth wlan battery
+
+	;tray-position = none
+	;tray-padding = 2
+	;tray-maxsize = 24
+	;tray-detached = false
+	;tray-transparent = false
+	;tray-scale = 1.0
+
+	;override-redirect = true
+	;wm-restach = i3
+	;offset-x = 670
+	;offset-y = 2
+	padding = 0
+ 
+	cursor-click = pointer
+	cursor-scroll = ns-resize
+	enable-ipc = true
+
+[module/i3]
+	type = internal/i3
+	format = <label-state> <label-mode>
+	index-sort = true
+	wrapping-scroll = false
+
+	label-mode-padding = 2
+	;label-mode-foreground = ${xrdb:color0}
+	;label-mode-background = ${xrdb:color4}
+
+	label-focused = %index%
+	label-focused-background = ${xrdb:color8}
+	label-focused-foreground = ${xrdb:color0} 
+	label-focused-padding = 2
+
+	label-unfocused = %index%
+	;label-unfocused-background = ${xrdb:color4}
+	label-unfocused-foreground = ${xrdb:color7} 
+	label-unfocused-padding = 2
+
+	label-visible = %index%
+	;label-visible-background = ${xrdb:color4}
+	;label-visible-foreground = ${xrdb:color0}
+	label-visible-padding = 2
+
+	label-urgent = %index%
+	label-urgent-background = #BA2922
+	label-urgent-padding = 2
+
+[module/battery]
+	type = internal/battery
+	battery = BAT0
+	adapter = ADP1
+	full-at = 100
+
+	format-foreground = ${xrdb:color0}
+	format-background = ${xrdb:color5}
+
+	format-charging = <animation-charging> <label-charging>
+	format-discharging = <ramp-capacity> <label-discharging>
+	label-full =  %percentage%
+	
+	ramp-capacity-0 = 
+	ramp-capacity-1 = 
+	ramp-capacity-2 = 
+	ramp-capacity-3 = 
+	ramp-capacity-4 = 
+
+	animation-charging-0 = 
+	animation-charging-1 = 
+	animation-charging-2 = 
+	animation-charging-3 = 
+	animation-charging-4 = 
+	animation-charging-framerate = 650
+
+[module/wlan]
+	type = internal/network
+	interface = wlo1
+	interval = 3.0
+
+	;format-connected = <ramp-signal> <label-connected>
+	format-connected = <label-connected><ramp-signal>
+	format-connected-foreground = ${xrdb:color7}
+	format-connected-background = ${xrdb:color0}
+	format-connected-padding = 0
+	;label-connected = %essid%
+	label-connected = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+
+	format-disconnected = <label-disconnected>
+	;label-disconnected =  
+	label-disconnected =  
+	;ramp-signal-0 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+	;ramp-signal-1 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+	;ramp-signal-2 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+	;ramp-signal-3 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}" 
+	;ramp-signal-4 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+	ramp-signal-0 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+	ramp-signal-1 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+	ramp-signal-2 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+	ramp-signal-3 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}" 
+	ramp-signal-4 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+	ramp-signal-foreground = ${xrdb:color7}
+
+[module/eth]
+	type = internal/network
+	interface = eno1
+	interval = 3.0
+
+	format-connected-padding = 0
+	format-connected-foreground = ${xrdb:color7}
+	format-connected-background = ${xrdb:color0}
+	format-connected-prefix = " "
+	format-connected-prefix-foreground = ${xrdb:color7}
+	label-connected = %local_ip%
+
+	format-disconnected =
+
+[module/date]
+	type = internal/date
+	interval = 5
+
+	time = %I:%M %p%
+	time-alt = "%{A1:~/.config/polybar/scripts/dzen-calendar:}%I:%M %p%{A}"
+	
+	format-prefix = 
+	;format-foreground = ${xrdb:color0}
+	;format-background = ${xrdb:color5}
+	format-padding = -1
+
+	label = %date% %time%
+
+[module/weather]
+	type = custom/script
+	exec = /opt/miniconda3/bin/python ~/.config/polybar/scripts/weather.py
+	click-left = /opt/miniconda3/bin/python ~/.config/polybar/scripts/weather.py
+	label = %output%
+	interval = 60
+
+[module/cpu]
+	type = internal/cpu
+	interval = 0.5
+	format = <ramp-coreload>
+	label = CPU
+
+	ramp-coreload-0 = ▁
+	ramp-coreload-0-font = 2
+	ramp-coreload-0-foreground = ${xrdb:color7}
+	ramp-coreload-1 = ▂
+	ramp-coreload-1-font = 2
+	ramp-coreload-1-foreground = ${xrdb:color7}
+	ramp-coreload-2 = ▃
+	ramp-coreload-2-font = 2
+	ramp-coreload-2-foreground = ${xrdb:color7}
+	ramp-coreload-3 = ▄
+	ramp-coreload-3-font = 2
+	ramp-coreload-3-foreground = ${xrdb:color7}
+	ramp-coreload-4 = ▅
+	ramp-coreload-4-font = 2
+	ramp-coreload-4-foreground = #fba922
+	ramp-coreload-5 = ▆
+	ramp-coreload-5-font = 2
+	ramp-coreload-5-foreground = #fba922
+	ramp-coreload-6 = ▇
+	ramp-coreload-6-font = 2
+	ramp-coreload-6-foreground = #ff5555
+	ramp-coreload-7 = █
+	ramp-coreload-7-font = 2
+	ramp-coreload-7-foreground = #ff5555
+
+[module/memory]
+	type = internal/memory
+	format = <bar-used>
+	label = RAM
+
+	bar-used-width = 30
+	bar-used-foreground-0 = ${xrdb:color7}
+	bar-used-foreground-1 = ${xrdb:color7}
+	bar-used-foreground-2 = #fba922
+	bar-used-foreground-3 = #ff5555
+	bar-used-indicator = |
+	bar-used-indicator-font = 6
+	bar-used-indicator-foreground = #ff
+	bar-used-fill = ─
+	bar-used-fill-font = 6
+	bar-used-empty = ─
+	bar-used-empty-font = 6
+	bar-used-empty-foreground = #444444
+
+[settings]
+	screenchange-reload = true
+
+[global/wm]
+	margin-top = 0
+	margin-bottom = 0
