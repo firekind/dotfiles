@@ -1,6 +1,6 @@
 #!/bin/bash
 
-F="/home/ouroboros/.config/i3/scripts/.loc"
+F="/home/ouroboros/.scripts/.loc"
 function ping_gw (){
    ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` &> /dev/null && return 0 || return -1
 }
