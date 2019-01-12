@@ -211,6 +211,7 @@ exec --no-startup-id 								nitrogen --restore; sleep 1; compton -b
 #exec --no-startup-id 								/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id								terminator -T term_pad -p opaque
 exec --no-startup-id								urxvt -name sys_monitor -e htop
+exec --no-startup-id								~/.config/i3/scripts/redshift-start
 #exec --no-startup-id								boostnote
 #exec_always --no-startup-id 						gnome-power-manager
 #exec_always --no-startup-id 						ff-theme-util

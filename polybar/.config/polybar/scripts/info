@@ -25,13 +25,16 @@ function battery () {
  	chargeInfo=$(echo $all | sed 's/,.*//')
  	timeInfo=$(echo $all | sed 's/^[^,]*,//g')
  	tempInfo=" Temp: $(acpi -t | sed 's/^[^,]*,//g')"
- 
+	line=3 
  	echo $all | grep "Unknown"
  	if [[ "$?" -eq 0 ]]
  	then
     	chargeInfo="Unknown"
      	timeInfo=" Unknown"
      	tempInfo=" Unknown"
+	elif [[ $(echo $all | grep "Full") ]]
+	then
+		timeInfo=" Time: NA"
 	fi
 
 	(echo -e " BATTERY INFO:\n $chargeInfo\n$timeInfo\n$tempInfo") | dzen2 \
@@ -42,7 +45,7 @@ function battery () {
      	-y 45 \
      	-h 40 \
      	-w 290 \
-     	-l 3 \
+     	-l $line \
      	-fn "Source Code Pro" \
      	-e "onstart=uncollapse;entertitle=grabkeys;enterslave=grabkeys;leaveslave=ungrabkeys;button3=exit;key_Escape=exit,ungrabkeys" \
      	-ta c \
