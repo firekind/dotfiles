@@ -90,17 +90,17 @@
 	format-discharging = <ramp-capacity> <label-discharging>
 	label-full =  %percentage%
 	
-	ramp-capacity-0 = 
-	ramp-capacity-1 = 
-	ramp-capacity-2 = 
-	ramp-capacity-3 = 
-	ramp-capacity-4 = 
+	ramp-capacity-0 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
+	ramp-capacity-1 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
+	ramp-capacity-2 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
+	ramp-capacity-3 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
+	ramp-capacity-4 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
 
-	animation-charging-0 = 
-	animation-charging-1 = 
-	animation-charging-2 = 
-	animation-charging-3 = 
-	animation-charging-4 = 
+	animation-charging-0 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
+	animation-charging-1 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
+	animation-charging-2 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
+	animation-charging-3 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
+	animation-charging-4 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
 	animation-charging-framerate = 650
 
 [module/wlan]
@@ -114,21 +114,21 @@
 	format-connected-background = ${xrdb:color0}
 	format-connected-padding = 0
 	;label-connected = %essid%
-	label-connected = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+	label-connected = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
 
 	format-disconnected = <label-disconnected>
 	;label-disconnected =  
 	label-disconnected =  
-	;ramp-signal-0 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
-	;ramp-signal-1 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
-	;ramp-signal-2 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
-	;ramp-signal-3 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}" 
-	;ramp-signal-4 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
-	ramp-signal-0 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
-	ramp-signal-1 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
-	ramp-signal-2 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
-	ramp-signal-3 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}" 
-	ramp-signal-4 = "%{A1:~/.config/polybar/scripts/wifi-info:}%{A}"
+	;ramp-signal-0 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
+	;ramp-signal-1 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
+	;ramp-signal-2 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
+	;ramp-signal-3 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}" 
+	;ramp-signal-4 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
+	ramp-signal-0 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
+	ramp-signal-1 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
+	ramp-signal-2 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
+	ramp-signal-3 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}" 
+	ramp-signal-4 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
 	ramp-signal-foreground = ${xrdb:color7}
 
 [module/eth]
@@ -162,7 +162,7 @@
 [module/weather]
 	type = custom/script
 	exec = /opt/miniconda3/bin/python ~/.config/polybar/scripts/weather.py
-	click-left = /opt/miniconda3/bin/python ~/.config/polybar/scripts/weather.py
+	;click-left = /opt/miniconda3/bin/python ~/.config/polybar/scripts/weather.py
 	label = %output%
 	interval = 60
 

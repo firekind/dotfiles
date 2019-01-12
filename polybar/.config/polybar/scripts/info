@@ -1,0 +1,93 @@
+#!/bin/bash
+source $HOME/.cache/wal/colors.sh
+
+function wifi () {
+	text=$(iw dev wlo1 link | egrep "SSID|signal" | sed -e 's/^[[:space:]]*//' | sed -e 's/s/S/g')
+	(echo -e "WIFI INFO:\n $text") | dzen2 \
+    	-title-name "wifi-info" \
+   		-bg "$color0" \
+    	-fg "$color7" \
+    	-x 1720 \
+    	-y 45 \
+   		-h 40 \
+    	-w 190 \
+    	-l 2 \
+    	-fn "Source Code Pro" \
+    	-e "onstart=uncollapse;entertitle=grabkeys;enterslave=grabkeys;leaveslave=ungrabkeys;button3=exit;key_Escape=exit,ungrabkeys" \
+    	-ta c \
+    	-sa c \
+    	-p &
+
+}
+
+function battery () {
+	all=$(acpi | sed 's/^[^:]*://g' | sed 's/,/:/1')
+ 	chargeInfo=$(echo $all | sed 's/,.*//')
+ 	timeInfo=$(echo $all | sed 's/^[^,]*,//g')
+ 	tempInfo=" Temp: $(acpi -t | sed 's/^[^,]*,//g')"
+ 
+ 	echo $all | grep "Unknown"
+ 	if [[ "$?" -eq 0 ]]
+ 	then
+    	chargeInfo="Unknown"
+     	timeInfo=" Unknown"
+     	tempInfo=" Unknown"
+	fi
+
+	(echo -e " BATTERY INFO:\n $chargeInfo\n$timeInfo\n$tempInfo") | dzen2 \
+     	-title-name "battery-info" \
+     	-bg "$color0" \
+     	-fg "$color7" \
+     	-x 1620 \
+     	-y 45 \
+     	-h 40 \
+     	-w 290 \
+     	-l 3 \
+     	-fn "Source Code Pro" \
+     	-e "onstart=uncollapse;entertitle=grabkeys;enterslave=grabkeys;leaveslave=ungrabkeys;button3=exit;key_Escape=exit,ungrabkeys" \
+     	-ta c \
+     	-sa l \
+     	-p &
+
+}
+
+
+function kill_process () {
+	if [[ "$(pgrep -f "dzen2 -title-name $1")" ]]
+	then
+		pkill -f "dzen2 -title-name $1"
+	fi
+}
+
+function is_process () {
+	pgrep -f "dzen2 -title-name $1"
+	if [[ "$?" -eq 0 ]]
+	then
+		return 1
+	else
+		return 0
+	fi
+}
+
+case "$1" in
+	-w)
+		kill_process "battery-info"
+		if [[ $(is_process "wifi-info") -ne 0 ]]
+		then
+			kill_process "wifi-info"
+			exit 0
+		else
+			wifi
+		fi
+		;;
+	-b)
+		kill_process "wifi-info"
+		if [[ $(is_process "battery-info") -ne 0 ]]
+		then
+			kill_process "battery-info"
+			exit 0
+		else
+			battery
+		fi
+		;;
+esac

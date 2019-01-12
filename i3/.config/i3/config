@@ -194,8 +194,9 @@ bindsym --release Print 							exec "scrot -m ~/Pictures/screenshots/%s_%H%M_%d.
 # show calendar
 bindsym $mod+c										exec --no-startup-id "~/.config/polybar/scripts/dzen-calendar"	
 
-# show wifi info
-bindsym $mod+Shift+w								exec --no-startup-id "~/.config/polybar/scripts/wifi-info"
+# show information
+bindsym $mod+Shift+w								exec --no-startup-id "~/.config/polybar/scripts/info -w"
+bindsym $mod+b										exec --no-startup-id "~/.config/polybar/scripts/info -b"
 
 # lock screen (showing background)
 bindsym $mod+l										exec --no-startup-id sh ~/.config/i3/scripts/lock.sh -b
@@ -215,7 +216,6 @@ exec --no-startup-id								urxvt -name sys_monitor -e htop
 #exec_always --no-startup-id 						ff-theme-util
 #exec_always --no-startup-id 						fix_xcursor
 exec_always --no-startup-id 						~/.config/polybar/scripts/launch.sh
-exec_always --no-startup-id							~/.config/i3/scripts/redshift-start
 
 # Application specific settings
 for_window [class="^.*"]							border pixel 0
