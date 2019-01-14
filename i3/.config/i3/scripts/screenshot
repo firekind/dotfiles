@@ -1,0 +1,4 @@
+#!/bin/bash
+
+scrot -m ~/Pictures/screenshots/%d-%m-%Y_%H:%M:%S.png
+dunstify "Screenshot saved" -r 20

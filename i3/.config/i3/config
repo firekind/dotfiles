@@ -189,7 +189,7 @@ bindsym XF86MonBrightnessDown						exec --no-startup-id sh ~/.config/i3/scripts/
 #bindcode 255										exec --no-startup-id sh ~/.config/i3/scripts/airplane.sh
 
 # Print screen controls
-bindsym --release Print 							exec "scrot -m ~/Pictures/screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png"
+bindsym --release Print 							exec ~/.config/i3/scripts/screenshot
 
 # show calendar
 bindsym $mod+c										exec --no-startup-id "~/.config/polybar/scripts/dzen-calendar"	
