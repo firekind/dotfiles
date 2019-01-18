@@ -259,6 +259,9 @@ assign [class="Atom"]								$ws2
 assign [class="Code"]								$ws2
 assign [class="jetbrains-studio"]  					$ws8
 assign [class="jetbrains-idea-ce"]					$ws2
+assign [class="discord"]							$ws8
+assign [class="Mailspring"]							$ws8
+
 #######################MODES#######################
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
