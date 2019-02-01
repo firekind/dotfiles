@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ ! -d "/run/media/ouroboros/12.20" ]]
+then
+	sudo mkdir /run/media/ouroboros/12.20
+fi
+
 if [ "$1" == "-m" ]
 then
 	sudo mount -t cifs //192.168.12.20/CE /run/media/ouroboros/12.20 -o username=ce,password=sas,vers=1.0
