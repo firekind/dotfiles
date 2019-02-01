@@ -98,6 +98,10 @@ export PATH=$PATH:~/.local/bin:~/.scripts
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias nsa="sudo netctl stop-all"
+alias na="sudo netctl start Aphelion"
+alias no="sudo netctl start Ouroboros"
+alias ns="sudo netctl start Studentlan"
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then

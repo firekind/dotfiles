@@ -2,5 +2,5 @@
 . /opt/miniconda3/etc/profile.d/conda.sh
 
 cd ~/Documents/MATLAB
-conda activate base
+conda activate jupyter
 jupyter lab

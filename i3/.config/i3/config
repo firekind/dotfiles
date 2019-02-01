@@ -255,6 +255,7 @@ for_window [urgent=latest] 							focus #switch to workspace with urgent window 
 
 assign [class="Boostnote"] 							$ws9
 assign [class="Firefox"]							$ws3
+assign [class="Min"]								$ws3
 assign [class="Atom"]								$ws2
 assign [class="Code"]								$ws2
 assign [class="jetbrains-studio"]  					$ws8
