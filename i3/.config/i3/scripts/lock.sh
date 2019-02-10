@@ -11,6 +11,20 @@ F=/usr/share/backgrounds/ouroboros.png
 if [[ "$1" == "-b" ]]
 then
 	F=$(cat ~/.cache/wal/wal)
+   	convertedFileName=${F##*/}
+	
+	if [[ ! -d /tmp/lock-images ]]
+	then
+		mkdir /tmp/lock-images
+	fi
+
+	if [[ ! -f /tmp/lock-images/$convertedFileName ]]
+	then
+		convert $F \
+			-resize 1920x -resize 'x1080<' \
+			-gravity center -crop 1920x1080+0+0 +repage /tmp/lock-images/$convertedFileName
+	fi
+	F="/tmp/lock-images/$convertedFileName"
 fi
 
 i3lock \
