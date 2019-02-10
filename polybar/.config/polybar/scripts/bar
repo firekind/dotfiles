@@ -1,0 +1,43 @@
+#!/bin/env sh
+
+launch (){
+	pkill polybar
+	sleep 1;
+
+	if type "xrandr"; then
+	  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+		MONITOR=$m polybar --reload top &
+	  done
+	else
+	  polybar --reload top &
+	fi
+}
+
+toggle_hide (){
+	xdo_path=$(which xdo)
+	if [ $? -ne 0 ]; then
+		echo "cannot find \'xdo\' command. " 1>&2
+		exit -1
+	fi
+
+	id=$(xdo id -N "Polybar")
+	
+	if xprop -id $id | grep -q "Normal"; then
+		xdo hide -N "Polybar"
+	else
+		xdo show -N "Polybar"
+	fi
+}
+
+
+case "$1" in
+	-ht)
+		toggle_hide
+		;;
+	-l)
+		launch
+		;;
+	*)
+		echo "Invalid usage"
+		;;
+esac

@@ -6,6 +6,7 @@
 	;radius = 0
 	radius = 7
 	fixed-center = true
+	;bottom=true
 
 	background = ${xrdb:color0}
 	foreground = ${xrdb:color7}
@@ -89,6 +90,10 @@
 	format-charging = <animation-charging> <label-charging>
 	format-discharging = <ramp-capacity> <label-discharging>
 	label-full =  %percentage%
+	
+	;format-charging = <animation-charging>
+	;format-discharging = <ramp-capacity>
+	;label-full = 
 	
 	ramp-capacity-0 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
 	ramp-capacity-1 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"

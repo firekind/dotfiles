@@ -1,14 +1,23 @@
 #!/bin/bash
 source $HOME/.cache/wal/colors.sh
 
+bottom=0
+
 function wifi () {
+	if [[ "$bottom" -ne 0 ]]
+	then
+		y_coord=915
+	else
+		y_coord=45
+	fi
+
 	text=$(iw dev wlo1 link | egrep "SSID|signal" | sed -e 's/^[[:space:]]*//' | sed -e 's/s/S/g')
 	(echo -e "WIFI INFO:\n $text") | dzen2 \
     	-title-name "wifi-info" \
    		-bg "$color0" \
     	-fg "$color7" \
     	-x 1720 \
-    	-y 45 \
+		-y $y_coord \
    		-h 40 \
     	-w 190 \
     	-l 2 \
@@ -37,12 +46,19 @@ function battery () {
 		timeInfo=" Time: NA"
 	fi
 
+	if [[ "$bottom" -ne 0 ]]
+	then
+		y_coord=995
+	else
+		y_coord=45
+	fi
+
 	(echo -e " BATTERY INFO:\n $chargeInfo\n$timeInfo\n$tempInfo") | dzen2 \
      	-title-name "battery-info" \
      	-bg "$color0" \
      	-fg "$color7" \
      	-x 1620 \
-     	-y 45 \
+		-y $y_coord \
      	-h 40 \
      	-w 290 \
      	-l $line \
@@ -59,6 +75,11 @@ function kill_process () {
 	if [[ "$(pgrep -f "dzen2 -title-name $1")" ]]
 	then
 		pkill -f "dzen2 -title-name $1"
+	fi
+
+	if [[ "$(pgrep -f "dzen2 -title-name calendar")" ]]
+	then
+		pkill -f "dzen2 -title-name calendar"
 	fi
 }
 

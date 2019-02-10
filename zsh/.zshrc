@@ -71,6 +71,8 @@ plugins=(
 (cat ~/.cache/wal/sequences &)
 . /opt/miniconda3/etc/profile.d/conda.sh
 export PATH=$PATH:~/.local/bin:~/.scripts
+export PATH=$PATH:~/flutter/bin
+export PATH=$PATH:~/Android/Sdk/emulator
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

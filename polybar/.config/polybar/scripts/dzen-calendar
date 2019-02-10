@@ -2,6 +2,8 @@
 
 source $HOME/.cache/wal/colors.sh
 
+bottom=0
+
 if [[ "$(pgrep -f 'dzen2 -title-name calendar')" ]]
 then
    pkill -f "dzen2 -title-name calendar"
@@ -53,12 +55,22 @@ if test "$month" -eq "$current_month" && test "$year" -eq "$current_year"; then
   out=$(echo "$out" | sed -e "2,/$(date +%e)/ s/\($(date +%e)\)/^fg($color0)^bg($color7)\1^fg()^bg()/")
 fi
 
+if [[ $bottom -eq 0 ]]
+then
+	x_coord=835
+	y_coord=45
+else
+	x_coord=1655
+	y_coord=1000
+fi
+
+
 echo  "$out" | dzen2 \
   -title-name "calendar" \
   -bg "$color0" \
   -fg "$color7" \
-  -x 835 \
-  -y 45 \
+  -x $x_coord \
+  -y $y_coord \
   -h 35 \
   -l $((lines-1)) \
   -w 250 \
