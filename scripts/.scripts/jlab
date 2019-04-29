@@ -3,4 +3,7 @@
 
 cd ~
 conda activate jupyter
-jupyter lab
+jupyter notebook --no-browser &
+google-chrome-stable --app=http://localhost:8888 --user-data-dir=/tmp &> /dev/null
+kill $(pgrep -f jupyter)
+echo "done"

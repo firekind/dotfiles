@@ -15,7 +15,7 @@ from gi import require_version
 require_version('Gtk', '3.0')
 require_version('Nautilus', '3.0')
 from gi.repository import Nautilus, GObject
-from subprocess import call
+import subprocess
 import os
 
 # path to vscode
@@ -33,9 +33,13 @@ class VSCodeExtension(GObject.GObject, Nautilus.MenuProvider):
     def launch_vscode(self, menu, files):
         safepaths = ''
         args = ''
-
+        print(files)
         for file in files:
-            filepath = file.get_location().get_path()
+            if type(file) == type(""):
+                filepath=str(file)
+            else:
+                filepath = file.get_location().get_path()
+            
             safepaths += '"' + filepath + '" '
 
             # If one of the files we are trying to open is a folder
@@ -46,7 +50,7 @@ class VSCodeExtension(GObject.GObject, Nautilus.MenuProvider):
         if NEWWINDOW:
             args = '--new-window '
 
-        call(VSCODE + ' ' + args + safepaths + '&', shell=True)
+        subprocess.call(VSCODE + ' ' + args + safepaths + '&', shell=True)
 
     def get_file_items(self, window, files):
         item = Nautilus.MenuItem(
@@ -59,11 +63,33 @@ class VSCodeExtension(GObject.GObject, Nautilus.MenuProvider):
         return [item]
 
     def get_background_items(self, window, file_):
-        item = Nautilus.MenuItem(
+        menuItems = []
+        menuItems.append(Nautilus.MenuItem(
             name='VSCodeOpenBackground',
             label='Open ' + VSCODENAME + ' Here',
             tip='Opens VSCode in the current directory'
-        )
-        item.connect('activate', self.launch_vscode, [file_])
+        ))
+        menuItems[-1].connect('activate', self.launch_vscode, [file_])
 
-        return [item]
+        if file_ == None:
+            return menuItems
+        
+        FNULL=open(os.devnull, 'w')
+        loc = file_.get_location().get_path()
+        isGitDir = subprocess.call("cd "+loc+"&& git rev-parse --is-inside-work-tree", shell=True, stdout=FNULL, stderr=FNULL)
+        if isGitDir == 0:
+            menuItems.append(Nautilus.MenuItem(
+                name='VSCodeOpenProjectBackground',
+                label='Open Project In ' + VSCODENAME,
+                tip='Opens git project in VSCode'
+            ))
+            gitProjDir=subprocess.Popen(['git','rev-parse', '--show-toplevel'],
+                    stdout=subprocess.PIPE,
+                    stderr=FNULL,
+                    cwd=loc).communicate()[0]
+            menuItems[-1].connect('activate', self.launch_vscode, [gitProjDir.decode("utf-8").strip()])
+	
+
+        return menuItems
+
+

@@ -1,6 +1,9 @@
 #!/bin/bash
 . /opt/miniconda3/etc/profile.d/conda.sh
 
-cd ~/Documents/MATLAB
+cd /run/media/ouroboros/Windows/Users/shyam/Documents/College/University/MATLAB
 conda activate jupyter
-jupyter lab
+jupyter notebook --no-browser &
+google-chrome-stable -app=http://localhost:8888 --user-data-dir=/tmp &> /dev/null
+sleep 1
+kill $(pgrep -f jupyter-notebook) $(pgrep -f jupyter/kernel)

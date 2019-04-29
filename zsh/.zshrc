@@ -69,7 +69,7 @@ plugins=(
 # User configuration
 
 (cat ~/.cache/wal/sequences &)
-. /opt/miniconda3/etc/profile.d/conda.sh
+. ~/miniconda3/etc/profile.d/conda.sh
 export PATH=$PATH:~/.local/bin:~/.scripts
 export PATH=$PATH:~/flutter/bin
 export PATH=$PATH:~/Android/Sdk/emulator
@@ -101,7 +101,7 @@ export PATH=$PATH:~/Android/Sdk/emulator
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias nsa="sudo netctl stop-all"
-alias na="sudo netctl start Aphelion"
+alias na="sudo netctl start AphelionStatic"
 alias no="sudo netctl start Ouroboros"
 alias ns="sudo netctl start Studentlan"
 
