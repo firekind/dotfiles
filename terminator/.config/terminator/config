@@ -2,7 +2,6 @@
   borderless = True
   dbus = False
   suppress_multiple_term_dialog = True
-  window_state = maximise
 [keybindings]
   split_horiz = <Primary><Shift>o
   split_vert = <Primary><Shift>e

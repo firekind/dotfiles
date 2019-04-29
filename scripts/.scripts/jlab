@@ -1,5 +1,5 @@
 #!/bin/bash
-. /opt/miniconda3/etc/profile.d/conda.sh
+. ~/miniconda3/etc/profile.d/conda.sh
 
 cd ~
 conda activate jupyter

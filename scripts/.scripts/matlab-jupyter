@@ -1,5 +1,5 @@
 #!/bin/bash
-. /opt/miniconda3/etc/profile.d/conda.sh
+. ~/miniconda3/etc/profile.d/conda.sh
 
 cd /run/media/ouroboros/Windows/Users/shyam/Documents/College/University/MATLAB
 conda activate jupyter
