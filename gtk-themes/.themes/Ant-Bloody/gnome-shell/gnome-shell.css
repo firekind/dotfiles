@@ -699,10 +699,10 @@ StScrollBar {
   /* transition from solid to transparent */
   transition-duration: 500ms;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 12px;
   font-family: Source Code Pro;
   /* original: 1.86em */
-  height: 2.3em;
+  height: 1.86em;
   padding: 0px 0px; }
   #panel.unlock-screen, #panel.login-screen, #panel.lock-screen {
     background-color: transparent; }
@@ -750,7 +750,7 @@ StScrollBar {
         icon-shadow: black 0 2px 2px; }
     #panel .panel-button .system-status-icon {
       /* original: 1.09em */
-      icon-size: 1.29em;
+      icon-size: 1.09em;
       padding: 0 5px; }
     .unlock-screen #panel .panel-button,
     .login-screen #panel .panel-button,
