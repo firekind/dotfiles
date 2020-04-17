@@ -8,7 +8,9 @@ set $mod Mod4
 
 hide_edge_borders both
 
-font xft:URWGothic-Book 1
+# font xft:URWGothic-Book 10
+font pango:Fira Code Retina 13
+title_align center
 
 floating_modifier $mod
 
@@ -56,6 +58,7 @@ bindsym $mod+Return 								exec terminator
 bindsym $mod+Shift+Return							exec i3-sensible-terminal
 bindsym $mod+grave 									[class="Terminator" title="term_pad"] scratchpad show
 bindsym $mod+e										exec nautilus
+bindsym $mod+Shift+e								exec terminator -x ranger
 
 # Window kill command
 bindsym $mod+Shift+q 								kill
@@ -97,8 +100,8 @@ bindsym $mod+f 										fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s 									layout stacking
-# bindsym $mod+Shift+w 								layout tabbed
-# bindsym $mod+Shift+d								layout default
+bindsym $mod+t 										layout tabbed
+bindsym $mod+Shift+d								layout default
 # bindsym $mod+e 									layout toggle split
 
 # toggle tiling / floating
@@ -220,7 +223,7 @@ exec --no-startup-id								udiskie -c ~/.config/udiskie/config.yaml
 exec_always --no-startup-id 						~/.config/polybar/scripts/bar -l
 
 # Application specific settings
-for_window [class="^.*"]							border pixel 0
+for_window [class="^.*"]							border pixel 0, title_format "<span size='smaller'>%title</span>"
 for_window [title="alsamixer"] 						floating enable border pixel 1
 for_window [class="Calamares"] 						floating enable border normal
 for_window [class="Clipgrab"] 						floating enable
@@ -248,8 +251,8 @@ for_window [class="Thus"] 							floating enable border normal
 for_window [class="Timeset-gui"] 					floating enable border normal
 for_window [class="(?i)virtualbox"] 				floating enable border normal
 for_window [class="Xfburn"] 						floating enable
-for_window [class="Terminator" title="term_pad"]	move scratchpad, resize set 650 300, move position 1260 45, scratchpad show
-for_window [instance="sys_monitor"]					move scratchpad, resize set 1500 900, move position 210 103, scratchpad show
+for_window [class="Terminator" title="term_pad"]	move scratchpad, resize set 650 300, move position 1260 45
+for_window [instance="sys_monitor"]					move scratchpad, resize set 1500 900, move position 210 103
 for_window [instance="gnome-calendar"]				floating enable
 for_window [title="Welcome to Android Studio"]		floating enable
 for_window [urgent=latest] 							focus #switch to workspace with urgent window automatically
@@ -257,9 +260,11 @@ for_window [class="simplescreenrecorder"]			floating enable
 for_window [class="Nm-connection-editor"]			floating enable
 for_window [class="jetbrains-pycharm-ce" title=" "]	floating enable
 for_window [title="Shiginima Launcher v4.200"]		floating enable
+for_window [title="todos.md - Typora"]				floating enable, resize set 350 650, move position 1510 45
+for_window [title="Assignment"]						floating enable
 
 assign [class="Boostnote"] 							$ws9
-assign [class="Firefox"]							$ws3
+assign [class="firefox"]							$ws3
 assign [class="Min"]								$ws3
 assign [class="Atom"]								$ws2
 assign [class="Code"]								$ws2
@@ -270,8 +275,10 @@ assign [class="discord"]							$ws8
 assign [class="Mailspring"]							$ws8
 assign [class="dia"]								$ws8
 assign [class="Google-chrome"]						$ws3
+assign [class="Chromium"]						    $ws3
 assign [class="Minecraft.*"]						$ws9
 assign [title="Shiginima Launcher.*"]				$ws9
+assign [title="todos.md - Typora"]				    $ws9
 
 #######################MODES#######################
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
@@ -290,30 +297,30 @@ mode "$mode_system" {
 }
 
 mode "resize" {
-	# These bindings trigger as soon as you enter the resize mode
-	# Pressing left will shrink the window’s width.
-	# Pressing right will grow the window’s width.
-	# Pressing up will shrink the window’s height.
-	# Pressing down will grow the window’s height.
-	bindsym j 										resize shrink width 5 px or 5 ppt
-	bindsym k 										resize grow height 5 px or 5 ppt
-	bindsym l 										resize shrink height 5 px or 5 ppt
-	bindsym semicolon 								resize grow width 5 px or 5 ppt
+    # These bindings trigger as soon as you enter the resize mode
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym j 										resize shrink width 5 px or 5 ppt
+    bindsym k 										resize grow height 5 px or 5 ppt
+    bindsym l 										resize shrink height 5 px or 5 ppt
+    bindsym semicolon 								resize grow width 5 px or 5 ppt
 
-	# same bindings, but for the arrow keys
-	bindsym Left 									resize shrink width 5 px or 5 ppt
-	bindsym Down 									resize grow height 5 px or 5 ppt
-	bindsym Up 										resize shrink height 5 px or 5 ppt
-	bindsym Right 									resize grow width 5 px or 5 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left 									resize shrink width 5 px or 5 ppt
+    bindsym Down 									resize grow height 5 px or 5 ppt
+    bindsym Up 										resize shrink height 5 px or 5 ppt
+    bindsym Right 									resize grow width 5 px or 5 ppt
 
-	bindsym Shift+Left 								resize shrink width 1 px or 1 ppt
-	bindsym Shift+Down 								resize grow height 1 px or 1 ppt
-	bindsym Shift+Up 								resize shrink height 1 px or 1 ppt
-	bindsym Shift+Right 							resize grow width 1 px or 1 ppt
+    bindsym Shift+Left 								resize shrink width 1 px or 1 ppt
+    bindsym Shift+Down 								resize grow height 1 px or 1 ppt
+    bindsym Shift+Up 								resize shrink height 1 px or 1 ppt
+    bindsym Shift+Right 							resize grow width 1 px or 1 ppt
 
-	# exit resize mode: Enter or Escape
-	bindsym Return 									mode "default"
-	bindsym Escape 									mode "default"
+    # exit resize mode: Enter or Escape
+    bindsym Return 									mode "default"
+    bindsym Escape 									mode "default"
 }
 
 set $mode_gaps 										Gaps: (o)uter,  (i)nner, (m)in, (d)efault, (n)o gaps
@@ -324,33 +331,33 @@ mode "$mode_gaps" {
     bindsym i     								 	mode "$mode_gaps_inner"
     bindsym Return 									mode "default"
     bindsym Escape 									mode "default"
-	bindsym m      									gaps inner current set 15; gaps outer current set 0; mode "default"
-	bindsym d      									gaps inner current set 50; gaps outer current set 19; mode "default"
-	bindsym n      									gaps inner current set 0; gaps outer current set 0; mode "default"
+    bindsym m      									gaps inner current set 15; gaps outer current set 0; mode "default"
+    bindsym d      									gaps inner current set 50; gaps outer current set 19; mode "default"
+    bindsym n      									gaps inner current set 0; gaps outer current set 0; mode "default"
 }
 mode "$mode_gaps_inner" {
-	bindsym plus  									gaps inner current plus 5
-	bindsym minus 									gaps inner current minus 5
-	bindsym 0    								 	gaps inner current set 0
+    bindsym plus  									gaps inner current plus 5
+    bindsym minus 									gaps inner current minus 5
+    bindsym 0    								 	gaps inner current set 0
 
-	bindsym Shift+plus  							gaps inner all plus 5
-	bindsym Shift+minus 							gaps inner all minus 5
-	bindsym Shift+0    		 						gaps inner all set 0
+    bindsym Shift+plus  							gaps inner all plus 5
+    bindsym Shift+minus 							gaps inner all minus 5
+    bindsym Shift+0    		 						gaps inner all set 0
 
-	bindsym Return 									mode "default"
-	bindsym Escape 									mode "default"
+    bindsym Return 									mode "default"
+    bindsym Escape 									mode "default"
 }
 mode "$mode_gaps_outer" {
-	bindsym plus  									gaps outer current plus 5
-	bindsym minus 									gaps outer current minus 5
-	bindsym 0     									gaps outer current set 0
+    bindsym plus  									gaps outer current plus 5
+    bindsym minus 									gaps outer current minus 5
+    bindsym 0     									gaps outer current set 0
 
-	bindsym Shift+plus  							gaps outer all plus 5
-	bindsym Shift+minus 							gaps outer all minus 5
-	bindsym Shift+0     							gaps outer all set 0
+    bindsym Shift+plus  							gaps outer all plus 5
+    bindsym Shift+minus 							gaps outer all minus 5
+    bindsym Shift+0     							gaps outer all set 0
 
-	bindsym Return	 								mode "default"
-	bindsym Escape 									mode "default"
+    bindsym Return	 								mode "default"
+    bindsym Escape 									mode "default"
 }
 
 #######################

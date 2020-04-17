@@ -72,7 +72,11 @@ plugins=(
 . ~/miniconda3/etc/profile.d/conda.sh
 export PATH=$PATH:~/.local/bin:~/.scripts
 export PATH=$PATH:~/flutter/bin
-export PATH=$PATH:~/Android/Sdk/emulator
+export ANDROID_SDK_HOME=~/Android
+export ANDROID_SDK_ROOT=~/Android/sdk
+export ANDROID_NDK_HOME=$ANDROID_SDK_HOME/ndk
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
+export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -100,10 +104,7 @@ export PATH=$PATH:~/Android/Sdk/emulator
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias nsa="sudo netctl stop-all"
-alias na="sudo netctl start AphelionStatic"
-alias no="sudo netctl start Ouroboros"
-alias ns="sudo netctl start Studentlan"
+alias todos="i3-msg 'workspace 9'; exec typora ~/Documents/todos.md &!"
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
@@ -112,4 +113,4 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
