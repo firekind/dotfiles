@@ -2,7 +2,7 @@
 
 source $HOME/.cache/wal/colors.sh
 
-bottom=0
+bottom=1
 
 if [[ "$(pgrep -f 'dzen2 -title-name calendar')" ]]
 then
@@ -61,7 +61,7 @@ then
 	y_coord=45
 else
 	x_coord=1655
-	y_coord=1000
+	y_coord=990
 fi
 
 

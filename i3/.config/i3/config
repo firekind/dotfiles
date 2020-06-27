@@ -251,11 +251,11 @@ for_window [class="Thus"] 							floating enable border normal
 for_window [class="Timeset-gui"] 					floating enable border normal
 for_window [class="(?i)virtualbox"] 				floating enable border normal
 for_window [class="Xfburn"] 						floating enable
-for_window [class="Terminator" title="term_pad"]	move scratchpad, resize set 650 300, move position 1260 45
+for_window [class="Terminator" title="term_pad"]	move scratchpad, resize set 650 300, move position 1260 0 # set y to 45 when polybar is on top
 for_window [instance="sys_monitor"]					move scratchpad, resize set 1500 900, move position 210 103
 for_window [instance="gnome-calendar"]				floating enable
 for_window [title="Welcome to Android Studio"]		floating enable
-for_window [urgent=latest] 							focus #switch to workspace with urgent window automatically
+for_window [urgent=latest] 							focus # switch to workspace with urgent window automatically
 for_window [class="simplescreenrecorder"]			floating enable
 for_window [class="Nm-connection-editor"]			floating enable
 for_window [class="jetbrains-pycharm-ce" title=" "]	floating enable

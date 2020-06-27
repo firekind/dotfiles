@@ -43,9 +43,9 @@
     padding: 2.5ch;
     
     /*comment/remove the following you want the menu in the center of the screen*/
-    anchor: north west;
-    location: north west;
-    y-offset: 45;
+    anchor: south west;
+    location: south west;
+    y-offset: -55;
     x-offset: 9;
     width: 320;
 }}

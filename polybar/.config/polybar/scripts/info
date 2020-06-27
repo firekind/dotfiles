@@ -1,12 +1,12 @@
 #!/bin/bash
 source $HOME/.cache/wal/colors.sh
 
-bottom=0
+bottom=1
 
 function wifi () {
 	if [[ "$bottom" -ne 0 ]]
 	then
-		y_coord=915
+		y_coord=905
 	else
 		y_coord=45
 	fi
@@ -48,7 +48,7 @@ function battery () {
 
 	if [[ "$bottom" -ne 0 ]]
 	then
-		y_coord=995
+		y_coord=985
 	else
 		y_coord=45
 	fi
