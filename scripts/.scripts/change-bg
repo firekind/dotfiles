@@ -2,7 +2,7 @@
 
 if [[ "$1" == "" ]]
 then
-   wal -i ~/Pictures/Wallpapers/new -n
+   wal -i ~/Pictures/Wallpapers -n
 else
    wal -i $1 -n
 fi

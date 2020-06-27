@@ -11,7 +11,7 @@ rofi
 scrot
 jsoncpp
 python-pywal
-compton
+picom
 lxappearance
 acpi
 pulseaudio
@@ -44,6 +44,7 @@ udiskie
 terminator
 nautilus-extensions
 vim
+zsh
 "
 
 check_requirements() {
@@ -69,26 +70,36 @@ check_requirements() {
 }
 
 check_conflicts() {
-	if [[ -d "~/.config/i3" ]]
+	if [[ -d ~/.config/i3 ]]
 	then
-		mv "~/.config/i3" "~/.config/i3.bck"
+		mv ~/.config/i3 ~/.config/i3.bck
 	fi
 
-	if [[ -d "~/.i3" ]]
+	if [[ -d ~/.i3 ]]
 	then
-		mv "~/.i3" "~/.i3.bck"
+		mv ~/.i3 ~/.i3.bck
 	fi
 
-	if [[ -d "~/.config/dunst" ]]
+	if [[ -d ~/.config/dunst ]]
 	then
-		mv "~/.config/dunst" "~/.config/dunst.bck"
+		mv ~/.config/dunst ~/.config/dunst.bck
+	fi
+
+	if [[ -f ~/.vimrc ]]
+	then
+		mv ~/.vimrc ~/.vimrc.bck
+	fi
+
+	if [[ -f ~/.zshrc ]]
+	then
+		mv ~/.zshrc ~/.zshrc.bck
 	fi
 
 }
 
 install_packages() {
 	printf "\n -> installing(via yay): $(echo $1 | sed 's/\n/, /g'), custom-fonts\n"
-	yay -S ${packages}  --needed --answerclean All --answerdiff None --removemake --noconfirm
+	yay -S ${packages}  --needed --answerclean All --answerdiff None --removemake
 
 	dir=$(pwd)
 	cd res/packages/custom-fonts
@@ -103,17 +114,19 @@ install_dotfiles() {
 	stow -t ~ ${stowlist}
 	
 	printf "\n -> copying backgrounds"
-	if [[ ! -d "~/Pictures/Wallpapers" ]]
+	if [[ ! -d ~/Pictures/Wallpapers ]]
+	then
 		mkdir -p ~/Pictures/Wallpapers
 	fi
 	cp res/wallpapers/* ~/Pictures/Wallpapers
 
-	printf "\n -> copying zsh theme"
-	sudo cp /res/zsh-themes/zero.zsh-theme /usr/share/oh-my-zsh/themes
+	printf "\n -> copying zsh theme\n"
+	sudo cp res/zsh-themes/zero.zsh-theme /usr/share/oh-my-zsh/themes
 
 	cd ${dir}
 }
 
 check_requirements
+check_conflicts
 install_packages
 install_dotfiles

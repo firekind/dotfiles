@@ -97,7 +97,7 @@ then
 fi
 
 ## google chrome
-if [[ id "/usr/bin/google-chrome-stable" ]]
+if [[ -d "/usr/bin/google-chrome-stable" ]]
 then
 	export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 fi
