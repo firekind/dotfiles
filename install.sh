@@ -44,6 +44,7 @@ terminator
 nautilus-extensions
 vim
 zsh
+picom
 "
 
 check_requirements() {
@@ -94,9 +95,20 @@ check_conflicts() {
 		mv ~/.zshrc ~/.zshrc.bck
 	fi
 
+	if [[ -f ~/.config/compton.conf ]]
+	then
+		mv ~/.config/compton.conf ~/.config/compton.conf.bck
+	fi
+
+	if [[ -d ~/.config/compton ]]
+	then
+		mv ~/.config/compton ~/.config/compton.bck
+	fi
+
 }
 
 install_packages() {
+	yay -Sy
 	printf "\n -> installing(via yay): $(echo $1 | sed 's/\n/, /g'), custom-fonts\n"
 	yay -S ${packages}  --needed --answerclean All --answerdiff None --removemake
 
@@ -136,7 +148,19 @@ vte-terminal {
 	cd ${dir}
 }
 
+post_install() {
+	printf "\n -> changing default shell to zsh\n"
+	chsh -s /usr/bin/zsh
+	
+	printf "\n -> setting wallpaper\n"
+	~/.scripts/change-bg
+
+	printf "\n Please log out for all the changes to take effect.\n"
+}
+
 check_requirements
 check_conflicts
 install_packages
 install_dotfiles
+post_install
+
