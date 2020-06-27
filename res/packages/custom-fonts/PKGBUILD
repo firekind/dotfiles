@@ -1,0 +1,16 @@
+# Note: for personal use only.
+
+pkgname=custom-fonts
+pkgver=0.1
+pkgrel=1
+pkgdesc="fonts for desktop. contains font awesome and simplifica"
+arch=(any)
+license=('unknown')
+source=("$pkgname-$pkgver.tar.gz")
+md5sums=('736d3e3c308b5ff4546ea9cb5ff5703a')
+
+package() {
+  cd "$pkgname"
+  install -d "$pkgdir/usr/share/fonts/${pkgname%-fonts}"
+  install -t "$pkgdir/usr/share/fonts/${pkgname%-fonts}" -m644 TTF/*.ttf
+}

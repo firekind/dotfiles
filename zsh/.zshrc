@@ -67,16 +67,40 @@ plugins=(
 
 
 # User configuration
-
-(cat ~/.cache/wal/sequences &)
-. ~/miniconda3/etc/profile.d/conda.sh
 export PATH=$PATH:~/.local/bin:~/.scripts
-export PATH=$PATH:~/flutter/bin
-export ANDROID_SDK_HOME=~/Android
-export ANDROID_SDK_ROOT=~/Android/sdk
-export ANDROID_NDK_HOME=$ANDROID_SDK_HOME/ndk
-export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
-export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+
+## pywal
+if [[ -d "~/.cache/wal" ]]
+then
+	(cat ~/.cache/wal/sequences &)
+fi
+
+## miniconda
+if [[ -d "~/miniconda3" ]]
+then
+	. ~/miniconda3/etc/profile.d/conda.sh
+fi
+
+## flutter
+if [[ -d "~/flutter" ]]
+then
+	export PATH=$PATH:~/flutter/bin
+fi
+
+## android
+if [[ -d "~/Android" ]]
+then
+	export ANDROID_SDK_HOME=~/Android
+	export ANDROID_SDK_ROOT=~/Android/sdk
+	export ANDROID_NDK_HOME=$ANDROID_SDK_HOME/ndk
+	export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
+fi
+
+## google chrome
+if [[ id "/usr/bin/google-chrome-stable" ]]
+then
+	export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -104,7 +128,6 @@ export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias todos="i3-msg 'workspace 9'; exec typora ~/Documents/todos.md &!"
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
@@ -113,4 +136,8 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source /usr/share/nvm/init-nvm.sh
+
+if [[ -d "/usr/share/nvm" ]]
+then
+	source /usr/share/nvm/init-nvm.sh
+fi
