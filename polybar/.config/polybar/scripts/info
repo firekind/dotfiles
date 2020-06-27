@@ -48,7 +48,7 @@ function battery () {
 
 	if [[ "$bottom" -ne 0 ]]
 	then
-		y_coord=985
+		y_coord=866
 	else
 		y_coord=45
 	fi
