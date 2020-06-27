@@ -34,8 +34,7 @@ terminator
 zsh-autosuggestions
 "
 
-stowlist="dunst
-i3
+stowlist="i3
 polybar
 rofi
 scripts
@@ -113,6 +112,9 @@ install_dotfiles() {
 
 	stow -t ~ ${stowlist}
 	
+	mkdir ~/.config/dunst
+	ln -sf ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc
+
 	printf "\n -> copying backgrounds"
 	if [[ ! -d ~/Pictures/Wallpapers ]]
 	then

@@ -70,25 +70,25 @@ plugins=(
 export PATH=$PATH:~/.local/bin:~/.scripts
 
 ## pywal
-if [[ -d "~/.cache/wal" ]]
+if [[ -d ~/.cache/wal ]]
 then
 	(cat ~/.cache/wal/sequences &)
 fi
 
 ## miniconda
-if [[ -d "~/miniconda3" ]]
+if [[ -d ~/miniconda3 ]]
 then
 	. ~/miniconda3/etc/profile.d/conda.sh
 fi
 
 ## flutter
-if [[ -d "~/flutter" ]]
+if [[ -d ~/flutter ]]
 then
 	export PATH=$PATH:~/flutter/bin
 fi
 
 ## android
-if [[ -d "~/Android" ]]
+if [[ -d ~/Android ]]
 then
 	export ANDROID_SDK_HOME=~/Android
 	export ANDROID_SDK_ROOT=~/Android/sdk
@@ -97,7 +97,7 @@ then
 fi
 
 ## google chrome
-if [[ -d "/usr/bin/google-chrome-stable" ]]
+if [[ -d /usr/bin/google-chrome-stable ]]
 then
 	export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 fi
