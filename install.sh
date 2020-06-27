@@ -115,6 +115,14 @@ install_dotfiles() {
 	mkdir ~/.config/dunst
 	ln -sf ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc
 
+	echo "VteTerminal,
+TerminalScreen,
+vte-terminal {
+    padding: 10px 10px 10px 10px;
+    -VteTerminal-inner-border: 10px 10px 10px 10px;
+}" >> ~/.config/gtk-3.0/gtk.css
+
+
 	printf "\n -> copying backgrounds"
 	if [[ ! -d ~/Pictures/Wallpapers ]]
 	then
