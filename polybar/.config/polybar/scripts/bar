@@ -10,6 +10,7 @@ launch (){
 		then
 			MONITOR=$m polybar --reload top &
 		else
+			MONITOR=$m polybar --reload dummy &
 			MONITOR=$m polybar --reload right &
 			MONITOR=$m polybar --reload left &
 		fi
@@ -17,7 +18,7 @@ launch (){
 	else
 	  if [[ $1 == "--top" ]]
 	  then
-		  MONITOR=$m polybar --reload top &
+		  polybar --reload top &
 	  else
 		  polybar --reload right &
 		  polybar --reload left &

@@ -1,6 +1,6 @@
 #######################MISC SETTINGS#######################
 set $mod Mod4
-set $bartype --top
+set $bartype --bottom
 #new_window pixel 0
 #new_float normal
 #default_border none
