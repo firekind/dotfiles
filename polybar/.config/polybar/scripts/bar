@@ -10,7 +10,6 @@ launch (){
 		then
 			MONITOR=$m polybar --reload top &
 		else
-			MONITOR=$m polybar --reload dummy &
 			MONITOR=$m polybar --reload right &
 			MONITOR=$m polybar --reload left &
 		fi

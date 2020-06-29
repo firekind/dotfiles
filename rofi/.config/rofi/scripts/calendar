@@ -1,0 +1,29 @@
+full_date=$(date '+%-Y-%0m-%_d|%a, %0d %b %0H:%0M|%B')
+day_number=${full_date:8:2}
+
+cal_command() {
+    cal | sed '1d;s/ *$//g;/^$/d'
+}
+
+counts_cal_lines() {
+    cal_lines=$(cal_command | wc -l)
+}
+
+the_date="${full_date:11:7} ${full_date:29}"
+
+counts_cal_lines
+cal_command \
+| sed "s#^#<span color='\#f17171'>#g;s#.#&</span>#24" \
+| sed "s#\b${day_number// /}\b#<span bgcolor='\#ffffff' color='\#000000'>${day_number// /}</span>#" \
+| rofi \
+-dmenu \
+-width '-21' \
+-lines "$cal_lines" \
+-location '5' \
+-xoffset '-15' \
+-yoffset '-24' \
+-theme themes/calendar.rasi \
+-p "$the_date" \
+-a '0' \
+-no-custom \
+-markup-rows &> /dev/null

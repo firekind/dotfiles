@@ -43,6 +43,7 @@ set $ws9 9
 # Gaps#
 gaps inner 50
 gaps outer 19
+gaps bottom 52
 #workspace $ws1 gaps inner 50
 #workspace $ws1 gaps outer 19
 #workspace $ws9 gaps inner 50
@@ -64,8 +65,8 @@ bindsym $mod+Shift+e								exec terminator -x ranger
 bindsym $mod+Shift+q 								kill
 
 # start program launcher
-bindsym $mod+d 										exec --no-startup-id rofi -show drun
-bindsym $mod+w										exec --no-startup-id rofi -show window
+bindsym $mod+d 										exec --no-startup-id rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi
+bindsym $mod+w										exec --no-startup-id ~/.config/rofi/scripts/wifi-menu
 bindsym $mod+Shift+x								[instance="sys_monitor"] scratchpad show
 
 # change focus
@@ -331,8 +332,8 @@ mode "$mode_gaps" {
     bindsym i     								 	mode "$mode_gaps_inner"
     bindsym Return 									mode "default"
     bindsym Escape 									mode "default"
-    bindsym m      									gaps inner current set 15; gaps outer current set 0; mode "default"
-    bindsym d      									gaps inner current set 50; gaps outer current set 19; mode "default"
+    bindsym m      									gaps inner current set 15; gaps outer current set 0; gaps bottom current set 42; mode "default"
+    bindsym d      									gaps inner current set 50; gaps outer current set 19; gaps bottom current set 52; mode "default"
     bindsym n      									gaps inner current set 0; gaps outer current set 0; mode "default"
 }
 mode "$mode_gaps_inner" {

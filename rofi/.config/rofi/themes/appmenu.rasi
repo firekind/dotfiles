@@ -1,0 +1,13 @@
+@import "base.rasi"
+
+* {
+    lines: 13;
+}
+
+#window {
+    anchor: south west;
+    location: south west;
+    y-offset: -55;
+    x-offset: 10;
+    width: 320;
+}

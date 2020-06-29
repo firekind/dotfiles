@@ -4,8 +4,10 @@
 	fixed-center = true
 	width = 30%
 	height = 30
-	background = ${xrdb:color0}
-	foreground = ${xrdb:color7}
+	;background = ${xrdb:color0}
+	;foreground = ${xrdb:color7}
+	background = #ff000000
+	foreground = #ffffffff
 	radius = 7.0
 	line-size = 0
 	line-color = #f00
@@ -21,15 +23,6 @@
 	dim-value = 1.0
 	override-redirect = true
 	wm-restack = i3
-
-[bar/dummy]
-	inherit = bar/base
-	override-redirect = false
-	width = 100%
-	height = 55
-	background = #00ffffff
-	foreground = #00000000
-	modules-left = dummy
 
 [bar/left]
 	inherit = bar/base
@@ -94,12 +87,6 @@
 	cursor-scroll = ns-resize
 	enable-ipc = true
 
-[module/dummy]
-	type = custom/text
-	content = " "
-	content-foreground = #00000000
-	content-background = #00000000
-
 [module/i3]
 	type = internal/i3
 	format = <label-state> <label-mode>
@@ -111,13 +98,15 @@
 	;label-mode-background = ${xrdb:color4}
 
 	label-focused = %index%
-	label-focused-background = ${xrdb:color8}
-	label-focused-foreground = ${xrdb:color0} 
+	;label-focused-background = ${xrdb:color8}
+	;label-focused-foreground = ${xrdb:color0} 
+	label-focused-foreground = #ff000000
+	label-focused-background = #ffffffff
 	label-focused-padding = 2
 
 	label-unfocused = %index%
 	;label-unfocused-background = ${xrdb:color4}
-	label-unfocused-foreground = ${xrdb:color7} 
+	;label-unfocused-foreground = ${xrdb:color7} 
 	label-unfocused-padding = 2
 
 	label-visible = %index%
