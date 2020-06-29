@@ -20,10 +20,7 @@ cal_command \
 -dmenu \
 -width '-21' \
 -lines "$cal_lines" \
--location '5' \
--xoffset '-15' \
--yoffset '-24' \
--theme themes/calendar.rasi \
+-theme themes/info.rasi \
 -p "$the_date" \
 -a '0' \
 -no-custom \

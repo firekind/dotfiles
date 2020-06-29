@@ -2,6 +2,8 @@
 
 * {
     font: "Source Code Pro Semibold 11";
+    selected-normal-background: @background;
+    selected-normal-foreground: @foreground;
 }
 
 #window {

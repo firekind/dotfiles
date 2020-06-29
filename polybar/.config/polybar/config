@@ -11,9 +11,9 @@
 	radius = 7.0
 	line-size = 0
 	line-color = #f00
-	padding-right = 2
-	module-margin = 2
-
+	module-margin-left = 1
+	module-margin-right = 2
+	padding-right = 1
 	font-0 = "Source Code Pro Semibold:pixelsize=11;1"
 	font-1 = "Font Awesome 5 Pro:style=Solid:pixelsize=13;3.5"
 	font-2 = "Font Awesome 5 Brands:pixelsize=10;1"
@@ -124,58 +124,51 @@
 	adapter = ADP1
 	full-at = 100
 
-	format-foreground = ${xrdb:color0}
-	format-background = ${xrdb:color5}
+	format-foreground = #ffffffff
+	format-background = #ff000000
 
 	format-charging = <animation-charging> <label-charging>
 	format-discharging = <ramp-capacity> <label-discharging>
-	label-full =  %percentage%
+	label-full = "%{A1:~/.config/rofi/scripts/battery-info:} %percentage%%{A}"
 	
 	;format-charging = <animation-charging>
 	;format-discharging = <ramp-capacity>
 	;label-full = 
 	
-	ramp-capacity-0 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
-	ramp-capacity-1 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
-	ramp-capacity-2 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
-	ramp-capacity-3 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
-	ramp-capacity-4 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
+	ramp-capacity-0 = "%{A1:~/.config/rofi/scripts/battery-info:}%{A}"
+	ramp-capacity-1 = "%{A1:~/.config/rofi/scripts/battery-info:}%{A}"
+	ramp-capacity-2 = "%{A1:~/.config/rofi/scripts/battery-info:}%{A}"
+	ramp-capacity-3 = "%{A1:~/.config/rofi/scripts/battery-info:}%{A}"
+	ramp-capacity-4 = "%{A1:~/.config/rofi/scripts/battery-info:}%{A}"
 
-	animation-charging-0 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
-	animation-charging-1 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
-	animation-charging-2 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
-	animation-charging-3 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
-	animation-charging-4 = "%{A1:~/.config/polybar/scripts/info -b:}%{A}"
+	animation-charging-0 = "%{A1:~/.config/rofi/scripts/battery-info:}%{A}"
+	animation-charging-1 = "%{A1:~/.config/rofi/scripts/battery-info:}%{A}"
+	animation-charging-2 = "%{A1:~/.config/rofi/scripts/battery-info:}%{A}"
+	animation-charging-3 = "%{A1:~/.config/rofi/scripts/battery-info:}%{A}"
+	animation-charging-4 = "%{A1:~/.config/rofi/scripts/battery-info:}%{A}"
 	animation-charging-framerate = 650
 
 [module/wlan]
 	type = internal/network
-	interface = wlo1
+	interface = wlp61s0
 	interval = 3.0
 
 	;format-connected = <ramp-signal> <label-connected>
 	format-connected = <label-connected><ramp-signal>
-	format-connected-foreground = ${xrdb:color7}
-	format-connected-background = ${xrdb:color0}
+	format-connected-foreground = #ffffffff
+	format-connected-background = #ff000000
 	format-connected-padding = 0
 	;label-connected = %essid%
-	label-connected = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
+	label-connected = "%{A1:~/.config/rofi/scripts/wifi-menu:}%{A}"
 
 	format-disconnected = <label-disconnected>
-	;label-disconnected =  
-	;label-disconnected =  
-	label-disconnected = 
-	;ramp-signal-0 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
-	;ramp-signal-1 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
-	;ramp-signal-2 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
-	;ramp-signal-3 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}" 
-	;ramp-signal-4 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
-	ramp-signal-0 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
-	ramp-signal-1 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
-	ramp-signal-2 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
-	ramp-signal-3 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}" 
-	ramp-signal-4 = "%{A1:~/.config/polybar/scripts/info -w:}%{A}"
-	ramp-signal-foreground = ${xrdb:color7}
+	label-disconnected = "%{A1:~/.config/rofi/scripts/wifi-menu:}%{A}" 
+	ramp-signal-0 = "%{A1:~/.config/rofi/scripts/wifi-menu:}%{A}"
+	ramp-signal-1 = "%{A1:~/.config/rofi/scripts/wifi-menu:}%{A}"
+	ramp-signal-2 = "%{A1:~/.config/rofi/scripts/wifi-menu:}%{A}"
+	ramp-signal-3 = "%{A1:~/.config/rofi/scripts/wifi-menu:}%{A}" 
+	ramp-signal-4 = "%{A1:~/.config/rofi/scripts/wifi-menu:}%{A}"
+	ramp-signal-foreground = #ffffffff
 
 [module/wlan-ext]
 	type = internal/network
@@ -224,15 +217,14 @@
 	type = internal/date
 	interval = 5
 
-	time = %I:%M %p%
-	time-alt = "%{A1:~/.config/polybar/scripts/dzen-calendar:}%I:%M %p%{A}"
+	time = "%I:%M %p%"
 	
-	format-prefix = 
+	format-prefix = "%{A1:~/.config/rofi/scripts/calendar:}%{A}"
 	;format-foreground = ${xrdb:color0}
 	;format-background = ${xrdb:color5}
 	format-padding = -1
 
-	label = %date% %time%
+	label = "%{A1:~/.config/rofi/scripts/calendar:}%date% %time% %{A}"
 
 [module/weather]
 	type = custom/script

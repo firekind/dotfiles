@@ -1,0 +1,26 @@
+#!/bin/bash
+
+all=$(acpi | sed 's/^[^:]*://g' | sed 's/,/:/1')
+chargeInfo=$(echo $all | sed 's/,.*//')
+timeInfo=$(echo $all | sed 's/^[^,]*,//g')
+tempInfo=" Temp:$(acpi -t | sed 's/^[^,]*,//g' | sed 's/degrees /°/g')"
+line=3 
+echo $all | grep "Unknown"
+if [[ "$?" -eq 0 ]]
+then
+    chargeInfo="Unknown"
+    timeInfo=" Unknown"
+    tempInfo=" Unknown"
+elif [[ $(echo $all | grep "Full") ]]
+then
+    timeInfo=" Time: NA"
+fi
+
+echo -e " $chargeInfo\n$timeInfo\n$tempInfo" | rofi \
+    -dmenu \
+    -theme themes/info.rasi \
+    -p "Battery Info" \
+    -width '-21' \
+    -lines 3 \
+    -a '0' \
+    -no-custom

@@ -66,7 +66,6 @@ bindsym $mod+Shift+q 								kill
 
 # start program launcher
 bindsym $mod+d 										exec --no-startup-id rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi
-bindsym $mod+w										exec --no-startup-id ~/.config/rofi/scripts/wifi-menu
 bindsym $mod+Shift+x								[instance="sys_monitor"] scratchpad show
 
 # change focus
@@ -196,11 +195,11 @@ bindcode 255										exec --no-startup-id sh ~/.config/i3/scripts/airplane.sh
 bindsym --release Print 							exec ~/.config/i3/scripts/screenshot
 
 # show calendar
-bindsym $mod+c										exec --no-startup-id "~/.config/polybar/scripts/dzen-calendar"	
+bindsym $mod+c										exec --no-startup-id "~/.config/rofi/scripts/calendar"	
 
 # show information
-bindsym $mod+Shift+w								exec --no-startup-id "~/.config/polybar/scripts/info -w"
-bindsym $mod+b										exec --no-startup-id "~/.config/polybar/scripts/info -b"
+bindsym $mod+w										exec --no-startup-id ~/.config/rofi/scripts/wifi-menu
+bindsym $mod+b										exec --no-startup-id "~/.config/rofi/scripts/battery-info"
 
 # lock screen (without showing background)
 bindsym $mod+l										exec --no-startup-id sh ~/.config/i3/scripts/lock.sh
