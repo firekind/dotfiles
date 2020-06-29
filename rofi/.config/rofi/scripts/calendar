@@ -1,3 +1,5 @@
+#!/bin/bash
+
 full_date=$(date '+%-Y-%0m-%_d|%a, %0d %b %0H:%0M|%B')
 day_number=${full_date:8:2}
 
