@@ -15,7 +15,6 @@ the_date="${full_date:11:7} ${full_date:29}"
 
 counts_cal_lines
 cal_command \
-| sed "s#^#<span color='\#ffffff'>#g;s#.#&</span>#24" \
 | sed "s#\b${day_number// /}\b#<span bgcolor='\#ffffff' color='\#000000'>${day_number// /}</span>#" \
 | rofi \
 -dmenu \
