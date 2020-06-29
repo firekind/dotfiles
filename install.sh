@@ -50,6 +50,15 @@ picom
 dunst
 "
 
+move() {
+	if [[ ! -d $2 ]]
+	then
+		mkdir -p $2
+	fi
+
+	mv $1 $2
+}
+
 check_requirements() {
 	pacman -Q git &> /dev/null
 	if [[ "$?" -ne 0 ]]
@@ -79,37 +88,37 @@ check_conflicts() {
 	fi
 	if [[ -d ~/.config/i3 ]]
 	then
-		mv ~/.config/i3 ${backup_location}/.config/i3
+		move ~/.config/i3 ${backup_location}/.config/i3
 	fi
 
 	if [[ -d ~/.i3 ]]
 	then
-		mv ~/.i3 ${backup_location}/.i3
+		move ~/.i3 ${backup_location}/.i3
 	fi
 
 	if [[ -d ~/.config/dunst ]]
 	then
-		mv ~/.config/dunst ${backup_location}/.config/dunst
+		move ~/.config/dunst ${backup_location}/.config/dunst
 	fi
 
 	if [[ -f ~/.vimrc ]]
 	then
-		mv ~/.vimrc ${backup_location}/.vimrc
+		move ~/.vimrc ${backup_location}/.vimrc
 	fi
 
 	if [[ -f ~/.zshrc ]]
 	then
-		mv ~/.zshrc ${backup_location}/.zshrc
+		move ~/.zshrc ${backup_location}/.zshrc
 	fi
 
 	if [[ -f ~/.config/compton.conf ]]
 	then
-		mv ~/.config/compton.conf ${backup_location}/.config/compton.conf
+		move ~/.config/compton.conf ${backup_location}/.config/compton.conf
 	fi
 
 	if [[ -d ~/.config/compton ]]
 	then
-		mv ~/.config/compton ${backup_location}/.config/compton
+		move ~/.config/compton ${backup_location}/.config/compton
 	fi
 
 }
