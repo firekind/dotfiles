@@ -11,3 +11,8 @@
     x-offset: -10;
     width: 320;
 }
+
+element normal.active, element selected.active, element alternate.active {
+    background-color: #ffffff;
+    text-color: #000000;
+}

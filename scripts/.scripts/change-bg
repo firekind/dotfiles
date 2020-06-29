@@ -18,5 +18,11 @@ xrdb ~/.Xresources
 
 # kill any instances of dunst and restart it
 pkill dunst
+# checking if a dunstrc does not exist
+if [[ ! -f ~/.config/dunst/dunstrc ]]
+then
+   # copying generated config to folder
+   cp ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc
+fi
 dunst &> /dev/null &
 

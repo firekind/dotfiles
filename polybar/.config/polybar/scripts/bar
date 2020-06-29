@@ -8,19 +8,19 @@ launch (){
 	  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
 		if [[ $1 == "--top" ]]
 		then
-			MONITOR=$m polybar --reload top &
+			MONITOR=$m polybar -c ~/.config/polybar/config.ini --reload top &
 		else
-			MONITOR=$m polybar --reload right &
-			MONITOR=$m polybar --reload left &
+			MONITOR=$m polybar -c ~/.config/polybar/config.ini --reload right &
+			MONITOR=$m polybar -c ~/.config/polybar/config.ini --reload left &
 		fi
 	  done
 	else
 	  if [[ $1 == "--top" ]]
 	  then
-		  polybar --reload top &
+		  polybar -c ~/.config/polybar/config.ini --reload top &
 	  else
-		  polybar --reload right &
-		  polybar --reload left &
+		  polybar -c ~/.config/polybar/config.ini --reload right &
+		  polybar -c ~/.config/polybar/config.ini --reload left &
 	  fi
 	fi
 }

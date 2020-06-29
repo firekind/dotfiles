@@ -1,12 +1,13 @@
 #!/bin/bash
 
+backup_location=./backups
+
 packages="i3-gaps
 i3lock-color
 rxvt-unicode
 dunst
 light
 alsa-utils
-dzen2
 rofi
 scrot
 jsoncpp
@@ -20,6 +21,7 @@ pavucontrol
 papirus-icon-theme
 nautilus
 libnautilus-extension
+python-nautilus
 gvfs-afc
 gvfs-gphoto2
 gvfs-smb
@@ -45,6 +47,7 @@ nautilus-extensions
 vim
 zsh
 picom
+dunst
 "
 
 check_requirements() {
@@ -70,39 +73,43 @@ check_requirements() {
 }
 
 check_conflicts() {
+	if [[ ! -d $backup_location ]]
+	then
+		mkdir $backup_location
+	fi
 	if [[ -d ~/.config/i3 ]]
 	then
-		mv ~/.config/i3 ~/.config/i3.bck
+		mv ~/.config/i3 ${backup_location}/.config/i3
 	fi
 
 	if [[ -d ~/.i3 ]]
 	then
-		mv ~/.i3 ~/.i3.bck
+		mv ~/.i3 ${backup_location}/.i3
 	fi
 
 	if [[ -d ~/.config/dunst ]]
 	then
-		mv ~/.config/dunst ~/.config/dunst.bck
+		mv ~/.config/dunst ${backup_location}/.config/dunst
 	fi
 
 	if [[ -f ~/.vimrc ]]
 	then
-		mv ~/.vimrc ~/.vimrc.bck
+		mv ~/.vimrc ${backup_location}/.vimrc
 	fi
 
 	if [[ -f ~/.zshrc ]]
 	then
-		mv ~/.zshrc ~/.zshrc.bck
+		mv ~/.zshrc ${backup_location}/.zshrc
 	fi
 
 	if [[ -f ~/.config/compton.conf ]]
 	then
-		mv ~/.config/compton.conf ~/.config/compton.conf.bck
+		mv ~/.config/compton.conf ${backup_location}/.config/compton.conf
 	fi
 
 	if [[ -d ~/.config/compton ]]
 	then
-		mv ~/.config/compton ~/.config/compton.bck
+		mv ~/.config/compton ${backup_location}/.config/compton
 	fi
 
 }
