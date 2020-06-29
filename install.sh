@@ -153,7 +153,7 @@ post_install() {
 	chsh -s /usr/bin/zsh
 	
 	printf "\n -> setting wallpaper\n"
-	~/.scripts/change-bg
+	~/.scripts/change-bg ~/Pictures/Wallpapers/forest.jpg
 
 	printf "\n Please log out for all the changes to take effect.\n"
 }
