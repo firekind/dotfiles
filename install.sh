@@ -35,6 +35,7 @@ oh-my-zsh-git
 terminator
 zsh-autosuggestions
 visual-studio-code-bin
+gtk-engine-murrine
 "
 
 stowlist="i3
@@ -61,6 +62,7 @@ move_dir() {
 }
 
 check_requirements() {
+	sudo pacman -Sy
 	pacman -Q git &> /dev/null
 	if [[ "$?" -ne 0 ]]
 	then
@@ -72,11 +74,12 @@ check_requirements() {
 	if [[ "$?" -ne 0 ]]
 	then
 		echo -e "-> installing: yay\n"
+		sudo pacman -S base-devel --noconfirm
 		git clone https://aur.archlinux.org/yay.git
 		cd yay
 		makepkg -rsci --noconfirm
 		cd ..
-		rm -r yay
+		sudo rm -r yay
 		yay -Sy
 	fi
 
