@@ -50,7 +50,7 @@ picom
 dunst
 "
 
-move() {
+move_dir() {
 	if [[ ! -d $2 ]]
 	then
 		mkdir -p $2
@@ -88,37 +88,38 @@ check_conflicts() {
 	fi
 	if [[ -d ~/.config/i3 ]]
 	then
-		move ~/.config/i3 ${backup_location}/.config/i3
+		move_dir ~/.config/i3 ${backup_location}/.config/i3
 	fi
 
 	if [[ -d ~/.i3 ]]
 	then
-		move ~/.i3 ${backup_location}/.i3
+		move_dir ~/.i3 ${backup_location}/.i3
 	fi
 
 	if [[ -d ~/.config/dunst ]]
 	then
-		move ~/.config/dunst ${backup_location}/.config/dunst
+		move_dir ~/.config/dunst ${backup_location}/.config/dunst
 	fi
 
 	if [[ -f ~/.vimrc ]]
 	then
-		move ~/.vimrc ${backup_location}/.vimrc
+		mv ~/.vimrc ${backup_location}/.vimrc
 	fi
 
 	if [[ -f ~/.zshrc ]]
 	then
-		move ~/.zshrc ${backup_location}/.zshrc
+		mv ~/.zshrc ${backup_location}/.zshrc
 	fi
 
 	if [[ -f ~/.config/compton.conf ]]
 	then
-		move ~/.config/compton.conf ${backup_location}/.config/compton.conf
+		mkdir -p ${backup_location}/.config
+		mv ~/.config/compton.conf ${backup_location}/.config/compton.conf
 	fi
 
 	if [[ -d ~/.config/compton ]]
 	then
-		move ~/.config/compton ${backup_location}/.config/compton
+		move_dir ~/.config/compton ${backup_location}/.config/compton
 	fi
 
 }
