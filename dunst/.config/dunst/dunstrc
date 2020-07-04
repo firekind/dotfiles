@@ -1,5 +1,5 @@
 [global]
-    geometry = "300x10-10+38"
+    geometry = "300x10-10+15"
 
     # Show multiple notifications in the same box
     separator_height = 3

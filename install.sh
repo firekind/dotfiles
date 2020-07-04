@@ -34,6 +34,7 @@ nitrogen
 oh-my-zsh-git
 terminator
 zsh-autosuggestions
+visual-studio-code-bin
 "
 
 stowlist="i3
@@ -126,8 +127,8 @@ check_conflicts() {
 
 install_packages() {
 	yay -Sy
-	printf "\n -> installing(via yay): $(echo $1 | sed 's/\n/, /g'), custom-fonts\n"
-	yay -S ${packages}  --needed --answerclean All --answerdiff None --removemake
+	printf "\n -> installing(via yay): $(echo $1) custom-fonts\n\n"
+	yay -S $1  --needed --answerclean All --answerdiff None --removemake
 
 	dir=$(pwd)
 	cd res/packages/custom-fonts
@@ -138,12 +139,8 @@ install_packages() {
 install_dotfiles() {
 	printf "\n -> installing dotfiles"
 	dir=$(pwd)
-
 	stow -t ~ ${stowlist}
 	
-	mkdir ~/.config/dunst
-	ln -sf ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc
-
 	echo "VteTerminal,
 TerminalScreen,
 vte-terminal {
@@ -177,7 +174,7 @@ post_install() {
 
 check_requirements
 check_conflicts
-install_packages
+install_packages "$packages"
 install_dotfiles
 post_install
 
