@@ -12,7 +12,7 @@
     horizontal_padding = 10
 
     # The frame color and width of the notification
-    frame_color = "#1F6E8B"
+    frame_color = "{color2}"
     frame_width = 0
 
     # How long a user needs to be idle for sticky notifications
@@ -70,6 +70,6 @@
     timeout = 5
 
 [urgency_critical]
-    background = "#000000"
-    foreground = "#ff0000"
+    background = "#ff0000"
+    foreground = "#ffffff"
     timeout = 5
