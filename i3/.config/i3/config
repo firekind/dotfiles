@@ -41,9 +41,9 @@ set $ws9 9
 ##############################################
 
 # Gaps#
-gaps inner 50
-gaps outer 19
-gaps bottom 52
+gaps inner 15
+gaps outer 0
+gaps bottom 42
 #workspace $ws1 gaps inner 50
 #workspace $ws1 gaps outer 19
 #workspace $ws9 gaps inner 50

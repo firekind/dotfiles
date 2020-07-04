@@ -13,6 +13,6 @@
 }
 
 element normal.active, element selected.active, element alternate.active {
-    background-color: #ffffff;
-    text-color: #000000;
+    background-color: #363636;
+    text-color: #ffffff;
 }

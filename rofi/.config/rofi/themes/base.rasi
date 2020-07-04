@@ -13,10 +13,10 @@
     alternate-urgent-background: @background;
     alternate-urgent-foreground: @foreground;
 
-    selected-active-background: #363636;
-    selected-active-foreground: @foreground;
-    selected-normal-background: #363636;
-    selected-normal-foreground: @foreground;
+    selected-active-background: @foreground;
+    selected-active-foreground: @background;
+    selected-normal-background: @foreground;
+    selected-normal-foreground: @background;
     selected-urgent-background: @foreground;
     selected-urgent-foreground: @foreground;
 
