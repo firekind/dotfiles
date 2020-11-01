@@ -71,23 +71,23 @@ class VSCodeExtension(GObject.GObject, Nautilus.MenuProvider):
         ))
         menuItems[-1].connect('activate', self.launch_vscode, [file_])
 
-        if file_ == None:
-            return menuItems
+        # if file_ == None:
+        #     return menuItems
         
-        FNULL=open(os.devnull, 'w')
-        loc = file_.get_location().get_path()
-        isGitDir = subprocess.call("cd "+loc+"&& git rev-parse --is-inside-work-tree", shell=True, stdout=FNULL, stderr=FNULL)
-        if isGitDir == 0:
-            menuItems.append(Nautilus.MenuItem(
-                name='VSCodeOpenProjectBackground',
-                label='Open Project In ' + VSCODENAME,
-                tip='Opens git project in VSCode'
-            ))
-            gitProjDir=subprocess.Popen(['git','rev-parse', '--show-toplevel'],
-                    stdout=subprocess.PIPE,
-                    stderr=FNULL,
-                    cwd=loc).communicate()[0]
-            menuItems[-1].connect('activate', self.launch_vscode, [gitProjDir.decode("utf-8").strip()])
+        # FNULL=open(os.devnull, 'w')
+        # loc = file_.get_location().get_path()
+        # isGitDir = subprocess.call("cd "+loc+"&& git rev-parse --is-inside-work-tree", shell=True, stdout=FNULL, stderr=FNULL)
+        # if isGitDir == 0:
+        #     menuItems.append(Nautilus.MenuItem(
+        #         name='VSCodeOpenProjectBackground',
+        #         label='Open Project In ' + VSCODENAME,
+        #         tip='Opens git project in VSCode'
+        #     ))
+        #     gitProjDir=subprocess.Popen(['git','rev-parse', '--show-toplevel'],
+        #             stdout=subprocess.PIPE,
+        #             stderr=FNULL,
+        #             cwd=loc).communicate()[0]
+        #     menuItems[-1].connect('activate', self.launch_vscode, [gitProjDir.decode("utf-8").strip()])
 	
 
         return menuItems

@@ -12,7 +12,7 @@ class OpenTerminatorExtension(GObject.GObject, Nautilus.MenuProvider):
         args = '--working-directory '
 
         print(safepaths)
-        call('terminator' + ' ' + args + safepaths + '&', shell=True)
+        call('alacritty' + ' ' + args + safepaths + '&', shell=True)
 
     def get_file_items(self, window, files):
         if len(files) != 1:
