@@ -1,7 +1,7 @@
 @import "base.rasi"
 
 * {
-    lines: 5;
+    lines: 1;
 }
 
 #window {

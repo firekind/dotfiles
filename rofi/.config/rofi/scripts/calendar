@@ -18,7 +18,7 @@ cal_command \
 | sed "s#\b${day_number// /}\b#<span bgcolor='\#ffffff' color='\#000000'>${day_number// /}</span>#" \
 | rofi \
 -dmenu \
--width '-21' \
+-width '-22' \
 -lines "$cal_lines" \
 -theme themes/info.rasi \
 -p "$the_date" \

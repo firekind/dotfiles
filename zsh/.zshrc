@@ -136,6 +136,10 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# highlight options
+ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=red
 
 if [[ -d "/usr/share/nvm" ]]
 then
