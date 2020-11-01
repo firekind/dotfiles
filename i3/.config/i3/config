@@ -65,7 +65,7 @@ bindsym $mod+Shift+e								exec alacritty -e ranger
 bindsym $mod+Shift+q 								kill
 
 # start program launcher
-bindsym $mod+d 										exec --no-startup-id rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi
+bindsym $mod+space									exec --no-startup-id rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi
 bindsym $mod+Shift+x								[instance="sys_monitor"] scratchpad show
 
 # rofi calculator
@@ -111,7 +111,7 @@ bindsym $mod+Shift+d								layout default
 bindsym $mod+Shift+space 							floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space 									focus mode_toggle
+bindsym $mod+d 										focus mode_toggle
 
 # toggle sticky
 bindsym $mod+Shift+s 								sticky toggle
