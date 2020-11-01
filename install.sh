@@ -32,10 +32,12 @@ polybar
 stow
 nitrogen
 oh-my-zsh-git
-terminator
+alacritty
+tmux
 zsh-autosuggestions
 visual-studio-code-bin
 gtk-engine-murrine
+ttf-cascadia-code
 "
 
 stowlist="i3
@@ -44,7 +46,7 @@ rofi
 scripts
 wal
 udiskie
-terminator
+alacritty
 nautilus-extensions
 vim
 zsh

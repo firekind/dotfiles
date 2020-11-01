@@ -1,0 +1,24 @@
+font:
+  normal:
+    family: Cascadia Code
+    style: Regular
+
+  bold:
+    family: Cascadia Code
+    style: Bold
+  
+  italic:
+    family: Cascadia Code
+    style: italic
+  
+  bold_italic:
+    family: Cascadia Code
+    style: Bold Italic
+
+window:
+  padding:
+    x: 10
+    y: 10
+
+  dynamic_padding: true
+    
