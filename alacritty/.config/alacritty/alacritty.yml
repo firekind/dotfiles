@@ -14,7 +14,8 @@ font:
   bold_italic:
     family: Cascadia Code
     style: Bold Italic
-
+  
+  size: 8.5
 window:
   padding:
     x: 10

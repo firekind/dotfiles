@@ -28,6 +28,7 @@ then
 fi
 
 i3lock \
+	-t \
 	-i $F \
 	--indpos="1850:1000"    \
 	--insidevercolor=$insideCircleColor   \
@@ -38,7 +39,6 @@ i3lock \
 	--ringcolor=$textColor        \
 	--linecolor=$insideCircleColor        \
 	--separatorcolor=$insideCircleColor   \
-\
 	--verifcolor=$textColor        \
 	--wrongcolor=$textColor        \
 	--timecolor=$textColor        \
@@ -46,9 +46,7 @@ i3lock \
 	--layoutcolor=$textColor      \
 	--keyhlcolor=$Hl       \
 	--bshlcolor=$W        \
-\
 	--radius=30	      \
-	--screen 1            \
 	--force-clock               \
 	--datestr="" 	       \
 	--veriftext=""		\

@@ -65,7 +65,7 @@ bindsym $mod+Shift+e								exec --no-startup-id alacritty -e ranger
 bindsym $mod+Shift+q 								kill
 
 # start program launcher
-bindsym $mod+space									exec --no-startup-id rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi
+bindsym $mod+space									exec rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi
 bindsym $mod+Shift+x								[instance="sys_monitor"] scratchpad show
 
 # rofi calculator
@@ -129,8 +129,8 @@ bindsym $mod+minus 									scratchpad show
 # navigate workspaces next / previous
 bindsym $mod+Ctrl+Right 							workspace next
 bindsym $mod+Ctrl+Left 								workspace prev
-bindsym $mod+Shift+s+Right							move container to output right
-bindsym $mod+Shift+s+Left							move container to output left
+bindsym $mod+Shift+bracketright						move container to output right
+bindsym $mod+Shift+bracketleft						move container to output left
 
 # switch to workspace
 bindsym $mod+1 										workspace $ws1
@@ -215,8 +215,8 @@ exec --no-startup-id 								nitrogen --restore; sleep 1; picom -b
 #exec --no-startup-id 								clipit
 #exec --no-startup-id								/usr/lib/gnome-settings-daemon/gsd-xsettings
 exec --no-startup-id 								/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id								alacritty -t term_pad
-exec --no-startup-id								alacritty --class sys_monitor -e htop
+#exec --no-startup-id								alacritty -t term_pad
+#exec --no-startup-id								alacritty --class sys_monitor -e htop
 exec --no-startup-id								~/.config/i3/scripts/redshift-start
 exec --no-startup-id								udiskie -c ~/.config/udiskie/config.yaml
 #exec --no-startup-id								boostnote
