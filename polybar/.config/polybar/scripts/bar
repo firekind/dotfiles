@@ -9,18 +9,24 @@ launch (){
 		if [[ $1 == "--top" ]]
 		then
 			MONITOR=$m polybar -c ~/.config/polybar/config.ini --reload top &
-		else
+		elif [[ $1 == "--bottom-split" ]]
+		then
 			MONITOR=$m polybar -c ~/.config/polybar/config.ini --reload right &
 			MONITOR=$m polybar -c ~/.config/polybar/config.ini --reload left &
+		else
+			MONITOR=$m polybar -c ~/.config/polybar/config.ini --reload bottom &
 		fi
 	  done
 	else
 	  if [[ $1 == "--top" ]]
 	  then
 		  polybar -c ~/.config/polybar/config.ini --reload top &
-	  else
+	  elif [[ $1 == "--bottom-split" ]]
+	  then
 		  polybar -c ~/.config/polybar/config.ini --reload right &
 		  polybar -c ~/.config/polybar/config.ini --reload left &
+	  else
+		  polybar -c ~/.config/polybar/config.ini --reload bottom &
 	  fi
 	fi
 }

@@ -10,6 +10,7 @@ dunst
 light
 alsa-utils
 rofi
+rofi-calc
 scrot
 jsoncpp
 python-pywal
