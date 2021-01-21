@@ -2,6 +2,7 @@
 
 backup_location=./backups
 
+# for light to work user has to be in video group
 packages="i3-gaps
 i3lock-color
 rxvt-unicode
@@ -35,7 +36,6 @@ oh-my-zsh-git
 alacritty
 tmux
 zsh-autosuggestions
-visual-studio-code-bin
 gtk-engine-murrine
 ttf-cascadia-code
 "
