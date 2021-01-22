@@ -9,10 +9,11 @@ class OpenTerminatorExtension(GObject.GObject, Nautilus.MenuProvider):
 
     def launch_terminal(self, menu, files):
         safepaths = files.get_location().get_path()
-        args = '--working-directory '
+        args = '--working-directory'
 
-        print(safepaths)
-        call('alacritty' + ' ' + args + safepaths + '&', shell=True)
+        # print(safepaths)
+        # call("alacritty" + ' ' + args + safepaths + '&', shell=True)
+        call("alacritty {} '{}' &".format(args, safepaths), shell=True)
 
     def get_file_items(self, window, files):
         if len(files) != 1:
