@@ -1,3 +1,7 @@
 i3/.config/i3/scripts/.loc
 __pycache__/
 backups/
+xmonad-x86_64-linux
+xmonad.errors
+xmonad.hi
+xmonad.o

@@ -128,6 +128,9 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias cdu='cd /d/Users/shyam/Documents/University'
+alias cdp='cd /d/Users/shyam/Projects'
+alias cdd='cd /d/Users/shyam'
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then

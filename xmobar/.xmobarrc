@@ -1,0 +1,38 @@
+Config { font = "xft:Source Code Pro Semibold:pixelsize=14:antialias=true"
+       , additionalFonts = [ "xft:Font Awesome 5 Pro:style=Solid:pixelsize=13"
+                           , "xft:Font Awesome 5 Brands:pixelsize=10" 
+                           ]
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "white"
+       , alpha = 255
+       , position = Top
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "/home/ouroboros/.xmonad/xpm" -- default: "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Date "<fn=1>\xf017</fn> %I:%M %p" "date" 10
+                    , Run Wireless "wlp61s0" [ "-t", "<fn=1>\xf690</fn> <ssid> @ <quality>%"] 20
+                    , Run BatteryP ["BAT0"] [ "-t", "<acstatus> <left>%"
+                                            , "--"
+                                            , "-O", "<fn=1>\xf376</fn>" -- charging
+                                            , "-i", "<fn=1>\xf240</fn>" -- plugged in, not charging
+                                            , "-o", "<fn=1>\xf240</fn>" -- discharging
+                                            , "-A", "10"
+                                            , "-a", "notify-send -u critical 'Battery low'"
+                                            ] 600
+                    , Run UnsafeStdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %UnsafeStdinReader% }\
+                    \{%wlp61s0wi%   %date%   %battery% "
+       }
+
+-- vim:filetype=haskell

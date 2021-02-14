@@ -252,7 +252,7 @@ for_window [class="(?i)System-config-printer.py"] 	floating enable border normal
 for_window [class="Skype"] 							floating enable border normal
 for_window [class="Thus"] 							floating enable border normal
 for_window [class="Timeset-gui"] 					floating enable border normal
-for_window [class="(?i)virtualbox"] 				floating enable border normal
+# for_window [class="(?i)virtualbox"] 				floating enable border normal
 for_window [class="Xfburn"] 						floating enable
 
 # set y position to 45 when bar is on top
@@ -270,6 +270,7 @@ for_window [title="todos.md - Typora"]				floating enable, resize set 350 650, m
 for_window [title="Assignment"]						floating enable
 
 assign [class="Boostnote"] 							$ws9
+assign [class="Firefox"]							$ws3
 assign [class="firefox"]							$ws3
 assign [class="Min"]								$ws3
 assign [class="Atom"]								$ws2
