@@ -3,11 +3,11 @@ Config { font = "xft:Source Code Pro Semibold:pixelsize=14:antialias=true"
                            , "xft:Font Awesome 5 Brands:pixelsize=10" 
                            ]
        , borderColor = "black"
-       , border = TopB
+       , border = NoBorder
        , bgColor = "black"
        , fgColor = "white"
        , alpha = 255
-       , position = Static { xpos = 0, ypos = 0, width = 1920, height = 30 }
+       , position = TopSize L 100 30
        , textOffset = -1
        , iconOffset = -1
        , lowerOnStart = True
