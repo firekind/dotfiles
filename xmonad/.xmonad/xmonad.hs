@@ -20,7 +20,9 @@ import XMonad.Actions.Submap
 import qualified Data.Map        as M
 
 -- Hooks
-import XMonad.Hooks.DynamicLog (statusBar, xmobarPP, xmobarColor, PP(..), wrap, shorten)
+import XMonad.Hooks.DynamicLog (xmobar, xmobarPP, xmobarColor, PP(..), wrap, shorten)
+import XMonad.Hooks.DynamicBars  as Bars
+import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks)
 
 -- Layouts
 import XMonad.Layout.ResizableTile
@@ -102,7 +104,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch dmenu
     , ((modm,               xK_space ), spawn "rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi")
 
-	-- launch nautilus
+    -- launch nautilus
 	, ((modm,               xK_e     ), spawn "nautilus &")
 
     -- close focused window
@@ -332,6 +334,28 @@ myManageHook = composeAll
     , className =? "Nm-connection-editor"    --> doFloat]
 
 ------------------------------------------------------------------------
+-- Status bar (XMobar)
+-- Custom PP
+--
+
+xmobarCreator :: Bars.DynamicStatusBar
+xmobarCreator (S sid) = spawnPipe $ "xmobar -x " ++ show sid
+
+xmobarDestroyer :: Bars.DynamicStatusBarCleanup
+xmobarDestroyer = return ()
+
+myBarPP = xmobarPP { ppCurrent         = xmobarColor "#2E94A7" "" . wrap "[" "]"
+                   , ppUrgent          = xmobarColor "#FF0000" ""
+                   , ppHidden          = xmobarColor "#FFFFFF" ""
+                   , ppHiddenNoWindows = xmobarColor "#616161" ""
+                   , ppTitle           = xmobarColor "#FFFFFF" "" . shorten 40
+                   , ppSep             = "<fc=#EBB079> : </fc>"
+                   }
+
+-- Key binding to toggle the gap for the bar
+-- toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+
+------------------------------------------------------------------------
 -- Event handling
 
 -- * EwmhDesktops users should change this to ewmhDesktopsEventHook
@@ -340,7 +364,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = Bars.dynStatusBarEventHook xmobarCreator xmobarDestroyer
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -348,7 +372,7 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+myLogHook = Bars.multiPP myBarPP myBarPP
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -359,6 +383,7 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do
+        Bars.dynStatusBarStartup xmobarCreator xmobarDestroyer
         spawnOnce "nitrogen --restore &"
         spawnOnce "picom -b &"
         spawnOnce "xfce4-power-manager &"
@@ -366,26 +391,11 @@ myStartupHook = do
         spawnOnce "udiskie -c ~/.config/udiskie/config.yaml &"
 
 ------------------------------------------------------------------------
--- Status bar (XMobar)
--- Custom PP
---
-myBarPP = xmobarPP { ppCurrent         = xmobarColor "#2E94A7" "" . wrap "[" "]"
-                   , ppUrgent          = xmobarColor "#FF0000" ""
-                   , ppHidden          = xmobarColor "#FFFFFF" ""
-                   , ppHiddenNoWindows = xmobarColor "#616161" ""
-                   , ppTitle           = xmobarColor "#FFFFFF" "" . shorten 40
-                   , ppSep             = "<fc=#EBB079> : </fc>"
-                   }
-
--- Key binding to toggle the gap for the bar
-toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
-
-------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad =<< statusBar "xmobar" myBarPP toggleStrutsKey defaults
+main = xmonad defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
@@ -409,9 +419,9 @@ defaults = def {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myLayout,
-        manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
+        layoutHook         = avoidStruts $ myLayout,
+        manageHook         = myManageHook <+> manageDocks,
+        handleEventHook    = myEventHook <+> docksEventHook,
         logHook            = myLogHook,
         startupHook        = myStartupHook
     }
