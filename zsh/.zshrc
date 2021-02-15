@@ -65,10 +65,6 @@ plugins=(
   git
 )
 
-
-# User configuration
-export PATH=$PATH:~/.local/bin:~/.scripts
-
 ## pywal
 if [[ -d ~/.cache/wal ]]
 then
