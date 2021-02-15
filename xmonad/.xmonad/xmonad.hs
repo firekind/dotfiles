@@ -14,7 +14,8 @@ import System.Exit (exitSuccess)
 import qualified XMonad.StackSet as W
 
 -- Actions
-import XMonad.Actions.Submap
+import XMonad.Actions.Submap (submap)
+import XMonad.Actions.CycleWS (nextScreen, prevScreen, shiftNextScreen, shiftPrevScreen)
 
 -- Data
 import qualified Data.Map        as M
@@ -218,6 +219,18 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
        -- lock
        , ((0,                    xK_l), spawn "sh ~/.config/i3/scripts/i3exit lock")
        ])
+
+    -- Switch focus to next monitor
+    , ((modm,                    xK_o), nextScreen)
+
+    -- Move focused window to next monitor
+    , ((modm .|. shiftMask,      xK_o), shiftNextScreen)
+    
+    -- Switch focus to previous monitor
+    , ((modm,                    xK_i), prevScreen)
+
+    -- Move focused window to previous monitor
+    , ((modm .|. shiftMask,      xK_i), shiftPrevScreen)
     ]
     ++
 
@@ -228,15 +241,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
+    -- ++
 
     --
     -- mod-{u,i,o}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{u,i,o}, Move client to screen 1, 2, or 3
     --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_u, xK_i, xK_o] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+    --    | (key, sc) <- zip [xK_u, xK_i, xK_o] [0..]
+    --    , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+
 
 
 ------------------------------------------------------------------------
