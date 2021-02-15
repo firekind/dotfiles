@@ -7,7 +7,7 @@ Config { font = "xft:Source Code Pro Semibold:pixelsize=14:antialias=true"
        , bgColor = "black"
        , fgColor = "white"
        , alpha = 255
-       , position = TopSize L 100 30
+       , position = BottomSize L 100 30
        , textOffset = -1
        , iconOffset = -1
        , lowerOnStart = True

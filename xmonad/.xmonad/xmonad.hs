@@ -21,7 +21,7 @@ import qualified Data.Map        as M
 
 -- Hooks
 import XMonad.Hooks.DynamicLog (xmobar, xmobarPP, xmobarColor, PP(..), wrap, shorten)
-import XMonad.Hooks.DynamicBars  as Bars
+import XMonad.Hooks.DynamicBars (DynamicStatusBar, DynamicStatusBarCleanup, dynStatusBarEventHook, dynStatusBarStartup, multiPP)
 import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks)
 
 -- Layouts
@@ -40,6 +40,7 @@ import XMonad.Layout.LayoutCombinators
 -- Utilities
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run (spawnPipe)
+import XMonad.Util.Loggers (logCmd)
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -105,7 +106,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_space ), spawn "rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi")
 
     -- launch nautilus
-	, ((modm,               xK_e     ), spawn "nautilus &")
+    , ((modm,               xK_e     ), spawn "nautilus &")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_q     ), kill)
@@ -338,22 +339,23 @@ myManageHook = composeAll
 -- Custom PP
 --
 
-xmobarCreator :: Bars.DynamicStatusBar
+xmobarCreator :: DynamicStatusBar
 xmobarCreator (S sid) = spawnPipe $ "xmobar -x " ++ show sid
 
-xmobarDestroyer :: Bars.DynamicStatusBarCleanup
+xmobarDestroyer :: DynamicStatusBarCleanup
 xmobarDestroyer = return ()
 
-myBarPP = xmobarPP { ppCurrent         = xmobarColor "#2E94A7" "" . wrap "[" "]"
+myBarPP = xmobarPP { ppCurrent         = xmobarColor "#2E94A7" ""
+                   , ppVisible         = xmobarColor "#EBB079" "" . wrap "(" ")"
                    , ppUrgent          = xmobarColor "#FF0000" ""
                    , ppHidden          = xmobarColor "#FFFFFF" ""
                    , ppHiddenNoWindows = xmobarColor "#616161" ""
                    , ppTitle           = xmobarColor "#FFFFFF" "" . shorten 40
-                   , ppSep             = "<fc=#EBB079> : </fc>"
+                   , ppSep             = "<fc=#AF5F00> : </fc>"
                    }
 
--- Key binding to toggle the gap for the bar
--- toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+myBarActivePP = myBarPP { ppCurrent    = xmobarColor "#2E94A7" "" . wrap "[" "]"
+                        }
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -364,7 +366,7 @@ myBarPP = xmobarPP { ppCurrent         = xmobarColor "#2E94A7" "" . wrap "[" "]"
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = Bars.dynStatusBarEventHook xmobarCreator xmobarDestroyer
+myEventHook = dynStatusBarEventHook xmobarCreator xmobarDestroyer
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -372,7 +374,7 @@ myEventHook = Bars.dynStatusBarEventHook xmobarCreator xmobarDestroyer
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = Bars.multiPP myBarPP myBarPP
+myLogHook = multiPP myBarActivePP myBarPP
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -383,7 +385,7 @@ myLogHook = Bars.multiPP myBarPP myBarPP
 --
 -- By default, do nothing.
 myStartupHook = do
-        Bars.dynStatusBarStartup xmobarCreator xmobarDestroyer
+        dynStatusBarStartup xmobarCreator xmobarDestroyer
         spawnOnce "nitrogen --restore &"
         spawnOnce "picom -b &"
         spawnOnce "xfce4-power-manager &"
