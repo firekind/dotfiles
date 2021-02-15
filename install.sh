@@ -33,12 +33,14 @@ exfat-utils
 polybar
 stow
 nitrogen
-oh-my-zsh-git
+starship
 alacritty
 tmux
 zsh-autosuggestions
 gtk-engine-murrine
 ttf-cascadia-code
+bat
+exa
 "
 
 stowlist="i3
@@ -53,6 +55,7 @@ vim
 zsh
 picom
 dunst
+starship
 "
 
 move_dir() {

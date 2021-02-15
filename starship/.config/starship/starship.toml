@@ -1,0 +1,11 @@
+add_newline = false
+
+# Use custom format
+format = "\\[ $directory$git_branch$git_status\\]\\$ " 
+
+[git_branch]
+symbol = ""
+
+[git_status]
+deleted = ""
+
