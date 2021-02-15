@@ -105,6 +105,10 @@ myKeys conf =
       ("M-<Space>", spawn "rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi"),
       -- launch nautilus:
       ("M-e", spawn "nautilus &"),
+      -- launch rofi calendar
+      ("M-c", spawn "~/.config/rofi/scripts/calendar"),
+      -- launch rofi wifi menu
+      ("M-w", spawn "~/.config/rofi/scripts/wifi-menu"),
       -- close focused window:
       ("M-S-q", kill),
       -- Rotate through the available layout algorithms:
@@ -298,6 +302,7 @@ myManageHook =
       className =? "discord" --> doShift (myWorkspaces !! 7), -- chat
       className =? "Signal" --> doShift (myWorkspaces !! 7), -- chat
       className =? "Gimp.bin" --> doShift (myWorkspaces !! 6), -- gfx
+      className =? "Org.gnome.Nautilus" --> doShift (myWorkspaces !! 4), -- app
       className =? "Pavucontrol" --> doFloat,
       className =? "GParted" --> doFloat,
       className =? "Lxappearance" --> doFloat,
