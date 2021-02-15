@@ -46,7 +46,7 @@ Config
     alignSep = "}{",
     template =
       " %UnsafeStdinReader% }\
-      \{<action=`~/.config/rofi/scripts/wifi-menu`>%wlp61s0wi%</action>   <action=`~/.config/rofi/scripts/calendar`>%date%</action>   %battery% "
+      \{<action=`~/.config/rofi/scripts/wifi-menu`>%wlp61s0wi%</action> <fc=#AF5F00>:</fc> <action=`~/.config/rofi/scripts/calendar`>%date%</action> <fc=#AF5F00>:</fc> %battery% "
   }
 
 -- vim:filetype=haskell
