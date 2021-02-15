@@ -9,7 +9,7 @@
     location: south east;
     y-offset: -55;
     x-offset: -10;
-    width: 320;
+    width: 335;
 }
 
 element normal.active, element selected.active, element alternate.active {
