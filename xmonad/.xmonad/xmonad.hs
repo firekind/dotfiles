@@ -303,6 +303,7 @@ myManageHook =
       className =? "Signal" --> doShift (myWorkspaces !! 7), -- chat
       className =? "Gimp.bin" --> doShift (myWorkspaces !! 6), -- gfx
       className =? "Org.gnome.Nautilus" --> doShift (myWorkspaces !! 4), -- app
+      className =? "obs" --> doShift (myWorkspaces !! 5), -- misc
       className =? "Pavucontrol" --> doFloat,
       className =? "GParted" --> doFloat,
       className =? "Lxappearance" --> doFloat,
