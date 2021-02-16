@@ -257,8 +257,10 @@ tabTheme =
     { fontName = "xft:Source Code Pro Semibold:size=11",
       activeTextColor = "#2E94A7",
       inactiveTextColor = "#CCCCCC",
+      urgentTextColor = "#FFFFFF",
       activeColor = "#111111",
       inactiveColor = "#0B0B0B",
+      urgentColor = "#FF0000",
       activeBorderWidth = 0,
       inactiveBorderWidth = 0,
       decoHeight = 24
