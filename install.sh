@@ -21,9 +21,7 @@ pulseaudio
 pulseaudio-alsa
 pavucontrol
 papirus-icon-theme
-nautilus
-libnautilus-extension
-python-nautilus
+pcmanfm-qt
 gvfs-afc
 gvfs-gphoto2
 gvfs-smb
@@ -50,7 +48,7 @@ scripts
 wal
 udiskie
 alacritty
-nautilus-extensions
+pcmanfm-context-menu
 vim
 zsh
 picom
