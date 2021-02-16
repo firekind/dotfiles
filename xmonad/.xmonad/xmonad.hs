@@ -269,7 +269,7 @@ fullScreen =
   renamed [Replace "Full"] $
     noBorders Full
 
-myLayout =
+myLayout = avoidStruts $
   tall
     ||| long
     ||| tabbed'
@@ -293,7 +293,7 @@ myLayout =
 
 myManageHook :: ManageHook
 myManageHook =
-  composeAll
+  composeAll $
     [ className =? "Firefox" --> doShift (myWorkspaces !! 2), -- web
       className =? "firefox" --> doShift (myWorkspaces !! 2), -- web
       className =? "Chromium" --> doShift (myWorkspaces !! 2), -- web
@@ -309,6 +309,9 @@ myManageHook =
       className =? "Lxappearance" --> doFloat,
       className =? "Nitrogen" --> doFloat,
       className =? "Nm-connection-editor" --> doFloat
+    ]
+    ++
+    [ manageDocks
     ]
 
 ------------------------------------------------------------------------
@@ -351,7 +354,10 @@ barActivePP =
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
 myEventHook :: Event -> X All
-myEventHook = dynStatusBarEventHook xmobarCreator xmobarDestroyer
+myEventHook = composeAll
+              [ dynStatusBarEventHook xmobarCreator xmobarDestroyer,
+                docksEventHook
+              ]
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -408,9 +414,9 @@ defaults =
       keys = myKeys,
       mouseBindings = myMouseBindings,
       -- hooks, layouts
-      layoutHook = avoidStruts myLayout,
-      manageHook = myManageHook <+> manageDocks,
-      handleEventHook = myEventHook <+> docksEventHook,
+      layoutHook = myLayout,
+      manageHook = myManageHook,
+      handleEventHook = myEventHook,
       logHook = myLogHook,
       startupHook = myStartupHook
     }
