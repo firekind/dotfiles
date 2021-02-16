@@ -396,7 +396,7 @@ myStartupHook :: X ()
 myStartupHook = do
   dynStatusBarStartup xmobarCreator xmobarDestroyer
   spawnOnce "nitrogen --restore &"
-  -- spawnOnce "picom -b &"
+  spawnOnce "picom -b &"
   spawnOnce "xfce4-power-manager &"
   spawnOnce "udiskie -c ~/.config/udiskie/config.yaml &"
 
