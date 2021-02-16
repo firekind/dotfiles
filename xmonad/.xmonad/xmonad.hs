@@ -111,8 +111,6 @@ myKeys conf =
       ("M-w", spawn "~/.config/rofi/scripts/wifi-menu"),
       -- close focused window:
       ("M-S-q", kill),
-      -- toggle struts
-      ("M-b", sendMessage ToggleStruts),
       -- Rotate through the available layout algorithms:
       ("M-S-l", sendMessage NextLayout),
       --  Reset the layouts on the current workspace to default:
@@ -154,7 +152,7 @@ myKeys conf =
       --- Switch to tabbed mode:
       ("M-S-t", sendMessage $ JumpToLayout "Tabbed"),
       --- Switch to full screen mode:
-      ("M-f", sendMessage $ JumpToLayout "Full"),
+      ("M-f", sendMessage (JumpToLayout "Full") >> sendMessage ToggleStruts),
       -- Increment the number of windows in the master area:
       ("M-,", sendMessage (IncMasterN 1)),
       -- Deincrement the number of windows in the master area:
