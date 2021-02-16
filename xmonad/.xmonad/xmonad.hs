@@ -254,7 +254,7 @@ tabTheme :: Theme
 tabTheme =
   def
     { fontName = "xft:Source Code Pro Semibold:size=11",
-      activeTextColor = "#1285A5",
+      activeTextColor = "#2E94A7",
       inactiveTextColor = "#CCCCCC",
       activeColor = "#111111",
       inactiveColor = "#0B0B0B",
