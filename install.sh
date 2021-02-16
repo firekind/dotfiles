@@ -14,7 +14,7 @@ rofi-calc
 scrot
 jsoncpp
 python-pywal
-picom
+picom-jonaburg-git
 lxappearance
 acpi
 pulseaudio
