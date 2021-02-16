@@ -14,7 +14,7 @@ import XMonad hiding ((|||))
 import XMonad.Actions.CycleWS (nextScreen, prevScreen, shiftNextScreen, shiftPrevScreen)
 import XMonad.Hooks.DynamicBars (DynamicStatusBar, DynamicStatusBarCleanup, dynStatusBarEventHook, dynStatusBarStartup, multiPP)
 import XMonad.Hooks.DynamicLog (PP (..), shorten, wrap, xmobar, xmobarColor, xmobarPP)
-import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks)
+import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
 import XMonad.Layout.Gaps
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LayoutModifier
@@ -152,7 +152,7 @@ myKeys conf =
       --- Switch to tabbed mode:
       ("M-S-t", sendMessage $ JumpToLayout "Tabbed"),
       --- Switch to full screen mode:
-      ("M-f", sendMessage $ JumpToLayout "Full"),
+      ("M-f", sendMessage (JumpToLayout "Full") >> sendMessage ToggleStruts),
       -- Increment the number of windows in the master area:
       ("M-,", sendMessage (IncMasterN 1)),
       -- Deincrement the number of windows in the master area:
