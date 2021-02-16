@@ -15,14 +15,14 @@ import XMonad.Actions.CycleWS (nextScreen, prevScreen, shiftNextScreen, shiftPre
 import XMonad.Hooks.DynamicBars (DynamicStatusBar, DynamicStatusBarCleanup, dynStatusBarEventHook, dynStatusBarStartup, multiPP)
 import XMonad.Hooks.DynamicLog (PP (..), shorten, wrap, xmobar, xmobarColor, xmobarPP)
 import XMonad.Hooks.ManageDocks (ToggleStruts (..), avoidStruts, docksEventHook, manageDocks)
-import XMonad.Layout.Gaps
+import XMonad.Layout.Gaps (GapMessage (..), gaps)
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.LimitWindows (limitWindows)
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.Spacing
+import XMonad.Layout.Spacing (Border (..), Spacing, spacingRaw, toggleScreenSpacingEnabled, toggleWindowSpacingEnabled)
 import XMonad.Layout.Tabbed
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (mkKeymap)
@@ -92,6 +92,15 @@ myNormalBorderColor = "#424242"
 myFocusedBorderColor :: String
 myFocusedBorderColor = "#dddddd"
 
+-- Function to toggle all gaps
+toggleAllGaps :: X ()
+toggleAllGaps = toggleWindowSpacingEnabled >> toggleScreenSpacingEnabled >> sendMessage ToggleGaps
+
+-- Function that toggles gaps and struts, effectively filling the
+-- entire screen with the current layout
+toggleGapsAndStruts :: X ()
+toggleGapsAndStruts = toggleAllGaps >> sendMessage ToggleStruts
+
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -111,6 +120,10 @@ myKeys conf =
       ("M-w", spawn "~/.config/rofi/scripts/wifi-menu"),
       -- close focused window:
       ("M-S-q", kill),
+      -- toggle gaps
+      ("M-S-g", toggleAllGaps),
+      -- toggle gaps and struts
+      ("M-S-f", toggleGapsAndStruts),
       -- Rotate through the available layout algorithms:
       ("M-S-l", sendMessage NextLayout),
       --  Reset the layouts on the current workspace to default:
