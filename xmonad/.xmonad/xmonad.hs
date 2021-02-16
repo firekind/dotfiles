@@ -113,7 +113,7 @@ myKeys conf =
       -- launch dmenu:
       ("M-<Space>", spawn "rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi"),
       -- launch nautilus:
-      ("M-e", spawn "nautilus &"),
+      ("M-e", spawn "pcmanfm-qt"),
       -- launch rofi calendar
       ("M-c", spawn "~/.config/rofi/scripts/calendar"),
       -- launch rofi wifi menu
@@ -317,6 +317,7 @@ myManageHook =
       className =? "firefox" --> doShift (myWorkspaces !! 2), -- web
       className =? "obs" --> doShift (myWorkspaces !! 4), -- app
       className =? "Org.gnome.Nautilus" --> doShift (myWorkspaces !! 4), -- app
+      className =? "pcmanfm-qt" --> doShift (myWorkspaces !! 4), -- app
       className =? "vlc" --> doShift (myWorkspaces !! 5), -- misc
       className =? "Gimp.bin" --> doShift (myWorkspaces !! 6), -- gfx
       className =? "discord" --> doShift (myWorkspaces !! 7), -- chat
