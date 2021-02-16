@@ -344,7 +344,7 @@ barPP :: PP
 barPP =
   xmobarPP
     { ppCurrent = xmobarColor "#2E94A7" "",
-      ppVisible = xmobarColor "#EBB079" "" . wrap "(" ")",
+      ppVisible = xmobarColor "#FFFFFF" "" . wrap "(" ")",
       ppUrgent = xmobarColor "#FF0000" "",
       ppHidden = xmobarColor "#FFFFFF" "",
       ppHiddenNoWindows = xmobarColor "#616161" "",
@@ -396,9 +396,8 @@ myStartupHook :: X ()
 myStartupHook = do
   dynStatusBarStartup xmobarCreator xmobarDestroyer
   spawnOnce "nitrogen --restore &"
-  spawnOnce "picom -b &"
+  -- spawnOnce "picom -b &"
   spawnOnce "xfce4-power-manager &"
-  spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
   spawnOnce "udiskie -c ~/.config/udiskie/config.yaml &"
 
 ------------------------------------------------------------------------
