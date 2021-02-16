@@ -14,7 +14,7 @@ import XMonad hiding ((|||))
 import XMonad.Actions.CycleWS (nextScreen, prevScreen, shiftNextScreen, shiftPrevScreen)
 import XMonad.Hooks.DynamicBars (DynamicStatusBar, DynamicStatusBarCleanup, dynStatusBarEventHook, dynStatusBarStartup, multiPP)
 import XMonad.Hooks.DynamicLog (PP (..), shorten, wrap, xmobar, xmobarColor, xmobarPP)
-import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.ManageDocks (ToggleStruts (..), avoidStruts, docksEventHook, manageDocks)
 import XMonad.Layout.Gaps
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LayoutModifier
@@ -111,6 +111,8 @@ myKeys conf =
       ("M-w", spawn "~/.config/rofi/scripts/wifi-menu"),
       -- close focused window:
       ("M-S-q", kill),
+      -- toggle struts
+      ("M-b", sendMessage ToggleStruts),
       -- Rotate through the available layout algorithms:
       ("M-S-l", sendMessage NextLayout),
       --  Reset the layouts on the current workspace to default:
@@ -152,7 +154,7 @@ myKeys conf =
       --- Switch to tabbed mode:
       ("M-S-t", sendMessage $ JumpToLayout "Tabbed"),
       --- Switch to full screen mode:
-      ("M-f", sendMessage (JumpToLayout "Full") >> sendMessage ToggleStruts),
+      ("M-f", sendMessage $ JumpToLayout "Full"),
       -- Increment the number of windows in the master area:
       ("M-,", sendMessage (IncMasterN 1)),
       -- Deincrement the number of windows in the master area:
@@ -269,11 +271,12 @@ fullScreen =
   renamed [Replace "Full"] $
     noBorders Full
 
-myLayout = avoidStruts $
-  tall
-    ||| long
-    ||| tabbed'
-    ||| fullScreen
+myLayout =
+  avoidStruts $
+    tall
+      ||| long
+      ||| tabbed'
+      ||| fullScreen
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -293,8 +296,10 @@ myLayout = avoidStruts $
 
 myManageHook :: ManageHook
 myManageHook =
-  composeAll $
-    [ className =? "Firefox" --> doShift (myWorkspaces !! 2), -- web
+  composeAll
+    [ manageDocks,
+      -- app specific
+      className =? "Firefox" --> doShift (myWorkspaces !! 2), -- web
       className =? "firefox" --> doShift (myWorkspaces !! 2), -- web
       className =? "Chromium" --> doShift (myWorkspaces !! 2), -- web
       className =? "Code" --> doShift (myWorkspaces !! 1), -- code
@@ -309,9 +314,6 @@ myManageHook =
       className =? "Lxappearance" --> doFloat,
       className =? "Nitrogen" --> doFloat,
       className =? "Nm-connection-editor" --> doFloat
-    ]
-    ++
-    [ manageDocks
     ]
 
 ------------------------------------------------------------------------
@@ -354,10 +356,11 @@ barActivePP =
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
 myEventHook :: Event -> X All
-myEventHook = composeAll
-              [ dynStatusBarEventHook xmobarCreator xmobarDestroyer,
-                docksEventHook
-              ]
+myEventHook =
+  composeAll
+    [ dynStatusBarEventHook xmobarCreator xmobarDestroyer,
+      docksEventHook
+    ]
 
 ------------------------------------------------------------------------
 -- Status bars and logging
