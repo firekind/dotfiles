@@ -310,21 +310,22 @@ myManageHook =
   composeAll
     [ manageDocks,
       -- app specific
+      className =? "Atom" --> doShift (myWorkspaces !! 1), -- code
+      className =? "Code" --> doShift (myWorkspaces !! 1), -- code
+      className =? "Chromium" --> doShift (myWorkspaces !! 2), -- web
       className =? "Firefox" --> doShift (myWorkspaces !! 2), -- web
       className =? "firefox" --> doShift (myWorkspaces !! 2), -- web
-      className =? "Chromium" --> doShift (myWorkspaces !! 2), -- web
-      className =? "Code" --> doShift (myWorkspaces !! 1), -- code
-      className =? "Atom" --> doShift (myWorkspaces !! 1), -- code
+      className =? "obs" --> doShift (myWorkspaces !! 4), -- app
+      className =? "Org.gnome.Nautilus" --> doShift (myWorkspaces !! 4), -- app
+      className =? "vlc" --> doShift (myWorkspaces !! 5), -- misc
+      className =? "Gimp.bin" --> doShift (myWorkspaces !! 6), -- gfx
       className =? "discord" --> doShift (myWorkspaces !! 7), -- chat
       className =? "Signal" --> doShift (myWorkspaces !! 7), -- chat
-      className =? "Gimp.bin" --> doShift (myWorkspaces !! 6), -- gfx
-      className =? "Org.gnome.Nautilus" --> doShift (myWorkspaces !! 4), -- app
-      className =? "obs" --> doShift (myWorkspaces !! 5), -- misc
-      className =? "Pavucontrol" --> doFloat,
       className =? "GParted" --> doFloat,
       className =? "Lxappearance" --> doFloat,
       className =? "Nitrogen" --> doFloat,
-      className =? "Nm-connection-editor" --> doFloat
+      className =? "Nm-connection-editor" --> doFloat,
+      className =? "Pavucontrol" --> doFloat
     ]
 
 ------------------------------------------------------------------------
