@@ -276,7 +276,7 @@ long =
 tabbed' =
   renamed [Replace "Tabbed"] $
     gaps [(U, 16), (D, 16), (L, 16), (R, 16)] $
-      tabbed shrinkText tabTheme
+      noBorders $ tabbed shrinkText tabTheme
 
 fullScreen =
   renamed [Replace "Full"] $
