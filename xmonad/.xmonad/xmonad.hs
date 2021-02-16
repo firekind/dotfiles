@@ -15,6 +15,7 @@ import XMonad.Actions.CycleWS (nextScreen, prevScreen, shiftNextScreen, shiftPre
 import XMonad.Hooks.DynamicBars (DynamicStatusBar, DynamicStatusBarCleanup, dynStatusBarEventHook, dynStatusBarStartup, multiPP)
 import XMonad.Hooks.DynamicLog (PP (..), shorten, wrap, xmobar, xmobarColor, xmobarPP)
 import XMonad.Hooks.ManageDocks (ToggleStruts (..), avoidStruts, docksEventHook, manageDocks)
+import XMonad.Hooks.Place (placeHook, smart)
 import XMonad.Layout.Gaps (GapMessage (..), gaps)
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LayoutModifier
@@ -308,7 +309,8 @@ myLayout =
 myManageHook :: ManageHook
 myManageHook =
   composeAll
-    [ manageDocks,
+    [ placeHook $ smart (0.5, 0.5),
+      manageDocks,
       -- app specific
       className =? "Atom" --> doShift (myWorkspaces !! 1), -- code
       className =? "Code" --> doShift (myWorkspaces !! 1), -- code
@@ -326,7 +328,8 @@ myManageHook =
       className =? "Lxappearance" --> doFloat,
       className =? "Nitrogen" --> doFloat,
       className =? "Nm-connection-editor" --> doFloat,
-      className =? "Pavucontrol" --> doFloat
+      className =? "Pavucontrol" --> doFloat,
+      className =? "Zenity" <&&> title =? "=Authentication" --> doFloat
     ]
 
 ------------------------------------------------------------------------
