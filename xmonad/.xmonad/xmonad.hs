@@ -276,8 +276,9 @@ long =
 
 tabbed' =
   renamed [Replace "Tabbed"] $
-    gaps [(U, 16), (D, 16), (L, 16), (R, 16)] $
-      noBorders $ tabbed shrinkText tabTheme
+    avoidStruts $  -- so that struts are avoided when going from Full to Tabbed layouts
+      gaps [(U, 16), (D, 16), (L, 16), (R, 16)] $
+        noBorders $ tabbed shrinkText tabTheme
 
 fullScreen =
   renamed [Replace "Full"] $
