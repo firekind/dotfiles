@@ -15,20 +15,21 @@ import XMonad.Actions.CycleWS (nextScreen, prevScreen, shiftNextScreen, shiftPre
 import XMonad.Actions.Warp (warpToWindow)
 import XMonad.Hooks.DynamicBars (DynamicStatusBar, DynamicStatusBarCleanup, dynStatusBarEventHook, dynStatusBarStartup, multiPP)
 import XMonad.Hooks.DynamicLog (PP (..), shorten, wrap, xmobar, xmobarColor, xmobarPP)
-import XMonad.Hooks.ManageDocks (ToggleStruts (..), avoidStruts, docksEventHook, manageDocks)
+import XMonad.Hooks.ManageDocks (ToggleStruts (ToggleStruts), avoidStruts, docksEventHook, manageDocks)
 import XMonad.Hooks.Place (placeHook, smart)
-import XMonad.Layout.Gaps (GapMessage (..), gaps)
-import XMonad.Layout.LayoutCombinators (JumpToLayout (..), (|||))
+import XMonad.Layout.Gaps (GapMessage (ToggleGaps), gaps)
+import XMonad.Layout.LayoutCombinators (JumpToLayout (JumpToLayout), (|||))
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.LimitWindows (limitWindows)
 import XMonad.Layout.NoBorders (noBorders)
-import XMonad.Layout.Renamed (Rename (..), renamed)
+import XMonad.Layout.Renamed (Rename (Replace), renamed)
 import XMonad.Layout.ResizableTile (ResizableTall (..))
-import XMonad.Layout.Spacing (Border (..), Spacing, spacingRaw, toggleScreenSpacingEnabled, toggleWindowSpacingEnabled)
+import XMonad.Layout.Spacing (Border (Border), Spacing, spacingRaw, toggleScreenSpacingEnabled, toggleWindowSpacingEnabled)
 import XMonad.Layout.Tabbed (Direction2D (..), Theme (..), shrinkText, tabbed)
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (mkKeymap)
 import XMonad.Util.Loggers (logCmd)
+import XMonad.Util.NamedScratchpad (NamedScratchpad (NS), customFloating, namedScratchpadAction, namedScratchpadFilterOutWorkspacePP, namedScratchpadManageHook)
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
@@ -95,36 +96,62 @@ myFocusedBorderColor :: String
 myFocusedBorderColor = "#dddddd"
 
 -- Function to toggle all gaps
+--
 toggleAllGaps :: X ()
 toggleAllGaps = toggleWindowSpacingEnabled >> toggleScreenSpacingEnabled >> sendMessage ToggleGaps
 
 -- Function that toggles gaps and struts, effectively filling the
 -- entire screen with the current layout
+--
 toggleGapsAndStruts :: X ()
 toggleGapsAndStruts = toggleAllGaps >> sendMessage ToggleStruts
+
+-- scratch pads
+--
+termScratchpadName :: String
+termScratchpadName = "alacritty-scratchpad"
+
+htopScratchpadName :: String
+htopScratchpadName = "htop-scratchpad"
+
+scratchpads =
+  [ NS termScratchpadName spawnTerm findTerm manageTerm,
+    NS htopScratchpadName spawnHtop findHtop manageHtop
+  ]
+  where
+    spawnTerm = unwords [myTerminal, "-t", termScratchpadName] -- command to spawn terminal
+    findTerm = title =? termScratchpadName
+    manageTerm = customFloating $ W.RationalRect 0.592 0.016 0.4 0.3
+
+    spawnHtop = unwords [myTerminal, "-t", htopScratchpadName, "-e", "htop"] -- command to spawn htop
+    findHtop = title =? htopScratchpadName
+    manageHtop = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf =
   mkKeymap conf $
-    [ -- launch a terminal:
-      ("M-<Return>", spawn $ XMonad.terminal conf),
-      -- launch dmenu:
+    [ -- launch rofi:
       ("M-<Space>", spawn "rofi -show drun -display-drun Apps -theme ~/.config/rofi/themes/appmenu.rasi"),
+      -- launch a terminal:
+      ("M-<Return>", spawn $ XMonad.terminal conf),
+      -- toggle terminal scratchpad:
+      ("M-`", namedScratchpadAction scratchpads termScratchpadName),
+      -- toggle htop scratchpad:
+      ("M-S-x", namedScratchpadAction scratchpads htopScratchpadName),
       -- launch nautilus:
       ("M-e", spawn "pcmanfm-qt"),
-      -- launch rofi calendar
+      -- launch rofi calendar:
       ("M-c", spawn "~/.config/rofi/scripts/calendar"),
-      -- launch rofi wifi menu
+      -- launch rofi wifi menu:
       ("M-w", spawn "~/.config/rofi/scripts/wifi-menu"),
       -- close focused window:
       ("M-S-q", kill),
-      -- toggle gaps
+      -- toggle gaps:
       ("M-S-g", toggleAllGaps),
-      -- toggle gaps and struts
+      -- toggle gaps and struts:
       ("M-S-f", toggleGapsAndStruts),
       -- Rotate through the available layout algorithms:
       ("M-S-l", sendMessage NextLayout),
@@ -248,7 +275,6 @@ myMouseBindings XConfig {XMonad.modMask = modm} =
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-
 addGaps :: Integer -> l a -> ModifiedLayout Spacing l a
 addGaps i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
@@ -309,11 +335,11 @@ myLayout =
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-
 myManageHook :: ManageHook
 myManageHook =
   composeAll
-    [ placeHook $ smart (0.5, 0.5),
+    [ namedScratchpadManageHook scratchpads,
+      placeHook $ smart (0.5, 0.5),
       manageDocks,
       -- app specific
       className =? "Atom" --> doShift (myWorkspaces !! 1), -- code
@@ -340,7 +366,6 @@ myManageHook =
 -- Status bar (XMobar)
 -- Custom PP
 --
-
 xmobarCreator :: DynamicStatusBar
 xmobarCreator (S sid) = spawnPipe $ "xmobar -x " ++ show sid
 
@@ -349,16 +374,17 @@ xmobarDestroyer = return ()
 
 barPP :: PP
 barPP =
-  xmobarPP
-    { ppCurrent = xmobarColor "#2E94A7" "",
-      ppVisible = xmobarColor "#FFFFFF" "" . wrap "(" ")",
-      ppUrgent = xmobarColor "#FF0000" "",
-      ppHidden = xmobarColor "#FFFFFF" "",
-      ppHiddenNoWindows = xmobarColor "#616161" "",
-      ppTitle = xmobarColor "#FFFFFF" "" . shorten 40,
-      ppSep = "<fc=#AF5F00> : </fc>",
-      ppLayout = xmobarColor "#FFFFFF" "" . wrap "<action=xdotool key super+shift+l>" "</action>"
-    }
+  namedScratchpadFilterOutWorkspacePP $ -- prevents the NSP workspace from showing up in xmobar
+    xmobarPP
+      { ppCurrent = xmobarColor "#2E94A7" "",
+        ppVisible = xmobarColor "#FFFFFF" "" . wrap "(" ")",
+        ppUrgent = xmobarColor "#FF0000" "",
+        ppHidden = xmobarColor "#FFFFFF" "",
+        ppHiddenNoWindows = xmobarColor "#616161" "",
+        ppTitle = xmobarColor "#FFFFFF" "" . shorten 40,
+        ppSep = "<fc=#AF5F00> : </fc>",
+        ppLayout = xmobarColor "#FFFFFF" "" . wrap "<action=xdotool key super+shift+l>" "</action>"
+      }
 
 barActivePP :: PP
 barActivePP =
