@@ -12,24 +12,25 @@ import Data.Monoid
 import System.Exit (exitSuccess)
 import XMonad hiding ((|||))
 import XMonad.Actions.CycleWS (nextScreen, prevScreen, shiftNextScreen, shiftPrevScreen)
+import XMonad.Actions.Warp (warpToWindow)
 import XMonad.Hooks.DynamicBars (DynamicStatusBar, DynamicStatusBarCleanup, dynStatusBarEventHook, dynStatusBarStartup, multiPP)
 import XMonad.Hooks.DynamicLog (PP (..), shorten, wrap, xmobar, xmobarColor, xmobarPP)
 import XMonad.Hooks.ManageDocks (ToggleStruts (..), avoidStruts, docksEventHook, manageDocks)
 import XMonad.Hooks.Place (placeHook, smart)
 import XMonad.Layout.Gaps (GapMessage (..), gaps)
-import XMonad.Layout.LayoutCombinators
-import XMonad.Layout.LayoutModifier
+import XMonad.Layout.LayoutCombinators (JumpToLayout (..), (|||))
+import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.LimitWindows (limitWindows)
-import XMonad.Layout.NoBorders
-import XMonad.Layout.Renamed
-import XMonad.Layout.ResizableTile
+import XMonad.Layout.NoBorders (noBorders)
+import XMonad.Layout.Renamed (Rename (..), renamed)
+import XMonad.Layout.ResizableTile (ResizableTall (..))
 import XMonad.Layout.Spacing (Border (..), Spacing, spacingRaw, toggleScreenSpacingEnabled, toggleWindowSpacingEnabled)
-import XMonad.Layout.Tabbed
+import XMonad.Layout.Tabbed (Direction2D (..), Theme (..), shrinkText, tabbed)
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (mkKeymap)
 import XMonad.Util.Loggers (logCmd)
 import XMonad.Util.Run (spawnPipe)
-import XMonad.Util.SpawnOnce
+import XMonad.Util.SpawnOnce (spawnOnce)
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -195,12 +196,12 @@ myKeys conf =
       ("M-0 r", spawn "sh ~/.config/i3/scripts/i3exit reboot"),
       -- lock:
       ("M-0 l", spawn "sh ~/.config/i3/scripts/i3exit lock"),
-      -- Switch focus to next monitor:
-      ("M-]", nextScreen),
+      -- Switch focus to next monitor and move mouse to the top right of the focused window on that screen:
+      ("M-]", nextScreen >> warpToWindow 1 0),
       -- Move focused window to next monitor:
       ("M-S-]", shiftNextScreen),
-      -- Switch focus to previous monitor:
-      ("M-[", prevScreen),
+      -- Switch focus to previous monitor and move mouse to the top right of the focused window on that screen:
+      ("M-[", prevScreen >> warpToWindow 1 0),
       -- Move focused window to previous monitor:
       ("M-S-[", shiftPrevScreen)
     ]
@@ -248,7 +249,7 @@ myMouseBindings XConfig {XMonad.modMask = modm} =
 -- which denotes layout choice.
 --
 
-addGaps :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
+addGaps :: Integer -> l a -> ModifiedLayout Spacing l a
 addGaps i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
 tabTheme :: Theme
@@ -278,7 +279,7 @@ long =
 
 tabbed' =
   renamed [Replace "Tabbed"] $
-    avoidStruts $  -- so that struts are avoided when going from Full to Tabbed layouts
+    avoidStruts $ -- so that struts are avoided when going from Full to Tabbed layout
       gaps [(U, 16), (D, 16), (L, 16), (R, 16)] $
         noBorders $ tabbed shrinkText tabTheme
 
@@ -355,7 +356,8 @@ barPP =
       ppHidden = xmobarColor "#FFFFFF" "",
       ppHiddenNoWindows = xmobarColor "#616161" "",
       ppTitle = xmobarColor "#FFFFFF" "" . shorten 40,
-      ppSep = "<fc=#AF5F00> : </fc>"
+      ppSep = "<fc=#AF5F00> : </fc>",
+      ppLayout = xmobarColor "#FFFFFF" "" . wrap "<action=xdotool key super+shift+l>" "</action>"
     }
 
 barActivePP :: PP
