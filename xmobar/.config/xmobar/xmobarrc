@@ -39,7 +39,7 @@ Config
             "-a",
             "notify-send -u critical 'Battery low'"
           ]
-          600,
+          50,
         Run UnsafeStdinReader
       ],
     sepChar = "%",
