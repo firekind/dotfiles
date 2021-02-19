@@ -25,7 +25,7 @@ import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.Renamed (Rename (Replace), renamed)
 import XMonad.Layout.ResizableTile (ResizableTall (..))
 import XMonad.Layout.Spacing (Border (Border), Spacing, spacingRaw, toggleScreenSpacingEnabled, toggleWindowSpacingEnabled)
-import XMonad.Layout.Tabbed (Direction2D (..), Theme (..), shrinkText, tabbed)
+import XMonad.Layout.Tabbed (Direction2D (..), Theme (..), shrinkText, tabbedAlways)
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (mkKeymap)
 import XMonad.Util.Loggers (logCmd)
@@ -147,6 +147,8 @@ myKeys conf =
       ("M-c", spawn "~/.config/rofi/scripts/calendar"),
       -- launch rofi wifi menu:
       ("M-w", spawn "~/.config/rofi/scripts/wifi-menu"),
+      -- launch rofi calculator
+      ("M-S-c", spawn "rofi -show calc -modi calc -no-show-match -no-sort -theme ~/.config/rofi/themes/calc.rasi"),
       -- close focused window:
       ("M-S-q", kill),
       -- toggle gaps:
@@ -307,7 +309,7 @@ tabbed' =
   renamed [Replace "Tabbed"] $
     avoidStruts $ -- so that struts are avoided when going from Full to Tabbed layout
       gaps [(U, 16), (D, 16), (L, 16), (R, 16)] $
-        noBorders $ tabbed shrinkText tabTheme
+        noBorders $ tabbedAlways shrinkText tabTheme
 
 fullScreen =
   renamed [Replace "Full"] $
