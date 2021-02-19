@@ -34,6 +34,9 @@
             "exa",
             "i3lock-color"
         ],
+        "local-makepkgs": [
+            "res/packages/custom-fonts"
+        ],
         "i3": [
             "i3-gaps",
             "jsoncpp",

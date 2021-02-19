@@ -7,6 +7,7 @@ import shutil
 from typing import List, Dict, Callable
 import subprocess
 import argparse
+from distutils.dir_util import copy_tree
 
 # Global variables
 config: Dict[str, str] = {}
@@ -98,6 +99,14 @@ def backup():
 def install_base():
     install_packages(config["packages"]["base"])
 
+    dir_ = os.getcwd()
+    for path in config["packages"]["local-makepkgs"]:
+        os.chdir(path)
+        execute_command("makepkg -rsci --noconfirm")
+        os.chdir(dir_)
+
+    os.chdir(dir_)
+
 
 @core(tag=_i3_tag)
 def install_i3():
@@ -112,7 +121,7 @@ def install_xmonad():
 @core()
 def install_dotfiles():
     dots = config["dotfiles"]["base"] + config["dotfiles"][args.wm]
-    execute_command("stow -t ~ " + " ".join(dots))
+    execute_command("stow -t %s %s" % (os.path.expanduser("~"), " ".join(dots)))
 
 
 # stuff to do after installation
@@ -125,11 +134,13 @@ def change_shell():
 @postinstall
 def change_background():
     wallpaper_dir = os.path.expanduser("~/Pictures/Wallpapers")
-    if not os.path.exists(wallpaper_dir):
-        execute_command("mkdir -p %s" % wallpaper_dir)
-        execute_command("cp res/wallpapers/* %s" % wallpaper_dir)
+    execute_command("mkdir -p %s" % wallpaper_dir)
+    copy_tree("res/wallpapers", wallpaper_dir)
 
-    execute_command("~/.scripts/change-bg ~/Pictures/Wallpapers/forest.jpg")
+    execute_command(
+        "%s %s" % os.path.expanduser("~/.scripts/change-bg"),
+        os.path.join(wallpaper_dir, "forest.jpg"),
+    )
 
 
 @postinstall
@@ -154,8 +165,8 @@ def update_gtkcss():
 #
 def install_packages(packages: List[str]):
     command_str = (
-        "yay -S --needed --answerclean All --answerdiff None --removemake "
-        + " ".join(packages)
+        "yay -S --needed --answerclean All --answerdiff None --removemake %s"
+        % " ".join(packages)
     )
     res = execute_command(command_str)
 
