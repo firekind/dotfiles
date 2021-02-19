@@ -111,7 +111,8 @@ def install_xmonad():
 
 @core
 def install_dotfiles():
-    execute_command("stow -t ~ " + " ".join(config["dotfiles"][args.wm]))
+    dots = config["dotfiles"]["base"] + config["dotfiles"][args.wm]
+    execute_command("stow -t ~ " + " ".join(dots))
 
 
 # stuff to do after installation
