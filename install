@@ -69,7 +69,7 @@ def check_requirements():
     if res.returncode != 0:
         print(" -> installing: yay")
         execute_command("sudo pacman -S base-devel --noconfirm")
-        execute_command("git clone https://aut.archlinux.org/yay.git")
+        execute_command("git clone https://aur.archlinux.org/yay.git")
         os.chdir("yay")
         execute_command("makepkg -rsci --noconfirm")
         os.chdir("..")
