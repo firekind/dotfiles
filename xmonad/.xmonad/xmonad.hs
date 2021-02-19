@@ -16,7 +16,7 @@ import XMonad.Actions.Warp (warpToWindow)
 import XMonad.Hooks.DynamicBars (DynamicStatusBar, DynamicStatusBarCleanup, dynStatusBarEventHook, dynStatusBarStartup, multiPP)
 import XMonad.Hooks.DynamicLog (PP (..), shorten, wrap, xmobar, xmobarColor, xmobarPP)
 import XMonad.Hooks.ManageDocks (ToggleStruts (ToggleStruts), avoidStruts, docksEventHook, manageDocks)
-import XMonad.Hooks.Place (placeHook, smart)
+import XMonad.Hooks.Place (placeHook, fixed)
 import XMonad.Layout.Gaps (GapMessage (ToggleGaps), gaps)
 import XMonad.Layout.LayoutCombinators (JumpToLayout (JumpToLayout), (|||))
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
@@ -341,7 +341,7 @@ myManageHook :: ManageHook
 myManageHook =
   composeAll
     [ namedScratchpadManageHook scratchpads,
-      placeHook $ smart (0.5, 0.5),
+      placeHook $ fixed (0.5, 0.5),
       manageDocks,
       -- app specific
       className =? "Atom" --> doShift (myWorkspaces !! 1), -- code
