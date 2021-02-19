@@ -21,7 +21,10 @@ _xmonad_tag = "xmonad"
 # argparser
 parser = argparse.ArgumentParser("install dotfiles and required programs")
 parser.add_argument(
-    "--wm", choices=[_i3_tag, _xmonad_tag], help="window manager to install"
+    "--wm",
+    choices=[_i3_tag, _xmonad_tag],
+    required=True,
+    help="window manager to install",
 )
 parser.add_argument(
     "--config", type=str, default="config.json", help="config file path"
@@ -162,7 +165,8 @@ def install_packages(packages: List[str]):
 
 def load_config():
     global config
-    config = json.loads(args.config)
+    with open(args.config, "r") as f:
+        config = json.load(f)
 
 
 def execute_command(command: str) -> subprocess.CompletedProcess:
@@ -174,7 +178,7 @@ def execute_command(command: str) -> subprocess.CompletedProcess:
 def main():
     load_config()
     func_list = _preinstall + _core + _postinstall
-    
+
     for func in func_list:
         func()
 
