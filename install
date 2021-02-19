@@ -153,7 +153,7 @@ def update_gtkcss():
 #
 def install_packages(packages: List[str]):
     command_str = (
-        "yay -S --needed --answerclean All --answerdiff None --removemake"
+        "yay -S --needed --answerclean All --answerdiff None --removemake "
         + " ".join(packages)
     )
     res = execute_command(command_str)
