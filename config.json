@@ -1,0 +1,94 @@
+{
+    "packages": {
+        "base": [
+            "dunst",
+            "light",
+            "alsa-utils",
+            "rofi",
+            "rofi-calc",
+            "scrot",
+            "python-pywal",
+            "picom-jonaburg-git",
+            "lxappearance",
+            "acpi",
+            "pulseaudio",
+            "pulseaudio-alsa",
+            "pavucontrol",
+            "papirus-icon-theme",
+            "pcmanfm-qt",
+            "gvfs-afc",
+            "gvfs-gphoto2",
+            "gvfs-smb",
+            "udiskie",
+            "dconf-editor",
+            "exfat-utils",
+            "nitrogen",
+            "starship",
+            "alacritty",
+            "tmux",
+            "zsh-autosuggestions",
+            "gtk-engine-murrine",
+            "ttf-cascadia-code",
+            "bat",
+            "exa",
+            "i3lock-color"
+        ],
+        "i3": [
+            "i3-gaps",
+            "jsoncpp",
+            "polybar"
+        ],
+        "xmonad": [
+            "xmonad",
+            "xmonad-contrib",
+            "xmobar"
+        ]
+    },
+    "dotfiles": {
+        "base": [
+            "rofi",
+            "scripts",
+            "wal",
+            "udiskie",
+            "alacritty",
+            "pcmanfm-context-menu",
+            "vim",
+            "zsh",
+            "picom",
+            "dunst",
+            "starship"
+        ],
+        "i3": [
+            "i3",
+            "polybar"
+        ],
+        "xmonad": [
+            "xmonad",
+            "xmobar"
+        ]
+    },
+    "backup": {
+        "dunst": [
+            "~/.config/dunst"
+        ],
+        "vim": [
+            "~/.vimrc"
+        ],
+        "zsh": [
+            "~/.zshrc"
+        ],
+        "compton": [
+            "~/.config/compton.conf",
+            "~/.config/compton"
+        ],
+        "i3": [
+            "~/.i3",
+            "~/.config/i3"
+        ],
+        "xmonad": [
+            "~/.xmonad",
+            "~/.config/xmobar"
+        ]
+    },
+    "backup_dir": "backup"
+}
