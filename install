@@ -59,13 +59,13 @@ def check_requirements():
     execute_command("sudo pacman -Sy")
 
     # checking if git exists
-    res = execute_command("pacman -Q git &> /dev/null")
+    res = execute_command("pacman -Q git", suppress_output=True)
     if res.returncode != 0:
         print(" -> installing: git")
         execute_command("sudo pacman -S git --noconfirm")
 
     # checking if yay exists
-    res = execute_command("pacman -Q yay &> /dev/null")
+    res = execute_command("pacman -Q yay", suppress_output=True)
     if res.returncode != 0:
         print(" -> installing: yay")
         execute_command("sudo pacman -S base-devel --noconfirm")
@@ -169,7 +169,13 @@ def load_config():
         config = json.load(f)
 
 
-def execute_command(command: str) -> subprocess.CompletedProcess:
+def execute_command(
+    command: str, suppress_output: bool = False
+) -> subprocess.CompletedProcess:
+    if suppress_output:
+        return subprocess.run(
+            command.split(), stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL
+        )
     return subprocess.run(command.split())
 
 
