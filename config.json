@@ -1,6 +1,7 @@
 {
     "packages": {
         "base": [
+            "stow",
             "dunst",
             "light",
             "alsa-utils",

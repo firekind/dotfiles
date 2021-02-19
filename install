@@ -94,7 +94,7 @@ def backup():
 
 # actual installation
 #
-@core
+@core()
 def install_base():
     install_packages(config["packages"]["base"])
 
@@ -109,7 +109,7 @@ def install_xmonad():
     install_packages(config["packages"][_xmonad_tag])
 
 
-@core
+@core()
 def install_dotfiles():
     dots = config["dotfiles"]["base"] + config["dotfiles"][args.wm]
     execute_command("stow -t ~ " + " ".join(dots))
