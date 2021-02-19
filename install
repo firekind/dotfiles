@@ -138,8 +138,11 @@ def change_background():
     copy_tree("res/wallpapers", wallpaper_dir)
 
     execute_command(
-        "%s %s" % os.path.expanduser("~/.scripts/change-bg"),
-        os.path.join(wallpaper_dir, "forest.jpg"),
+        "%s %s"
+        % (
+            os.path.expanduser("~/.scripts/change-bg"),
+            os.path.join(wallpaper_dir, "forest.jpg"),
+        ),
     )
 
 
@@ -152,11 +155,11 @@ def update_gtkcss():
     css_path = os.path.join(gtk_dir, "gtk.css")
     with open(css_path, "a") as f:
         f.write(
-            "VteTerminal,"
-            "TerminalScreen,"
-            "vte-terminal {"
-            "padding: 10px 10px 10px 10px;"
-            "-VteTerminal-inner-border: 10px 10px 10px 10px;"
+            "VteTerminal,\n"
+            "TerminalScreen,\n"
+            "vte-terminal {\n"
+            "   padding: 10px 10px 10px 10px;\n"
+            "   -VteTerminal-inner-border: 10px 10px 10px 10px;\n"
             "}"
         )
 
