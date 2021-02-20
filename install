@@ -20,11 +20,10 @@ _i3_tag = "i3"
 _xmonad_tag = "xmonad"
 
 # argparser
-parser = argparse.ArgumentParser("install dotfiles and required programs")
+parser = argparse.ArgumentParser("./install")
 parser.add_argument(
-    "--wm",
+    "wm",
     choices=[_i3_tag, _xmonad_tag],
-    required=True,
     help="window manager to install",
 )
 parser.add_argument(
