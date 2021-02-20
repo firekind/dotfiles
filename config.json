@@ -32,7 +32,8 @@
             "ttf-cascadia-code",
             "bat",
             "exa",
-            "i3lock-color"
+            "i3lock-color",
+            "networkmanager-dmenu-git"
         ],
         "local-makepkgs": [
             "res/packages/custom-fonts"
@@ -56,6 +57,7 @@
             "udiskie",
             "alacritty",
             "pcmanfm-context-menu",
+            "networkmanager-dmenu",
             "vim",
             "zsh",
             "picom",

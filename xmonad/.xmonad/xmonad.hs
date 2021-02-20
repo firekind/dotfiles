@@ -144,9 +144,9 @@ myKeys conf =
       -- launch nautilus:
       ("M-e", spawn "pcmanfm-qt"),
       -- launch rofi calendar:
-      ("M-c", spawn "~/.config/rofi/scripts/calendar"),
+      ("M-c", spawn "~/.config/custom-scripts/calendar"),
       -- launch rofi wifi menu:
-      ("M-w", spawn "~/.config/rofi/scripts/wifi-menu"),
+      ("M-w", spawn "networkmanager_dmenu"),
       -- launch rofi calculator
       ("M-S-c", spawn "rofi -show calc -modi calc -no-show-match -no-sort -theme ~/.config/rofi/themes/calc.rasi"),
       -- close focused window:
@@ -204,27 +204,27 @@ myKeys conf =
       -- Restart xmonad:
       ("M-S-r", spawn "xmonad --recompile; xmonad --restart"),
       -- Volume up - XF86AudioRaiseVolume:
-      ("<XF86AudioRaiseVolume>", spawn "sh ~/.config/i3/scripts/volume.sh increase"),
+      ("<XF86AudioRaiseVolume>", spawn "~/.config/custom-scripts/volume increase"),
       -- Volume down - XF86AudioLowerVolume:
-      ("<XF86AudioLowerVolume>", spawn "sh ~/.config/i3/scripts/volume.sh decrease"),
+      ("<XF86AudioLowerVolume>", spawn "~/.config/custom-scripts/volume decrease"),
       -- Volume mute - XF86AudioMute:
-      ("<XF86AudioMute>", spawn "sh ~/.config/i3/scripts/volume.sh mute"),
+      ("<XF86AudioMute>", spawn "~/.config/custom-scripts/volume mute"),
       -- Brightness up - XF86MonBrightnessUp:
-      ("<XF86MonBrightnessUp>", spawn "sh ~/.config/i3/scripts/brightness.sh inc"),
+      ("<XF86MonBrightnessUp>", spawn "~/.config/custom-scripts/brightness inc"),
       -- Brightness down - XF86MonBrightnessDown:
-      ("<XF86MonBrightnessDown>", spawn "sh ~/.config/i3/scripts/brightness.sh dec"),
+      ("<XF86MonBrightnessDown>", spawn "~/.config/custom-scripts/brightness dec"),
       -- Screenshot:
-      ("<Print>", spawn "sh ~/.config/i3/scripts/screenshot"),
+      ("<Print>", spawn "~/.config/custom-scripts/screenshot"),
       -- logout:
       ("M-0 e", io exitSuccess),
       -- suspend:
-      ("M-0 s", spawn "sh ~/.config/i3/scripts/i3exit suspend"),
+      ("M-0 s", spawn "sh ~/.config/custom-scripts/power-and-session suspend"),
       -- shutdown:
-      ("M-0 S-s", spawn "sh ~/.config/i3/scripts/i3exit shutdown"),
+      ("M-0 S-s", spawn "sh ~/.config/custom-scripts/power-and-session shutdown"),
       -- reboot:
-      ("M-0 r", spawn "sh ~/.config/i3/scripts/i3exit reboot"),
+      ("M-0 r", spawn "sh ~/.config/custom-scripts/power-and-session reboot"),
       -- lock:
-      ("M-0 l", spawn "sh ~/.config/i3/scripts/i3exit lock"),
+      ("M-0 l", spawn "sh ~/.config/custom-scripts/power-and-session lock"),
       -- Switch focus to next monitor and move mouse to the top right of the focused window on that screen:
       ("M-]", nextScreen >> warpToWindow 1 0),
       -- Move focused window to next monitor:

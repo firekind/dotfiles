@@ -139,7 +139,7 @@ def change_background():
     execute_command(
         "%s %s"
         % (
-            os.path.expanduser("~/.scripts/change-bg"),
+            os.path.expanduser("~/.config/custom-scripts/change-bg"),
             os.path.join(wallpaper_dir, "forest.jpg"),
         ),
     )
