@@ -35,7 +35,8 @@
             "i3lock-color",
             "networkmanager-dmenu-git",
             "xdotool",
-            "kvantum-manjaro"
+            "kvantum-manjaro",
+            "nvim"
         ],
         "local-makepkgs": [
             "res/packages/custom-fonts"
@@ -100,3 +101,4 @@
     },
     "backup_dir": "backup"
 }
+

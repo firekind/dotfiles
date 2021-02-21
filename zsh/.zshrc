@@ -63,6 +63,7 @@ alias cdp='cd /d/Users/shyam/Projects'
 alias cdd='cd /d/Users/shyam'
 alias ls='exa -al'
 alias less='bat'
+alias vim='nvim'
 
 ## plugins
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
