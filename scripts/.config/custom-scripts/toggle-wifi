@@ -9,3 +9,4 @@ else
 	dunstify "airplane mode off" -r -10
 	nmcli radio wifi on
 fi
+

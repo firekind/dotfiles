@@ -6,7 +6,7 @@ Hl='#00ff00ff'
 textColor='#ffffffff'
 #W='#880000bb'  # wrong
 W='#ff0000ff'
-F=/usr/share/backgrounds/ouroboros.png
+F=~/Pictures/Wallpapers/ouroboros.png
 
 if [[ "$1" == "-b" ]]
 then

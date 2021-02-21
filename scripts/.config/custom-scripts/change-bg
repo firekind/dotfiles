@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# generating color scheme using pywal
 if [[ "$1" == "" ]]
 then
    wal -i ~/Pictures/Wallpapers -n
@@ -7,8 +8,14 @@ else
    wal -i $1 -n
 fi
 
-# set and save wallpaper
-nitrogen $(cat ~/.cache/wal/wal) --set-zoom-fill --save
+# setting wallpaper
+if xhost &> /dev/null
+then
+    # set and save wallpaper
+    nitrogen $(cat ~/.cache/wal/wal) --set-zoom-fill --save
+else
+    echo "Display server is not available or is invalid. Not setting wallpaper."
+fi
 
 # update Xresouces
 cp ~/.cache/wal/colors.Xresources ~/.Xresources
