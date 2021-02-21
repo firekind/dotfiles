@@ -33,7 +33,9 @@
             "bat",
             "exa",
             "i3lock-color",
-            "networkmanager-dmenu-git"
+            "networkmanager-dmenu-git",
+            "xdotool",
+            "kvantum-manjaro"
         ],
         "local-makepkgs": [
             "res/packages/custom-fonts"
