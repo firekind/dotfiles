@@ -2,7 +2,7 @@
 ## setting history file to .zsh_history
 # needed so that history command works
 # and zsh autosuggestions plugin works
-HISTFILE=~/.zsh_history
+HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
