@@ -109,6 +109,6 @@
             "~/.config/xmobar"
         ]
     },
-    "backup_dir": "backup"
+    "backup_dir": "backups"
 }
 
