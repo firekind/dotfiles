@@ -46,7 +46,8 @@
             "appimagelauncher",
             "neofetch",
             "firefox",
-            "htop"
+            "htop",
+            "gnome-keyring"
         ],
         "local-makepkgs": [
             "res/packages/custom-fonts"
