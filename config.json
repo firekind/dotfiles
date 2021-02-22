@@ -42,8 +42,11 @@
             "neovim",
             "xorg-xhost",
             "xorg-xrdb",
+            "xorg-xrandr",
             "appimagelauncher",
-            "neofetch"
+            "neofetch",
+            "firefox",
+            "htop"
         ],
         "local-makepkgs": [
             "res/packages/custom-fonts"
