@@ -163,6 +163,17 @@ def update_gtkcss():
         )
 
 
+@postinstall
+def print_qt5_messages():
+    print(
+        'Note: To get QT5 themes working properly, first set the theme using kvantum. Then, run qt5ct and set\n'
+        '* Appearance -> Style = kvantum\n'
+        '* Font = Cantarell 10\n'
+        '* Icon Theme = Papirus-Adapta-Nokto-Maia\n'
+        'Then, add export QT_QPA_PLATFORMTHEME="qt5ct" to .profile and reboot (or logout)'
+    )
+
+
 # utility functions
 #
 def install_packages(packages: List[str]):
