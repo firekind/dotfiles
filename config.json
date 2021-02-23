@@ -47,7 +47,8 @@
             "neofetch",
             "firefox",
             "htop",
-            "gnome-keyring"
+            "gnome-keyring",
+            "polkit-gnome"
         ],
         "local-makepkgs": [
             "res/packages/custom-fonts"

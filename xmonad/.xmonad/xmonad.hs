@@ -236,7 +236,6 @@ myKeys conf =
       ++
       -- mod-[1..9], Switch to workspace N
       -- mod-shift-[1..9], Move client to workspace N
-      --
       [ (m ++ k, windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) (map show [1 .. 8]),
           (f, m) <- [(W.greedyView, "M-"), (W.shift, "M-S-")]
@@ -434,6 +433,7 @@ myStartupHook = do
   spawnOnce "picom -b &"
   spawnOnce "xfce4-power-manager &"
   spawnOnce "udiskie -c ~/.config/udiskie/config.yaml &"
+  spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
