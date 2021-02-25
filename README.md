@@ -1,3 +1,3 @@
 # dotfiles
 
-contains dotfiles. using GNU stow for symlinking.
+contains dotfiles for ubuntu 18.04. using GNU stow for symlinking.

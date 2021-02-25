@@ -12,12 +12,12 @@ case "$1" in
 esac
 
 TEXT=$(light -G | cut -d '.' -f 1)
-dunstify "Brightness: $TEXT%"  -r -10
+notify-send.py "Brightness: $TEXT%" -r 10
 
 
 # if the brightness doesnt change, try adding the user to group 'video'. If
-# that does not work, add the following udev rules to allow
-# users of group 'video' to change brightness (by default, only root can 
+# that does not work, add the following udev rules (replacing <vendor> with the folder name in /sys/class/backlight) 
+# to /etc/udev/rules.d/50-brightness.rules to allow users of group 'video' to change brightness (by default, only root can 
 # change brightness):
 
 # ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="<vendor>", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"

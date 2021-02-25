@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 insideCircleColor='#00000000'  # blank
 D='#ffffffff'  # default

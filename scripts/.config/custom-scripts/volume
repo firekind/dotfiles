@@ -22,5 +22,7 @@ case "$1" in
         ;;
 esac
 
-dunstify "Volume: $TEXT" -r -20
+# dunstify "Volume: $TEXT" -r 20
+
+notify-send.py --hint=string:x-dunst-stack-tag:volume "Volume: $TEXT" -r 20
 

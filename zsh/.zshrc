@@ -91,8 +91,8 @@ alias less='bat'
 alias vim='nvim'
 
 ## plugins
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ## starship prompt
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml

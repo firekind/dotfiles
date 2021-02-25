@@ -143,9 +143,9 @@ myKeys conf =
       -- launch nautilus:
       ("M-e", spawn "pcmanfm-qt"),
       -- launch rofi calendar:
-      ("M-c", spawn "~/.config/custom-scripts/calendar"),
+      -- ("M-c", spawn "~/.config/custom-scripts/calendar"),
       -- launch rofi wifi menu:
-      ("M-w", spawn "networkmanager_dmenu"),
+      ("M-w", spawn "~/.config/custom-scripts/networkmanager_dmenu"),
       -- launch rofi calculator
       ("M-S-c", spawn "rofi -show calc -modi calc -no-show-match -no-sort -theme ~/.config/rofi/themes/calc.rasi"),
       -- close focused window:
@@ -217,13 +217,13 @@ myKeys conf =
       -- logout:
       ("M-0 e", io exitSuccess),
       -- suspend:
-      ("M-0 s", spawn "sh ~/.config/custom-scripts/power-and-session suspend"),
+      ("M-0 s", spawn "~/.config/custom-scripts/power-and-session suspend"),
       -- shutdown:
-      ("M-0 S-s", spawn "sh ~/.config/custom-scripts/power-and-session shutdown"),
+      ("M-0 S-s", spawn "~/.config/custom-scripts/power-and-session shutdown"),
       -- reboot:
-      ("M-0 r", spawn "sh ~/.config/custom-scripts/power-and-session reboot"),
+      ("M-0 r", spawn "~/.config/custom-scripts/power-and-session reboot"),
       -- lock:
-      ("M-0 l", spawn "sh ~/.config/custom-scripts/power-and-session lock"),
+      ("M-0 l", spawn "~/.config/custom-scripts/power-and-session lock"),
       -- Switch focus to next monitor and move mouse to the top right of the focused window on that screen:
       ("M-]", nextScreen >> warpToWindow 1 0),
       -- Move focused window to next monitor:
@@ -430,7 +430,7 @@ myStartupHook :: X ()
 myStartupHook = do
   dynStatusBarStartup xmobarCreator xmobarDestroyer
   spawnOnce "nitrogen --restore &"
-  spawnOnce "picom -b &"
+  spawnOnce "compton -b &"
   spawnOnce "xfce4-power-manager &"
   spawnOnce "udiskie -c ~/.config/udiskie/config.yaml &"
   spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
