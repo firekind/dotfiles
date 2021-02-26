@@ -68,6 +68,7 @@
         "xmonad",
         "zsh"
     ],
-    "backup_dir": "backups"
+    "backup_dir": "backups",
+    "backup": []
 
 }
