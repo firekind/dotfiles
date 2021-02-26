@@ -69,6 +69,6 @@
         "zsh"
     ],
     "backup_dir": "backups",
-    "backup": []
+    "backup": {}
 
 }

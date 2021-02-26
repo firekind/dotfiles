@@ -144,26 +144,19 @@ def execute_command(
     command: str, suppress_output: bool = False
 ) -> subprocess.CompletedProcess:
 
-    pipe_count = command.count("|")
-    if pipe_count == 0:
+    if command.count("|") > 0 or command.count(">") > 0:
+        return _execute_piped_command(command)
+    else:
         if suppress_output:
             return subprocess.run(
                 command.split(), stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL
             )
         return subprocess.run(command.split())
 
-    elif pipe_count == 1:
-        return _execute_piped_command(command)
-
-    else:
-        raise Exception("commands with more than one pipe not supported.")
 
 def _execute_piped_command(command: str):
-    cmd_1, cmd_2 = command.split("|")
-
-    ps = subprocess.Popen(cmd_1.split(), stdout=subprocess.PIPE)
-    res = subprocess.run(cmd_2.split(), stdin=ps.stdout)
-    ps.wait()
+    res = subprocess.Popen(command, shell=True)
+    res.communicate()
 
     return res
 
