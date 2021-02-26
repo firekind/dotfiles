@@ -69,7 +69,7 @@ def install_ppas():
         execute_command("sudo add-apt-repository %s" % ppa)
 
     for cmd in config["post-ppa-commands"]:
-        execute_command(cmd)
+        execute_command(cmd, shell=True)
 
     execute_command("sudo apt update")
 
@@ -141,18 +141,22 @@ def load_config():
 
 
 def execute_command(
-    command: str, suppress_output: bool = False
+    command: str, suppress_output: bool = False, shell: bool = False
 ) -> subprocess.CompletedProcess:
 
-    if command.count("|") > 0 or command.count(">") > 0:
-        return _execute_piped_command(command)
-    else:
+    pipe_count = command.count("|")
+    if pipe_count == 0:
         if suppress_output:
             return subprocess.run(
                 command.split(), stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL
             )
         return subprocess.run(command.split())
 
+    elif pipe_count == 1:
+        return _execute_piped_command(command, shell=shell)
+
+    else:
+        raise Exception("commands with more than one pipe not supported.")
 
 def _execute_piped_command(command: str):
     p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
