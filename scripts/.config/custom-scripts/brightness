@@ -1,27 +1,47 @@
-#!/bin/bash
+#!/usr/bin/env python3
 
-case "$1" in
-    inc)
-        light -A 10
-        ;;
-    dec)
-        light -U 10
-        ;;
-    *)
-        echo "Usage: brightness {inc, dec}"
-esac
+import os
+import math
+import argparse
+import subprocess
 
-TEXT=$(light -G | cut -d '.' -f 1)
-notify-send.py "Brightness: $TEXT%" -r 10
+parser = argparse.ArgumentParser("brightness")
+parser.add_argument("op", choices=["inc", "dec"], help="increment or decrement")
+parser.add_argument("amount", type=int, help="amount to increment or decrement (0-100)")
 
+args = parser.parse_args()
 
-# if the brightness doesnt change, try adding the user to group 'video'. If
-# that does not work, add the following udev rules (replacing <vendor> with the folder name in /sys/class/backlight) 
-# to /etc/udev/rules.d/50-brightness.rules to allow users of group 'video' to change brightness (by default, only root can 
-# change brightness):
+dir_path = "/sys/class/backlight/intel_backlight"
 
-# ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="<vendor>", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
-# ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="<vendor>", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
+# getting max brightness (usually some huge ass value)
+with open(os.path.join(dir_path, "max_brightness"), "r") as f:
+    max_brightness = int(f.read())
 
-# then add the user to the group video
-# usermod -aG video <user>
+# getting current brightness
+with open(os.path.join(dir_path, "brightness"), "r") as f:
+    current_brightness = int(f.read())
+
+# converting current brightness into percentage
+current_percentage = current_brightness / max_brightness
+
+# incrementing or decrementing 
+if args.op == "inc":
+    new_brightness_percentage = min(current_percentage + (args.amount / 100), 1)
+else:
+    new_brightness_percentage = max(current_percentage - (args.amount / 100), 0)
+
+# converting the percentage into an integer value
+new_brightness = int(new_brightness_percentage * max_brightness)
+
+# writing new brightness
+with open(os.path.join(dir_path, "brightness"), "w") as f:
+    f.write(str(new_brightness))
+
+# sending notification
+subprocess.run([
+    "dunstify", 
+    "Brightness: %s%%" % math.ceil(new_brightness_percentage * 100), 
+    "-r", 
+    "-10"
+])
+

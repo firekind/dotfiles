@@ -1,0 +1,53 @@
+{
+    "ppa": [
+        "ppa:hvr/ghc",
+        "ppa:aslatter/ppa",
+        "ppa:justinabrahms/ttf-cascadia-code",
+        "ppa:papirus/papirus",
+        "ppa:codejamninja/jam-os",
+        "ppa:tista/adapta"
+    ],
+
+    "post-ppa-commands": [
+        "wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg",
+        "sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/",
+        "sudo sh -c 'echo \"deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main\" > /etc/apt/sources.list.d/vscode.list'"
+    ],
+
+    "uninstall": [
+        "grep:gnome"
+    ],
+    
+    "install": [
+        "ghc-8.8.4",
+        "cabal-install-3.4",
+        "compton",
+        "nitrogen",
+        "python3-pip",
+        "alacritty",
+        "ttf-cascadia-code",
+        "qt5-style-kvantum",
+        "qt5-style-kvantum-themes",
+        "qt5ct",
+        "pcmanfm-qt",
+        "papirus-icon-theme",
+        "fonts-cantarell",
+        "lxappearance",
+        "adapta-gtk-theme",
+        "apt-transport-https",
+        "xdotool",
+        "libglib2.0-dev",
+        "libdbus-1-dev",
+        "gir1.2-nm-1.0",
+        "libnm-util-dev",
+        "papirus-folders"
+    ],
+    "post-install": [
+        "sudo apt install code lightdm",
+        "sudo pip3 install pywal notify-send.py",
+        "sudo apt purge gnome-control-center gnome-bluetooth yelp gnome-terminal",
+        "sudo apt purge xterm",
+        "sudo apt install software-properties-common"
+    ]
+
+}
