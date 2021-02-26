@@ -98,7 +98,7 @@ def install_stuff():
 
 @core()
 def install_dotfiles():
-    dots = config["dotfiles"]["base"] + config["dotfiles"][args.wm]
+    dots = config["dotfiles"]
     execute_command("stow -t %s %s" % (os.path.expanduser("~"), " ".join(dots)))
 
 
@@ -110,13 +110,43 @@ def run_commands():
         execute_command(cmd)
 
 @postinstall
+def append_profile():
+    with open(os.path.expanduser("~/.profile"), "a") as f:
+        f.write('export PATH=$PATH:/opt/ghc/bin')
+
+@postinstall
 def print_messages():
     print(
-        'Note: To get QT5 themes working properly, first set the theme using kvantum. Then, run qt5ct and set\n'
-        '* Appearance -> Style = kvantum\n'
-        '* Font = Cantarell 10\n'
-        '* Icon Theme = Papirus-Adapta-Nokto-Maia\n'
-        'Then, add export QT_QPA_PLATFORMTHEME="qt5ct" to .profile and reboot (or logout)'
+        """
+Note: To get QT5 themes working properly, first set the theme using kvantum. Then, run qt5ct and set
+* Appearance -> Style = kvantum
+* Font = Cantarell 10
+* Icon Theme = Papirus-Adapta-Nokto-Maia
+Then, add export QT_QPA_PLATFORMTHEME="qt5ct" to .profile and reboot (or logout).
+
+to install xmonad, xmobar and xmonad-contrib, run
+$ echo "PATH=$PATH:/opt/ghc/bin" > ~/.profile
+$ sudo -i
+# PATH = $PATH:/opt/ghc/bin
+# cabal update
+# cabal v1-install --global xmonad-0.15 xmonad-contrib-0.16
+# cabal v1-install --global xmobar-0.37 --flags="all_extensions"
+
+also, add a file called xmonad.desktop to /usr/share/xsessions containing the following content:
+
+[Desktop Entry]
+Type=Application
+Name=Xmonad
+Comment=Lightweight X11 tiled window manager written in Haskell
+Exec=xmonad
+Icon=xmonad
+Terminal=false
+StartupNotify=false
+Categories=Application;
+
+to install starship prompt, run
+$ curl -fsSL https://starship.rs/install.sh | bash
+"""
     )
 
 

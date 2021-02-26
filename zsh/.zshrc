@@ -86,8 +86,6 @@ fi
 alias cdu='cd /d/Users/shyam/Documents/University'
 alias cdp='cd /d/Users/shyam/Projects'
 alias cdd='cd /d/Users/shyam'
-alias ls='exa -al'
-alias less='bat'
 alias vim='nvim'
 
 ## plugins

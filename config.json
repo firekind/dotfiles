@@ -44,15 +44,30 @@
         "stow",
         "dunst",
         "neovim",
-        "curl"
+        "curl",
+        "zsh",
+        "zsh-syntax-highlighting",
+        "rofi",
+        "lightdm",
+        "i3lock-color"
     ],
     "post-install": [
-        "sudo apt install code lightdm",
+        "sudo apt install code",
         "sudo pip3 install pywal notify-send.py",
-        "sudo apt purge gnome-control-center gnome-bluetooth yelp gnome-terminal",
-        "sudo apt purge xterm",
         "sudo apt install software-properties-common",
-        "curl -fsSL https://starship.rs/install.sh | bash"
+        "sudo apt purge gnome-control-center gnome-bluetooth yelp gnome-terminal gnome-settings-daemon gnome-control-center gnome-menus gnome-online-accounts gnome-screensaver xterm",
+        "sudo apt purge --autoremove",
+        "echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_18.04/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-autosuggestions.list",
+        "curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_18.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg > /dev/null",
+        "sudo apt update",
+        "sudo apt install zsh-autosuggestions libx11-dev libxrandr-dev libxss-dev libxft-dev libasound-dev c2hs libxpm-dev",
+        "sudo mkdir -p /usr/share/fonts/custom",
+        "sudo cp res/fonts/*.* /usr/share/fonts/custom",
+        "fc-cache -f -v",
+        "mkdir -p ~/Pictures/Wallpapers",
+        "cp res/wallpapers/*.* ~/Pictures/Wallpapers",
+        "https://github.com/ogham/exa/releases/latest/download/exa-linux-x86_64-0.9.0.zip",
+        "sudo dpkg-reconfigure lightdm"
     ],
     "dotfiles": [
         "alacritty",
