@@ -112,7 +112,8 @@ def run_commands():
 @postinstall
 def append_profile():
     with open(os.path.expanduser("~/.profile"), "a") as f:
-        f.write('export PATH=$PATH:/opt/ghc/bin')
+        f.write('export PATH=$PATH:/opt/ghc/bin\n')
+        f.write("export QT_QPA_PLATFORMTHEME='qt5ct'\n")
 
 @postinstall
 def print_messages():
@@ -122,7 +123,7 @@ Note: To get QT5 themes working properly, first set the theme using kvantum. The
 * Appearance -> Style = kvantum
 * Font = Cantarell 10
 * Icon Theme = Papirus-Adapta-Nokto-Maia
-Then, add export QT_QPA_PLATFORMTHEME="qt5ct" to .profile and reboot (or logout).
+Then, add make sure export QT_QPA_PLATFORMTHEME="qt5ct" is present in .profile and reboot (or logout).
 
 to install xmonad, xmobar and xmonad-contrib, run
 $ echo "PATH=$PATH:/opt/ghc/bin" > ~/.profile
@@ -138,14 +139,13 @@ also, add a file called xmonad.desktop to /usr/share/xsessions containing the fo
 Type=Application
 Name=Xmonad
 Comment=Lightweight X11 tiled window manager written in Haskell
-Exec=xmonad
-Icon=xmonad
-Terminal=false
-StartupNotify=false
-Categories=Application;
+Exec=/usr/local/bin/xmonad
 
 to install starship prompt, run
 $ curl -fsSL https://starship.rs/install.sh | bash
+
+to install zsh-autosuggestions plugin, download the deb file from here: 
+https://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_18.04/amd64/zsh-autosuggestions_0.5.0+1.1_amd64.deb
 """
     )
 
