@@ -40,14 +40,33 @@
         "libdbus-1-dev",
         "gir1.2-nm-1.0",
         "libnm-util-dev",
-        "papirus-folders"
+        "papirus-folders",
+        "stow",
+        "dunst",
+        "neovim",
+        "curl"
     ],
     "post-install": [
         "sudo apt install code lightdm",
         "sudo pip3 install pywal notify-send.py",
         "sudo apt purge gnome-control-center gnome-bluetooth yelp gnome-terminal",
         "sudo apt purge xterm",
-        "sudo apt install software-properties-common"
+        "sudo apt install software-properties-common",
+        "curl -fsSL https://starship.rs/install.sh | bash"
+    ],
+    "dotfiles": [
+        "alacritty",
+        "dunst",
+        "neovim",
+        "networkmanager-dmenu",
+        "pcmanfm-context-menu",
+        "rofi",
+        "scripts",
+        "starship",
+        "wal",
+        "xmobar",
+        "xmonad",
+        "zsh"
     ]
 
 }
