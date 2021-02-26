@@ -155,8 +155,8 @@ def execute_command(
 
 
 def _execute_piped_command(command: str):
-    res = subprocess.Popen(command, shell=True)
-    res.communicate()
+    p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+    res, _ = p.communicate()
 
     return res
 
