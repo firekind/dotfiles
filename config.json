@@ -65,7 +65,7 @@
         "sudo cp res/fonts/*.* /usr/share/fonts/custom",
         "fc-cache -f -v",
         "mkdir -p ~/Pictures/Wallpapers",
-        "cp res/wallpapers/*.* ~/Pictures/Wallpapers",
+        "cp -a res/wallpapers/ ~/Pictures/Wallpapers",
         "sudo dpkg-reconfigure lightdm"
     ],
     "dotfiles": [

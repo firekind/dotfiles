@@ -126,7 +126,6 @@ Note: To get QT5 themes working properly, first set the theme using kvantum. The
 Then, add make sure export QT_QPA_PLATFORMTHEME="qt5ct" is present in .profile and reboot (or logout).
 
 to install xmonad, xmobar and xmonad-contrib, run
-$ echo "PATH=$PATH:/opt/ghc/bin" > ~/.profile
 $ sudo -i
 # PATH = $PATH:/opt/ghc/bin
 # cabal update
