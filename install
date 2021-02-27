@@ -127,7 +127,7 @@ Then, add make sure export QT_QPA_PLATFORMTHEME="qt5ct" is present in .profile a
 
 to install xmonad, xmobar and xmonad-contrib, run
 $ sudo -i
-# PATH = $PATH:/opt/ghc/bin
+# PATH=$PATH:/opt/ghc/bin
 # cabal update
 # cabal v1-install --global xmonad-0.15 xmonad-contrib-0.16
 # cabal v1-install --global xmobar-0.37 --flags="all_extensions"
