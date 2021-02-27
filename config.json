@@ -49,7 +49,8 @@
             "htop",
             "gnome-keyring",
             "seahorse",
-            "polkit-gnome"
+            "polkit-gnome",
+            "xfce4-power-manager"
         ],
         "local-makepkgs": [
             "res/packages/custom-fonts"
