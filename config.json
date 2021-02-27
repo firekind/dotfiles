@@ -19,6 +19,7 @@
     ],
     
     "install": [
+        "htop",
         "ghc-8.8.4",
         "cabal-install-3.4",
         "compton",
