@@ -60,7 +60,7 @@
         "echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_18.04/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-autosuggestions.list",
         "curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_18.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg > /dev/null",
         "sudo apt update",
-        "sudo apt install zsh-autosuggestions libx11-dev libxrandr-dev libxss-dev libxft-dev libasound-dev c2hs libxpm-dev",
+        "sudo apt install libx11-dev libxrandr-dev libxss-dev libxft-dev libasound-dev c2hs libxpm-dev",
         "sudo mkdir -p /usr/share/fonts/custom",
         "sudo cp res/fonts/*.* /usr/share/fonts/custom",
         "fc-cache -f -v",
