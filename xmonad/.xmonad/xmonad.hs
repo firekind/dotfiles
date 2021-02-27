@@ -359,7 +359,8 @@ myManageHook =
       className =? "Nitrogen" --> doFloat,
       className =? "Nm-connection-editor" --> doFloat,
       className =? "Pavucontrol" --> doFloat,
-      className =? "Zenity" <&&> title =? "=Authentication" --> doFloat
+      className =? "Zenity" <&&> title =? "=Authentication" --> doFloat,
+      className =? "File-roller" --> doFloat
     ]
 
 ------------------------------------------------------------------------
