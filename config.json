@@ -57,8 +57,6 @@
         "sudo apt install software-properties-common",
         "sudo apt purge gnome-control-center gnome-bluetooth yelp gnome-terminal gnome-settings-daemon gnome-control-center gnome-menus gnome-online-accounts gnome-screensaver xterm",
         "sudo apt purge --autoremove",
-        "echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_18.04/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-autosuggestions.list",
-        "curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_18.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg > /dev/null",
         "sudo apt update",
         "sudo apt install libx11-dev libxrandr-dev libxss-dev libxft-dev libasound-dev c2hs libxpm-dev",
         "sudo mkdir -p /usr/share/fonts/custom",
