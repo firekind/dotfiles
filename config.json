@@ -59,7 +59,7 @@
         "sudo apt purge gnome-control-center gnome-bluetooth yelp gnome-terminal gnome-settings-daemon gnome-control-center gnome-menus gnome-online-accounts gnome-screensaver xterm",
         "sudo apt purge --autoremove",
         "sudo apt update",
-        "sudo apt install libx11-dev libxrandr-dev libxss-dev libxft-dev libasound-dev c2hs libxpm-dev",
+        "sudo apt install libx11-dev libxrandr-dev libxss-dev libxft-dev libasound-dev c2hs libxpm-dev libxinerama-dev",
         "sudo mkdir -p /usr/share/fonts/custom",
         "sudo cp res/fonts/*.* /usr/share/fonts/custom",
         "fc-cache -f -v",

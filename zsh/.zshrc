@@ -87,6 +87,7 @@ alias cdu='cd /d/Users/shyam/Documents/University'
 alias cdp='cd /d/Users/shyam/Projects'
 alias cdd='cd /d/Users/shyam'
 alias vim='nvim'
+alias gksu='pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY'
 
 ## plugins
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh

@@ -5,5 +5,5 @@ if [[ ! -d ~/Pictures/screenshots ]]; then
 fi
 
 scrot -m ~/Pictures/screenshots/%d-%m-%Y_%H:%M:%S.png
-dunstify "Screenshot saved" -r 20
+notify-send.py "Screenshot saved" -r 30
 
