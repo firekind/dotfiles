@@ -7,9 +7,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-## man pager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
 ## keybindings
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
@@ -81,6 +78,8 @@ if [[ -d /usr/bin/google-chrome-stable ]]
 then
 	export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 fi
+
+export PATH=$PATH:~/.local/bin
 
 ## aliases
 alias cdu='cd /d/Users/shyam/Documents/University'
