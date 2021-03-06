@@ -5,18 +5,13 @@
         "ppa:justinabrahms/ttf-cascadia-code",
         "ppa:papirus/papirus",
         "ppa:codejamninja/jam-os",
-        "ppa:tista/adapta"
+        "ppa:tista/adapta",
+        "ppa:neovim-ppa/stable"
     ],
 
-    "post-ppa-commands": [
-        "wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg",
-        "sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/",
-        "sudo sh -c 'echo \"deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main\" > /etc/apt/sources.list.d/vscode.list'"
-    ],
+    "post-ppa-commands": [],
 
-    "uninstall": [
-        "grep:gnome"
-    ],
+    "uninstall": [],
     
     "install": [
         "htop",
@@ -35,7 +30,6 @@
         "fonts-cantarell",
         "lxappearance",
         "adapta-gtk-theme",
-        "apt-transport-https",
         "xdotool",
         "libglib2.0-dev",
         "libdbus-1-dev",
@@ -53,19 +47,15 @@
         "i3lock-color"
     ],
     "post-install": [
-        "sudo apt install code",
         "sudo pip3 install pywal notify-send.py",
-        "sudo apt install software-properties-common",
-        "sudo apt purge gnome-control-center gnome-bluetooth yelp gnome-terminal gnome-settings-daemon gnome-control-center gnome-menus gnome-online-accounts gnome-screensaver xterm",
         "sudo apt purge --autoremove",
         "sudo apt update",
         "sudo apt install libx11-dev libxrandr-dev libxss-dev libxft-dev libasound-dev c2hs libxpm-dev libxinerama-dev",
         "sudo mkdir -p /usr/share/fonts/custom",
-        "sudo cp res/fonts/*.* /usr/share/fonts/custom",
+        "sudo cp -a res/fonts/ /usr/share/fonts/custom",
         "fc-cache -f -v",
         "mkdir -p ~/Pictures/Wallpapers",
-        "cp -a res/wallpapers/ ~/Pictures/Wallpapers",
-        "sudo dpkg-reconfigure lightdm"
+        "cp -a res/wallpapers/ ~/Pictures/Wallpapers"
     ],
     "dotfiles": [
         "alacritty",
