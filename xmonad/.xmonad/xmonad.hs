@@ -141,7 +141,7 @@ myKeys conf =
       -- toggle htop scratchpad:
       ("M-S-x", namedScratchpadAction scratchpads htopScratchpadName),
       -- launch nautilus:
-      ("M-e", spawn "pcmanfm-qt"),
+      ("M-e", spawn "nautilus"),
       -- launch rofi calendar:
       -- ("M-c", spawn "~/.config/custom-scripts/calendar"),
       -- launch rofi wifi menu:
@@ -209,9 +209,9 @@ myKeys conf =
       -- Volume mute - XF86AudioMute:
       ("<XF86AudioMute>", spawn "~/.config/custom-scripts/volume mute"),
       -- Brightness up - XF86MonBrightnessUp:
-      ("<XF86MonBrightnessUp>", spawn "~/.config/custom-scripts/brightness inc"),
+      ("<XF86MonBrightnessUp>", spawn "~/.config/custom-scripts/brightness inc 10"),
       -- Brightness down - XF86MonBrightnessDown:
-      ("<XF86MonBrightnessDown>", spawn "~/.config/custom-scripts/brightness dec"),
+      ("<XF86MonBrightnessDown>", spawn "~/.config/custom-scripts/brightness dec 10"),
       -- Screenshot:
       ("<Print>", spawn "~/.config/custom-scripts/screenshot"),
       -- logout:
@@ -349,6 +349,7 @@ myManageHook =
       className =? "firefox" --> doShift (myWorkspaces !! 2), -- web
       className =? "obs" --> doShift (myWorkspaces !! 4), -- app
       className =? "Org.gnome.Nautilus" --> doShift (myWorkspaces !! 4), -- app
+      className =? "Nautilus" --> doShift (myWorkspaces !! 4), -- app
       className =? "pcmanfm-qt" --> doShift (myWorkspaces !! 4), -- app
       className =? "vlc" --> doShift (myWorkspaces !! 5), -- misc
       className =? "Gimp.bin" --> doShift (myWorkspaces !! 6), -- gfx

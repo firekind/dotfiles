@@ -12,7 +12,7 @@
     "post-ppa-commands": [],
 
     "uninstall": [],
-    
+
     "install": [
         "htop",
         "ghc-8.8.4",
@@ -22,10 +22,6 @@
         "python3-pip",
         "alacritty",
         "ttf-cascadia-code",
-        "qt5-style-kvantum",
-        "qt5-style-kvantum-themes",
-        "qt5ct",
-        "pcmanfm-qt",
         "papirus-icon-theme",
         "fonts-cantarell",
         "lxappearance",
@@ -43,7 +39,6 @@
         "zsh",
         "zsh-syntax-highlighting",
         "rofi",
-        "lightdm",
         "i3lock-color"
     ],
     "post-install": [

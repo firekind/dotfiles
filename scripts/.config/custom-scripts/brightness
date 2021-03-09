@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
 
+# if the brightness doesnt change, try adding the user to group 'video'. If
+# that does not work, add the following udev rules to allow
+# users of group 'video' to change brightness (by default, only root can 
+# change brightness) (change <vendor> to intel_backlight for intel users, for other
+# users, idk:
+
+# ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="<vendor>", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
+# ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="<vendor>", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
+
+# then add the user to the group video
+# usermod -aG video <user>
+
 import os
 import math
 import argparse
@@ -39,9 +51,9 @@ with open(os.path.join(dir_path, "brightness"), "w") as f:
 
 # sending notification
 subprocess.run([
-    "dunstify", 
+    "notify-send.py", 
     "Brightness: %s%%" % math.ceil(new_brightness_percentage * 100), 
     "-r", 
-    "-10"
+    "50"
 ])
 
