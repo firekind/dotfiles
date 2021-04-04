@@ -433,7 +433,7 @@ myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom -b &"
   spawnOnce "xfce4-power-manager &"
-  spawnOnce "udiskie -c ~/.config/udiskie/config.yaml &"
+  -- spawnOnce "udiskie -c ~/.config/udiskie/config.yaml &"
   spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
 
 ------------------------------------------------------------------------

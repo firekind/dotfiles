@@ -30,6 +30,7 @@ fi
 i3lock \
 	-t \
 	-i $F \
+    -S 0 \
 	--indpos="1850:1000"    \
 	--insidevercolor=$insideCircleColor   \
 	--ringvercolor=$Hl     \
