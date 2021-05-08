@@ -90,6 +90,8 @@ alias ls='exa -al'
 alias less='bat'
 alias vim='nvim'
 alias todo='nvim ~/Documents/todo.md'
+alias dock='sh ~/.config/custom-scripts/dock'
+alias undock='sh ~/.config/custom-scripts/dock off'
 
 ## plugins
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

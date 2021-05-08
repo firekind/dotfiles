@@ -224,6 +224,8 @@ myKeys conf =
       ("M-0 r", spawn "sh ~/.config/custom-scripts/power-and-session reboot"),
       -- lock:
       ("M-0 l", spawn "sh ~/.config/custom-scripts/power-and-session lock"),
+      -- lock (blur screen):
+      ("M-0 S-l", spawn "sh ~/.config/custom-scripts/lock --blur"),
       -- Switch focus to next monitor and move mouse to the top right of the focused window on that screen:
       ("M-]", nextScreen >> warpToWindow 1 0),
       -- Move focused window to next monitor:
