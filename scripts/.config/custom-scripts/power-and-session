@@ -5,7 +5,7 @@
 
 case "$1" in
    lock)
-       ~/.config/custom-scripts/lock -b
+       ~/.config/custom-scripts/lock
        ;;
    logout)
        i3-msg exit
@@ -14,10 +14,10 @@ case "$1" in
        dm-tool switch-to-greeter
        ;;
    suspend)
-       ~/.config/custom-scripts/lock -b && $logind suspend
+       ~/.config/custom-scripts/lock && $logind suspend
        ;;
    hibernate)
-       ~/.config/custom-scripts/lock -b && $logind hibernate
+       ~/.config/custom-scripts/lock && $logind hibernate
        ;;
    reboot)
        $logind reboot

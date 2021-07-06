@@ -51,15 +51,15 @@ then
 fi
 
 ## Lazy loading nvm, to speed up shell startup
-NVM_DIR="$HOME/.nvm"
-
-if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+NVM_SH_DIR=/usr/share/nvm
+if [[ -s "$NVM_SH_DIR/nvm.sh" ]]; then
+    NVM_DIR=$HOME/.nvm
 	NODE_GLOBALS=(`find $NVM_DIR/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
 	NODE_GLOBALS+=("node")
 	NODE_GLOBALS+=("nvm")
 	# Lazy-loading nvm + npm on node globals
 	load_nvm () {
-		[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+		[ -s "$NVM_SH_DIR/nvm.sh" ] && \. "$NVM_SH_DIR/nvm.sh"
 	}
 	# Making node global trigger the lazy loading
 	for cmd in "${NODE_GLOBALS[@]}"; do

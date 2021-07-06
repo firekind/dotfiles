@@ -11,4 +11,4 @@ deleted = ""
 
 [python]
 format = "[$virtualenv]($style)"
-enabled = true
+disabled = false

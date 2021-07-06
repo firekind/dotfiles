@@ -141,7 +141,7 @@ myKeys conf =
       -- toggle htop scratchpad:
       ("M-S-x", namedScratchpadAction scratchpads htopScratchpadName),
       -- launch nautilus:
-      ("M-e", spawn "pcmanfm-qt"),
+      ("M-e", spawn "nautilus"),
       -- launch rofi calendar:
       ("M-c", spawn "~/.config/custom-scripts/calendar"),
       -- launch rofi wifi menu:
@@ -224,8 +224,6 @@ myKeys conf =
       ("M-0 r", spawn "sh ~/.config/custom-scripts/power-and-session reboot"),
       -- lock:
       ("M-0 l", spawn "sh ~/.config/custom-scripts/power-and-session lock"),
-      -- lock (blur screen):
-      ("M-0 S-l", spawn "sh ~/.config/custom-scripts/lock --blur"),
       -- Switch focus to next monitor and move mouse to the top right of the focused window on that screen:
       ("M-]", nextScreen >> warpToWindow 1 0),
       -- Move focused window to next monitor:
@@ -349,7 +347,7 @@ myManageHook =
       className =? "Chromium" --> doShift (myWorkspaces !! 2), -- web
       className =? "Firefox" --> doShift (myWorkspaces !! 2), -- web
       className =? "firefox" --> doShift (myWorkspaces !! 2), -- web
-      className =? "obs" --> doShift (myWorkspaces !! 4), -- app
+      className =? "obs" --> doShift (myWorkspaces !! 6), -- app
       className =? "Org.gnome.Nautilus" --> doShift (myWorkspaces !! 4), -- app
       className =? "pcmanfm-qt" --> doShift (myWorkspaces !! 4), -- app
       className =? "vlc" --> doShift (myWorkspaces !! 5), -- misc
@@ -362,7 +360,8 @@ myManageHook =
       className =? "Nm-connection-editor" --> doFloat,
       className =? "Pavucontrol" --> doFloat,
       className =? "Zenity" <&&> title =? "=Authentication" --> doFloat,
-      className =? "File-roller" --> doFloat
+      className =? "File-roller" --> doFloat,
+      className =? "TelegramDesktop" --> doShift (myWorkspaces !! 7) -- chat
     ]
 
 ------------------------------------------------------------------------
@@ -437,6 +436,7 @@ myStartupHook = do
   spawnOnce "xfce4-power-manager &"
   -- spawnOnce "udiskie -c ~/.config/udiskie/config.yaml &"
   spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
+  spawnOnce "xsetroot -cursor_name Left_ptr"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

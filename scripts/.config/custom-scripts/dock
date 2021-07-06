@@ -1,11 +1,10 @@
 #!/bin/bash
 
 if [[ "$1" != "off" ]]; then
-    xrandr --output HDMI-1-0 --auto --right-of eDP-1 --primary
-    xrandr --dpi 166
-    nitrogen --restore
+    xrandr --output eDP-1-1 --auto
+    xrandr --output HDMI-0 --auto --right-of eDP-1-1 --primary
+    nitrogen --restore && picom -b
 else
-    xrandr --output HDMI-1-0 --off --output eDP-1 --primary
-    xrandr --dpi 96
+    xrandr --output HDMI-0 --off --output eDP-1-1 --primary
 fi
 
