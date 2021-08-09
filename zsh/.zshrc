@@ -77,9 +77,9 @@ then
 fi
 
 ## google chrome
-if [[ -d /usr/bin/google-chrome-stable ]]
+if [[ -f /usr/bin/chromium ]]
 then
-	export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+	export CHROME_EXECUTABLE=/usr/bin/chromium
 fi
 
 ## aliases
@@ -88,8 +88,6 @@ alias cdp='cd /d/Users/shyam/Projects'
 alias cdd='cd /d/Users/shyam'
 alias ls='exa -al'
 alias less='bat'
-alias vim='nvim'
-alias todo='nvim ~/Documents/todo.md'
 alias dock='sh ~/.config/custom-scripts/dock'
 alias undock='sh ~/.config/custom-scripts/dock off'
 
