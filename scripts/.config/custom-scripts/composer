@@ -1,0 +1,22 @@
+#!/bin/bash
+
+CONTAINER_NAME="deepstream_composer"
+xhost + &> /dev/null
+if [ ! $(docker ps -a -q -f name="$CONTAINER_NAME") ]; then
+    docker run \
+        --gpus all \
+        -it \
+        --net host \
+        --ipc host \
+        --privileged \
+        --name "$CONTAINER_NAME" \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+        -v /home/$user/:/home/$user/ \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -e DISPLAY=$DISPLAY \
+        -w /opt/nvidia/deepstream/deepstream-6.0 \
+        nvcr.io/nvidia/deepstream:6.0-devel
+else
+    docker start -i "$CONTAINER_NAME"
+fi
+

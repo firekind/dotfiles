@@ -1,5 +1,5 @@
 
-## setting history file to .zsh_history
+## setting history file to .zhistory
 # needed so that history command works
 # and zsh autosuggestions plugin works
 HISTFILE=~/.zhistory
@@ -52,8 +52,8 @@ fi
 
 ## Lazy loading nvm, to speed up shell startup
 NVM_SH_DIR=/usr/share/nvm
-if [[ -s "$NVM_SH_DIR/nvm.sh" ]]; then
-    NVM_DIR=$HOME/.nvm
+NVM_DIR=$HOME/.nvm
+if [ -s "$NVM_SH_DIR/nvm.sh" ] && [ -d "$NVM_DIR/versions/node" ]; then
 	NODE_GLOBALS=(`find $NVM_DIR/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
 	NODE_GLOBALS+=("node")
 	NODE_GLOBALS+=("nvm")
@@ -88,8 +88,10 @@ alias cdp='cd /d/Users/shyam/Projects'
 alias cdd='cd /d/Users/shyam'
 alias ls='exa -al'
 alias less='bat'
-alias dock='sh ~/.config/custom-scripts/dock'
-alias undock='sh ~/.config/custom-scripts/dock off'
+alias composer='bash ~/.config/custom-scripts/composer'
+# alias dock='sh ~/.config/custom-scripts/dock'
+# alias undock='sh ~/.config/custom-scripts/dock off'
+
 
 ## plugins
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
