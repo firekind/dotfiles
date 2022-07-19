@@ -1,4 +1,3 @@
-
 ## setting history file to .zhistory
 # needed so that history command works
 # and zsh autosuggestions plugin works
@@ -100,3 +99,14 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 ## starship prompt
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 eval "$(starship init zsh)"
+
+eval $(thefuck --alias)
+export HOSTNAME=$HOST
+
+
+# bun completions
+[ -s "/home/firekind/.bun/_bun" ] && source "/home/firekind/.bun/_bun"
+
+# bun
+export BUN_INSTALL="/home/firekind/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

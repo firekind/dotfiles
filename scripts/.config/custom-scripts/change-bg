@@ -12,7 +12,7 @@ fi
 if xhost &> /dev/null
 then
     # set and save wallpaper
-    nitrogen $(cat ~/.cache/wal/wal) --set-zoom-fill --save
+    feh --bg-fill $(cat ~/.cache/wal/wal)
 else
     echo "Display server is not available or is invalid. Not setting wallpaper."
 fi

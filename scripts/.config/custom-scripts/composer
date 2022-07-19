@@ -11,7 +11,7 @@ if [ ! $(docker ps -a -q -f name="$CONTAINER_NAME") ]; then
         --privileged \
         --name "$CONTAINER_NAME" \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
-        -v /home/$user/:/home/$user/ \
+        -v deepstream_composer_cache:/root \
         -v /var/run/docker.sock:/var/run/docker.sock \
         -e DISPLAY=$DISPLAY \
         -w /opt/nvidia/deepstream/deepstream-6.0 \

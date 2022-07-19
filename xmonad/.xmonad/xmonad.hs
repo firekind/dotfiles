@@ -137,9 +137,9 @@ myKeys conf =
       -- launch a terminal:
       ("M-<Return>", spawn $ XMonad.terminal conf),
       -- toggle terminal scratchpad:
-      ("M-`", namedScratchpadAction scratchpads termScratchpadName),
+      -- ("M-`", namedScratchpadAction scratchpads termScratchpadName),
       -- toggle htop scratchpad:
-      ("M-S-x", namedScratchpadAction scratchpads htopScratchpadName),
+      -- ("M-S-x", namedScratchpadAction scratchpads htopScratchpadName),
       -- launch nautilus:
       ("M-e", spawn "nautilus"),
       -- launch rofi calendar:
@@ -151,9 +151,9 @@ myKeys conf =
       -- close focused window:
       ("M-S-q", kill),
       -- toggle gaps:
-      ("M-S-g", toggleAllGaps),
+      -- ("M-S-g", toggleAllGaps),
       -- toggle gaps and struts:
-      ("M-S-f", toggleGapsAndStruts),
+      -- ("M-S-f", toggleGapsAndStruts),
       -- Rotate through the available layout algorithms:
       ("M-S-l", sendMessage NextLayout),
       --  Reset the layouts on the current workspace to default:
@@ -163,18 +163,14 @@ myKeys conf =
       -- Move focus to the next window:
       ("M-<Tab>", windows W.focusDown),
       -- Move focus to the next window:
-      ("M-<Down>", windows W.focusDown),
-      -- Move focus to the next window:
-      ("M-<Right>", windows W.focusDown),
+      ("M-l", windows W.focusDown),
       -- Move focus to the next window:
       ("M-j", windows W.focusDown),
       -- Move focus to the previous window:
-      ("M-<Up>", windows W.focusUp),
-      -- Move focus to the previous window:
-      ("M-<Left>", windows W.focusUp),
-      -- Move focus to the previous window:
       ("M-k", windows W.focusUp),
-      -- Move focus to the master window:
+      -- Move focus to the previous window:
+      ("M-h", windows W.focusUp),
+      -- Move focus to the previous window:
       ("M-m", windows W.focusMaster),
       -- Swap the focused window and the master window:
       ("M-S-m", windows W.swapMaster),
@@ -187,9 +183,9 @@ myKeys conf =
       -- Swap the focused window with the previous window:
       ("M-S-<Left>", windows W.swapUp),
       -- Shrink the master area:
-      ("M-h", sendMessage Shrink),
+      ("M--", sendMessage Shrink),
       -- Expand the master area:
-      ("M-l", sendMessage Expand),
+      ("M-S-=", sendMessage Expand),
       -- Push window back into tiling:
       ("M-t", withFocused $ windows . W.sink),
       --- Switch to tabbed mode:
@@ -197,9 +193,9 @@ myKeys conf =
       --- Switch to full screen mode:
       ("M-f", sendMessage (JumpToLayout "Full") >> sendMessage ToggleStruts),
       -- Increment the number of windows in the master area:
-      ("M-,", sendMessage (IncMasterN 1)),
+      -- ("M-,", sendMessage (IncMasterN 1)),
       -- Deincrement the number of windows in the master area:
-      ("M-.", sendMessage (IncMasterN (-1))),
+      -- ("M-.", sendMessage (IncMasterN (-1))),
       -- Restart xmonad:
       ("M-S-r", spawn "xmonad --recompile; xmonad --restart"),
       -- Volume up - XF86AudioRaiseVolume:
@@ -338,7 +334,7 @@ myLayout =
 myManageHook :: ManageHook
 myManageHook =
   composeAll
-    [ namedScratchpadManageHook scratchpads,
+    [ -- namedScratchpadManageHook scratchpads,
       placeHook $ fixed (0.5, 0.5),
       manageDocks,
       -- app specific
@@ -361,7 +357,9 @@ myManageHook =
       className =? "Pavucontrol" --> doFloat,
       className =? "Zenity" <&&> title =? "=Authentication" --> doFloat,
       className =? "File-roller" --> doFloat,
-      className =? "TelegramDesktop" --> doShift (myWorkspaces !! 7) -- chat
+      className =? "TelegramDesktop" --> doShift (myWorkspaces !! 7), -- chat
+      className =? "Slack" --> doShift (myWorkspaces !! 7), -- chat
+      title =? "Firefox - Choose User Profile" --> doFloat
     ]
 
 ------------------------------------------------------------------------
@@ -431,12 +429,14 @@ myLogHook = multiPP barActivePP barPP
 myStartupHook :: X ()
 myStartupHook = do
   dynStatusBarStartup xmobarCreator xmobarDestroyer
-  spawnOnce "nitrogen --restore &"
-  spawnOnce "picom -b &"
+  spawnOnce "~/.fehbg &"
+  -- spawnOnce "picom -b &"
   spawnOnce "xfce4-power-manager &"
-  -- spawnOnce "udiskie -c ~/.config/udiskie/config.yaml &"
+  spawnOnce "udiskie -c ~/.config/udiskie/config.yaml &"
   spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
-  spawnOnce "xsetroot -cursor_name Left_ptr"
+  spawnOnce "gnome-keyring-daemon --start &"
+  -- spawnOnce "xsetroot -cursor_name Left_ptr"
+  spawnOnce "autorandr --change &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
