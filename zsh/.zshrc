@@ -82,10 +82,10 @@ then
 fi
 
 ## aliases
-alias cdp='cd ~/Projects'
+alias cdp='cd /d/Projects'
 alias ls='exa -al'
 alias less='bat'
-alias composer='bash ~/.config/custom-scripts/composer'
+alias vs='code'
 # alias dock='sh ~/.config/custom-scripts/dock'
 # alias undock='sh ~/.config/custom-scripts/dock off'
 
