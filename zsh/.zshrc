@@ -4,7 +4,13 @@
 HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=10000
-setopt appendhistory
+
+## oh my zsh
+export ZSH="$HOME/.oh-my-zsh"
+DISABLE_AUTO_UPDATE=true
+ZSH_THEME="minimal"
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
 
 ## man pager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -48,6 +54,19 @@ if [[ -d ~/flutter ]]
 then
 	export PATH=$PATH:~/flutter/bin
 fi
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+## devcontainer cli
+if [[ -d ~/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin ]]
+then
+    export PATH=$PATH:~/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin
+fi
+
+# sourcing /etc/os-release to get distro info
+if [[ -f /etc/os-release ]]
+then
+    source /etc/os-release
+fi
 
 ## Lazy loading nvm, to speed up shell startup
 NVM_SH_DIR=/usr/share/nvm
@@ -79,10 +98,14 @@ fi
 if [[ -f /usr/bin/chromium ]]
 then
 	export CHROME_EXECUTABLE=/usr/bin/chromium
+elif [[ -f /usr/bin/chromium-browser ]]
+then
+    export CHROME_EXECUTABLE=/usr/bin/chromium-browser
 fi
 
 ## aliases
 alias cdp='cd /d/Projects'
+alias cdmr='cd /d/Projects/mr'
 alias ls='exa -al'
 alias less='bat'
 alias vs='code'
@@ -91,9 +114,16 @@ alias vs='code'
 
 
 ## plugins
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# checking if /etc/os-release ID is fedora
+if [[ "$ID" == "fedora" ]]
+then
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 ## starship prompt
-export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
-eval "$(starship init zsh)"
+# export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+# eval "$(starship init zsh)"
