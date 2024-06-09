@@ -8,11 +8,18 @@ SAVEHIST=10000
 ## oh my zsh
 export ZSH="$HOME/.oh-my-zsh"
 DISABLE_AUTO_UPDATE=true
-ZSH_THEME="minimal"
-plugins=(git)
+
+if [[ -f /.dockerenv ]] || [[ -f /.containerenv ]]; then
+	ZSH_THEME="eastwood"
+else
+	ZSH_THEME="gallifrey"
+fi
+plugins=(zsh-autosuggestions zsh-syntax-highlighting git)
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 source $ZSH/oh-my-zsh.sh
 
 ## man pager
+export MANROFFOPT="-c" 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 ## keybindings
@@ -37,11 +44,11 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
-## pywal
-if [[ -d ~/.cache/wal ]]
-then
-	(cat ~/.cache/wal/sequences &)
-fi
+function add_to_path() {
+    if [[ ( -d $1 || -f $1 ) ]] && [[ ! ":$PATH:" == *":$1:"* ]]; then
+        export PATH=$PATH:$1
+    fi
+}
 
 ## miniconda
 if [[ -d ~/miniconda3 ]]
@@ -49,40 +56,16 @@ then
 	. ~/miniconda3/etc/profile.d/conda.sh
 fi
 
-## flutter
-if [[ -d ~/flutter ]]
-then
-	export PATH=$PATH:~/flutter/bin
-fi
-export PATH="$PATH":"$HOME/.pub-cache/bin"
-
-## devcontainer cli
-if [[ -d ~/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin ]]
-then
-    export PATH=$PATH:~/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin
-fi
+add_to_path $HOME/flutter/bin
+add_to_path $HOME/.pub-cache/bin
+add_to_path $HOME/go/bin
+add_to_path /usr/local/go/bin
+add_to_path $HOME/.local/bin
 
 # sourcing /etc/os-release to get distro info
 if [[ -f /etc/os-release ]]
 then
     source /etc/os-release
-fi
-
-## Lazy loading nvm, to speed up shell startup
-NVM_SH_DIR=/usr/share/nvm
-NVM_DIR=$HOME/.nvm
-if [ -s "$NVM_SH_DIR/nvm.sh" ] && [ -d "$NVM_DIR/versions/node" ]; then
-	NODE_GLOBALS=(`find $NVM_DIR/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
-	NODE_GLOBALS+=("node")
-	NODE_GLOBALS+=("nvm")
-	# Lazy-loading nvm + npm on node globals
-	load_nvm () {
-		[ -s "$NVM_SH_DIR/nvm.sh" ] && \. "$NVM_SH_DIR/nvm.sh"
-	}
-	# Making node global trigger the lazy loading
-	for cmd in "${NODE_GLOBALS[@]}"; do
-		eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
-	done
 fi
 
 ## android
@@ -104,26 +87,20 @@ then
 fi
 
 ## aliases
-alias cdp='cd /d/Projects'
-alias cdmr='cd /d/Projects/mr'
-alias ls='exa -al'
+alias cdp='cd /media/d/Projects'
+alias cdmr='cd /media/d/Projects/mr'
+alias cdw='cd /media/d/Projects/workbench'
+alias ls='eza -al'
 alias less='bat'
 alias vs='code'
-# alias dock='sh ~/.config/custom-scripts/dock'
-# alias undock='sh ~/.config/custom-scripts/dock off'
+alias vsd='vscode-distrobox'
 
-
-## plugins
-# checking if /etc/os-release ID is fedora
-if [[ "$ID" == "fedora" ]]
-then
-    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-else
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ ! -f /run/.containerenv ]] && command -v 1password &> /dev/null; then
+    export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/.1password/agent.sock
 fi
 
-## starship prompt
-# export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
-# eval "$(starship init zsh)"
+if [[ -f ~/.zshenv ]]; then
+	source ~/.zshenv
+fi
+
+unfunction add_to_path
