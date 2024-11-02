@@ -18,4 +18,12 @@ then
     eval "$(direnv hook zsh)"
 fi
 
-__distrobox_bin=$(which distrobox)
+## setting __distrobox_bin variable to point to the
+## original distrobox binary. if not found, intializes
+## it to distrobox
+if command -v distrobox 2>&1 >/dev/null
+then
+    __distrobox_bin=$(which distrobox)
+else
+    __distrobox_bin="distrobox"
+fi
