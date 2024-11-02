@@ -1,5 +1,0 @@
-notifications:
-    device_added: false
-    device_removed: false
-    device_unlocked: false
-    device_unlocked: false

@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# if [ -f /usr/bin/qtile ]; then
-#     qtile cmd-obj -o cmd -f restart
-# fi
