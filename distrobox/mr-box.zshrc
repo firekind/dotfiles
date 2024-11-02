@@ -1,6 +1,3 @@
-# setting history file to .zhistory
-# needed so that history command works
-# and zsh autosuggestions plugin works
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -17,15 +14,11 @@ source $ZSH/oh-my-zsh.sh
 export MANROFFOPT="-c" 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-## aliases
-alias cdp='cd /media/d/Projects'
-alias cdmr='cd /media/d/Projects/mr'
-alias cdw='cd /media/d/Projects/workbench'
+if [[ ! -z "$CONTAINER_ID" ]]; then
+    PROMPT="%F{cyan}‹$CONTAINER_ID›%f $PROMPT"
+fi
+
 alias ls='eza -al'
 alias less='bat'
-alias vs='code'
-alias vsd='vscode-distrobox'
 
-if [[ -f $HOME/.config/shell.config.zsh ]]; then
-    source $HOME/.config/shell.config.zsh
-fi
+export PATH=$PATH:/usr/lib/rust-1.77/bin

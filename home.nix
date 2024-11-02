@@ -22,7 +22,7 @@
     ];
     file = {
       "Pictures/Wallpapers".source = wallpapers/Pictures/Wallpapers;
-      ".vimrc".source = vim/.vimrc;
+      ".vimrc".source = vim/config;
     };
   };
   
@@ -43,10 +43,10 @@
         cdw = "cd /media/d/Projects/workbench";
         ls = "eza -al";
         less = "bat";
-        vs = "code";
         vsd = "vscode-distrobox";
+        distrobox = "env -u ZDOTDIR -u PATH $__distrobox_bin";
       };
-      initExtra = "${builtins.readFile zsh/.config/shell.config.zsh}";
+      initExtra = "${builtins.readFile zsh/config}";
       oh-my-zsh = {
         enable = true;
         plugins = [

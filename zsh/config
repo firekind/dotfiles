@@ -18,7 +18,4 @@ then
     eval "$(direnv hook zsh)"
 fi
 
-# if in a distrobox, add the distrobox name to the prompt
-if [[ ! -z "$CONTAINER_ID" ]]; then
-    PROMPT="%F{cyan}‹$CONTAINER_ID›%f $PROMPT"
-fi
+__distrobox_bin=$(which distrobox)
