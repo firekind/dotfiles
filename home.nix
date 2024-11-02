@@ -21,7 +21,7 @@
       pkgs.vim
     ];
     file = {
-      "Pictures/Wallpapers".source = wallpapers/Pictures/Wallpapers;
+      "Pictures/Wallpapers".source = ./wallpapers;
       ".vimrc".source = vim/config;
     };
   };
