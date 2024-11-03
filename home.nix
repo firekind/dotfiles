@@ -14,7 +14,6 @@
     packages = [
       pkgs.eza
       pkgs.bat
-      pkgs.direnv
       pkgs.cascadia-code
       pkgs.jetbrains-mono
       pkgs.oh-my-zsh
@@ -28,6 +27,11 @@
   
   programs = {
     home-manager.enable = true;
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
     zsh = {
       enable = true;
       autosuggestion.enable = true;
@@ -46,7 +50,7 @@
         vsd = "vscode-distrobox";
         distrobox = "env -u ZDOTDIR -u PATH $__distrobox_bin";
       };
-      initExtra = "${builtins.readFile zsh/config}";
+      initExtra = "${builtins.readFile zsh/config.zsh}";
       oh-my-zsh = {
         enable = true;
         plugins = [

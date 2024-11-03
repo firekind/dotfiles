@@ -12,12 +12,6 @@ add_to_path $HOME/.local/bin
 
 unfunction add_to_path
 
-## direnv
-if command -v direnv 2>&1 >/dev/null
-then
-    eval "$(direnv hook zsh)"
-fi
-
 ## setting __distrobox_bin variable to point to the
 ## original distrobox binary. if not found, intializes
 ## it to distrobox
