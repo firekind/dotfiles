@@ -37,7 +37,14 @@ RUN apt update && apt install -y --no-install-recommends \
     python3-requests \
     libtinfo5 \
     libstd-rust-1.77 \
-    rustfmt-1.77
+    rustfmt-1.77 \
+    libx11-6 \
+    libxrender1 \
+    libxxf86vm1 \
+    libxfixes3 \
+    libxi6 \
+    libxkbcommon0 \
+    libgomp1
 
 # eza
 RUN curl -fsSL https://github.com/eza-community/eza/releases/download/v0.20.4/eza_x86_64-unknown-linux-gnu.tar.gz | tar -xz -C /usr/local/bin
