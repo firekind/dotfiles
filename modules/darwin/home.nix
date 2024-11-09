@@ -16,6 +16,7 @@
       jetbrains-mono
       oh-my-zsh
       vim
+      htop
     ];
     file = {
       ".vimrc".source = ../../data/vim/config;

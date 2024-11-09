@@ -18,6 +18,7 @@
       jetbrains-mono
       oh-my-zsh
       vim
+      htop
     ];
     file = {
       "Pictures/Wallpapers".source = ../../data/wallpapers;
