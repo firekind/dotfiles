@@ -14,6 +14,9 @@
   homebrew = {
     enable = true;
     onActivation.cleanup = "uninstall";
+    brews = [
+      "uv"
+    ];
   };
   security.pam.enableSudoTouchIdAuth = true;
 }
