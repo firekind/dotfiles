@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   home = {
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
@@ -9,22 +9,20 @@
     # release notes.
     stateVersion = "24.05";
 
-    username = "firekind";
-    homeDirectory = "/home/firekind";
-    packages = [
-      pkgs.eza
-      pkgs.bat
-      pkgs.cascadia-code
-      pkgs.jetbrains-mono
-      pkgs.oh-my-zsh
-      pkgs.vim
+    packages = with pkgs; [
+      eza
+      bat
+      cascadia-code
+      jetbrains-mono
+      oh-my-zsh
+      vim
     ];
     file = {
-      "Pictures/Wallpapers".source = ./wallpapers;
-      ".vimrc".source = vim/config;
+      ".vimrc".source = ../../data/vim/config;
+      "Pictures/dotfiles-wallpapers".source = ../../data/wallpapers;
     };
   };
-  
+
   programs = {
     home-manager.enable = true;
     direnv = {
@@ -42,15 +40,9 @@
         MANPAGER="sh -c 'col -bx | bat -l man -p'";
       };
       shellAliases = {
-        cdp = "cd /media/d/Projects";
-        cdmr = "cd /media/d/Projects/mr";
-        cdw = "cd /media/d/Projects/workbench";
         ls = "eza -al";
         less = "bat";
-        vsd = "vscode-distrobox";
-        distrobox = "env -u ZDOTDIR -u PATH $__distrobox_bin";
       };
-      initExtra = "${builtins.readFile zsh/config.zsh}";
       oh-my-zsh = {
         enable = true;
         plugins = [
@@ -63,9 +55,5 @@
 
   fonts.fontconfig = {
     enable = true;
-    defaultFonts.monospace = [
-      "Cascadia Code"
-      "JetBrains Mono"
-    ];
   };
 }
