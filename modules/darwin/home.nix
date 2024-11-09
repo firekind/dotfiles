@@ -45,6 +45,7 @@
         less = "bat";
         cdp = "cd ~/Projects";
       };
+      initExtra = "${builtins.readFile ../../data/zsh/darwin-config.zsh}";
       oh-my-zsh = {
         enable = true;
         plugins = [
