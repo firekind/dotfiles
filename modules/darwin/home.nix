@@ -42,6 +42,7 @@
       shellAliases = {
         ls = "eza -al";
         less = "bat";
+        cdp = "cd ~/Projects";
       };
       oh-my-zsh = {
         enable = true;
