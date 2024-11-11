@@ -46,7 +46,7 @@
         CreateDesktop = false; # whether to show icons on desktop or not
         FXPreferredViewStyle = "icnv";
         NewWindowTarget = "Home";
-        ShowPathbar = true;
+        ShowPathbar = false;
       };
 
       hitoolbox = {
