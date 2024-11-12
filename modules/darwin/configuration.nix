@@ -4,6 +4,7 @@
     onActivation.cleanup = "zap";
     brews = [
       "uv"
+      "cocoapods"
     ];
   };
   networking = {

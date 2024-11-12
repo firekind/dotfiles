@@ -44,6 +44,8 @@
         ls = "eza -al";
         less = "bat";
         cdp = "cd ~/Projects";
+        cdmr = "cd ~/Projects/MR";
+        cdw = "cd ~/Projects/workbench";
       };
       initExtra = "${builtins.readFile ../../data/zsh/darwin-config.zsh}";
       oh-my-zsh = {
