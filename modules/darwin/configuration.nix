@@ -8,6 +8,7 @@
     ];
     casks = [
       "raycast"
+      "docker"
     ];
   };
   networking = {
