@@ -5,6 +5,7 @@
     brews = [
       "uv"
       "cocoapods"
+      "dive"
     ];
     casks = [
       "raycast"
