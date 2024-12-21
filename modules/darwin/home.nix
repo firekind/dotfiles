@@ -39,6 +39,7 @@
         ZSH_COMPDUMP = "$HOME/.cache/.zcompdump-$HOST";
         MANROFFOPT="-c";
         MANPAGER="sh -c 'col -bx | bat -l man -p'";
+        SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
       };
       shellAliases = {
         ls = "eza -al";

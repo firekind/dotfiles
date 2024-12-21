@@ -1,7 +1,11 @@
 { pkgs, lib, ... }: {
   homebrew = {
     enable = true;
-    onActivation.cleanup = "zap";
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
+      upgrade = true;
+    };
     brews = [
       "uv"
       "cocoapods"
