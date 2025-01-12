@@ -12,13 +12,16 @@
     username = "firekind";
     homeDirectory = "/home/firekind";
     packages = with pkgs; [
-      eza
+      awscli2
       bat
       cascadia-code
+      eza
+      gh
+      google-cloud-sdk
+      htop
       jetbrains-mono
       oh-my-zsh
       vim
-      htop
     ];
     file = {
       "Pictures/Wallpapers".source = ../../data/wallpapers;
