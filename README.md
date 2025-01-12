@@ -6,7 +6,7 @@ contains dotfiles.
 Set up via home manager:
 
 ```
-home-manager switch --flake ./modules/linux
+nix run home-manager/release-24.11 -- switch --flake ./modules/linux
 ```
 
 ## Darwin
