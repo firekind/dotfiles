@@ -18,6 +18,12 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
     chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
+# docker repo setup
+RUN install -m 0755 -d /etc/apt/keyrings && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc && \
+    chmod a+r /etc/apt/keyrings/docker.asc && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu jammy stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 # install packages
 RUN apt update && apt install -y --no-install-recommends \
     zsh \
@@ -44,7 +50,14 @@ RUN apt update && apt install -y --no-install-recommends \
     libxfixes3 \
     libxi6 \
     libxkbcommon0 \
-    libgomp1
+    libgomp1 \
+    docker-ce-cli \
+    docker-compose-plugin \
+    docker-buildx-plugin \
+    openssh-server
+
+# configuring ssh server port
+RUN echo "Port 23" >> /etc/ssh/sshd_config
 
 # eza
 RUN curl -fsSL https://github.com/eza-community/eza/releases/download/v0.20.4/eza_x86_64-unknown-linux-gnu.tar.gz | tar -xz -C /usr/local/bin

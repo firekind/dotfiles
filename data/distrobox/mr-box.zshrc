@@ -22,3 +22,23 @@ alias ls='eza -al'
 alias less='bat'
 
 export PATH=$PATH:/usr/lib/rust-1.77/bin
+
+function calc_sri() {
+    if ! command -v openssl 2>&1 >/dev/null
+    then
+        echo "openssl: command not found"
+        return 1
+    fi
+
+    if [[ -z "$1" ]]; then
+        echo "path to file should be given"
+        return 1
+    fi
+
+    if [[ ! -f "$1" ]]; then
+        echo "invalid file path: $1"
+        return 1
+    fi
+
+    echo $(openssl dgst -sha256 -binary $1 | openssl base64 -A)
+}
