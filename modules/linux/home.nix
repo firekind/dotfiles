@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, user, ... }: {
   fonts.fontconfig = {
     enable = true;
     defaultFonts.monospace = [
@@ -11,8 +11,15 @@
     file = {
       "Pictures/Wallpapers".source = ../../data/wallpapers;
       ".vimrc".source = ../../data/vim/config;
+      ".config/ghostty/config".text = ''
+          window-padding-x = 5
+          window-padding-y = 5
+          theme = "PencilDark"
+          cursor-style = "block"
+          shell-integration-features = "no-cursor"
+        '';
     };
-    homeDirectory = "/home/firekind";
+    homeDirectory = user.home-dir;
     packages = with pkgs; [
       awscli2
       bat
@@ -23,7 +30,9 @@
       htop
       jetbrains-mono
       oh-my-zsh
+      uv
       vim
+      vscode
     ];
   
     # This value determines the Home Manager release that your configuration is
@@ -35,7 +44,7 @@
     # release notes.
     stateVersion = "24.05";
 
-    username = "firekind";  
+    username = user.name;  
   };
 
   programs = {
@@ -43,17 +52,6 @@
       enable = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;
-    };
-    ghostty = {
-      enable = true;
-      enableZshIntegration = true;
-      settings = {
-        window-padding-x = 5;
-        window-padding-y = 5;
-        theme = "PencilDark";
-        cursor-style = "block";
-        shell-integration-features = "no-cursor";
-      };
     };
     home-manager.enable = true;
     zsh = {
