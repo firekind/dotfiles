@@ -18,6 +18,12 @@
           cursor-style = "block"
           shell-integration-features = "no-cursor"
         '';
+
+      # tiny mouse cursor on vscode windows solved by this config.
+      # ref: https://github.com/microsoft/vscode/issues/207033#issuecomment-2104720712
+      ".config/environment.d/30-electron-ozone-wayland.conf".text = ''
+        ELECTRON_OZONE_PLATFORM_HINT=auto
+      '';
     };
     homeDirectory = user.home-dir;
     packages = with pkgs; [
