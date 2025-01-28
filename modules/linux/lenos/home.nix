@@ -9,8 +9,8 @@
 
   home = {
     file = {
-      "Pictures/Wallpapers".source = ../../data/wallpapers;
-      ".vimrc".source = ../../data/vim/config;
+      "Pictures/Wallpapers".source = ../../../data/wallpapers;
+      ".vimrc".source = ../../../data/vim/config;
       ".config/ghostty/config".text = ''
           window-padding-x = 5
           window-padding-y = 5
@@ -18,12 +18,6 @@
           cursor-style = "block"
           shell-integration-features = "no-cursor"
         '';
-
-      # tiny mouse cursor on vscode windows solved by this config.
-      # ref: https://github.com/microsoft/vscode/issues/207033#issuecomment-2104720712
-      ".config/environment.d/30-electron-ozone-wayland.conf".text = ''
-        ELECTRON_OZONE_PLATFORM_HINT=auto
-      '';
     };
     homeDirectory = user.home-dir;
     packages = with pkgs; [
@@ -33,12 +27,9 @@
       eza
       gh
       google-cloud-sdk
-      htop
       jetbrains-mono
       oh-my-zsh
       uv
-      vim
-      vscode
     ];
   
     # This value determines the Home Manager release that your configuration is
@@ -63,7 +54,7 @@
     zsh = {
       autosuggestion.enable = true;
       enable = true;
-      initExtra = "${builtins.readFile ../../data/zsh/linux-config.zsh}";
+      initExtra = "${builtins.readFile ../../../data/zsh/linux-config.zsh}";
       oh-my-zsh = {
         enable = true;
         plugins = [
@@ -77,13 +68,8 @@
         MANPAGER="sh -c 'col -bx | bat -l man -p'";
       };
       shellAliases = {
-        cdp = "cd /media/d/Projects";
-        cdmr = "cd /media/d/Projects/mr";
-        cdw = "cd /media/d/Projects/workbench";
         ls = "eza -al";
         less = "bat";
-        vsd = "vscode-distrobox";
-        distrobox = "env -u ZDOTDIR -u PATH $__distrobox_bin";
       };
       syntaxHighlighting.enable = true;
     };
