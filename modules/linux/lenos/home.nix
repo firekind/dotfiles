@@ -70,6 +70,8 @@
       shellAliases = {
         ls = "eza -al";
         less = "bat";
+        cdmr = "cd ~/Documents/Projects/mr";
+        cdp = "cd ~/Documents/Projects";
       };
       syntaxHighlighting.enable = true;
     };
