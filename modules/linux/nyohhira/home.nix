@@ -30,6 +30,7 @@
       awscli2
       bat
       cascadia-code
+      dive
       eza
       gh
       google-cloud-sdk
