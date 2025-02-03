@@ -7,13 +7,20 @@
       upgrade = true;
     };
     brews = [
-      "uv"
+      "awscli"
       "cocoapods"
       "dive"
+      "gh"
+      "grpcurl"
+      "tree"
+      "uv"
     ];
     casks = [
-      "raycast"
       "docker"
+      "google-cloud-sdk"
+      "keymapp"
+      "postman"
+      "raycast"
     ];
   };
   networking = {
