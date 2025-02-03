@@ -1,4 +1,8 @@
-{ config, pkgs, user, ... }: {
+{
+  pkgs,
+  user,
+  ...
+}: {
   fonts.fontconfig = {
     enable = true;
     defaultFonts.monospace = [
@@ -12,12 +16,12 @@
       "Pictures/Wallpapers".source = ../../../data/wallpapers;
       ".vimrc".source = ../../../data/vim/config;
       ".config/ghostty/config".text = ''
-          window-padding-x = 5
-          window-padding-y = 5
-          theme = "PencilDark"
-          cursor-style = "block"
-          shell-integration-features = "no-cursor"
-        '';
+        window-padding-x = 5
+        window-padding-y = 5
+        theme = "PencilDark"
+        cursor-style = "block"
+        shell-integration-features = "no-cursor"
+      '';
     };
     homeDirectory = user.home-dir;
     packages = with pkgs; [
@@ -32,7 +36,7 @@
       oh-my-zsh
       uv
     ];
-  
+
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
     # introduces backwards incompatible changes.
@@ -42,7 +46,7 @@
     # release notes.
     stateVersion = "24.05";
 
-    username = user.name;  
+    username = user.name;
   };
 
   programs = {
@@ -65,8 +69,8 @@
       };
       sessionVariables = {
         ZSH_COMPDUMP = "$HOME/.cache/.zcompdump-$HOST";
-        MANROFFOPT="-c";
-        MANPAGER="sh -c 'col -bx | bat -l man -p'";
+        MANROFFOPT = "-c";
+        MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       };
       shellAliases = {
         ls = "eza -al";

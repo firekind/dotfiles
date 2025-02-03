@@ -11,11 +11,17 @@
     };
   };
 
-  outputs = {self, nix-darwin, nixpkgs, home-manager}: {
+  outputs = {
+    self,
+    nix-darwin,
+    nixpkgs,
+    home-manager,
+  }: {
     darwinConfigurations.yoitsu = nix-darwin.lib.darwinSystem {
       modules = [
         ./configuration.nix
-        home-manager.darwinModules.home-manager {
+        home-manager.darwinModules.home-manager
+        {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.verbose = true;

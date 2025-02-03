@@ -10,13 +10,15 @@
     stateVersion = "24.05";
 
     packages = with pkgs; [
-      eza
+      alejandra
       bat
       cascadia-code
+      eza
+      htop
       jetbrains-mono
+      nil
       oh-my-zsh
       vim
-      htop
     ];
     file = {
       ".vimrc".source = ../../data/vim/config;

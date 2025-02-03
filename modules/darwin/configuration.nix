@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{lib, ...}: {
   homebrew = {
     enable = true;
     onActivation = {
@@ -32,24 +32,25 @@
   services.nix-daemon.enable = true;
   system = {
     # Used for backwards compatibility. please read the changelog
-    # before changing: `darwin-rebuild changelog`.      
+    # before changing: `darwin-rebuild changelog`.
     stateVersion = 4;
 
     activationScripts.extraUserActivation = {
       enable = true;
-      text = 
-        let
-          hotkeysToDisable = [
-            64 # Spotlight -> Show Spotlight search
-            65 # Spotlight -> Show finder search window
-          ];
-          disableHotkeysCmd = map (
+      text = let
+        hotkeysToDisable = [
+          64 # Spotlight -> Show Spotlight search
+          65 # Spotlight -> Show finder search window
+        ];
+        disableHotkeysCmd =
+          map (
             key: "plutil -replace AppleSymbolicHotKeys.${toString key}.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist"
-          ) hotkeysToDisable;
-        in ''
-          ${lib.concatStringsSep "\n" disableHotkeysCmd}
-          /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-        '';
+          )
+          hotkeysToDisable;
+      in ''
+        ${lib.concatStringsSep "\n" disableHotkeysCmd}
+        /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+      '';
     };
 
     defaults = {

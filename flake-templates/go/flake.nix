@@ -9,12 +9,17 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, gomod2nix }:
-    flake-utils.lib.eachDefaultSystem(system:
-      let
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    gomod2nix,
+  }:
+    flake-utils.lib.eachDefaultSystem (
+      system: let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ gomod2nix.overlays.default ];
+          overlays = [gomod2nix.overlays.default];
         };
         goEnv = pkgs.mkGoEnv {
           pwd = ./.;
@@ -27,12 +32,12 @@
           src = ./.;
           modules = ./gomod2nix.toml;
         };
-        devShell = with pkgs; mkShell {
-          packages = [
-            goEnv
-          ];
-        };
+        devShell = with pkgs;
+          mkShell {
+            packages = [
+              goEnv
+            ];
+          };
       }
     );
-    
 }

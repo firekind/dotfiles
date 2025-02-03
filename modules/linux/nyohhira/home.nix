@@ -1,4 +1,8 @@
-{ config, pkgs, user, ... }: {
+{
+  pkgs,
+  user,
+  ...
+}: {
   fonts.fontconfig = {
     enable = true;
     defaultFonts.monospace = [
@@ -12,12 +16,12 @@
       "Pictures/Wallpapers".source = ../../../data/wallpapers;
       ".vimrc".source = ../../../data/vim/config;
       ".config/ghostty/config".text = ''
-          window-padding-x = 5
-          window-padding-y = 5
-          theme = "PencilDark"
-          cursor-style = "block"
-          shell-integration-features = "no-cursor"
-        '';
+        window-padding-x = 5
+        window-padding-y = 5
+        theme = "PencilDark"
+        cursor-style = "block"
+        shell-integration-features = "no-cursor"
+      '';
 
       # tiny mouse cursor on vscode windows solved by this config.
       # ref: https://github.com/microsoft/vscode/issues/207033#issuecomment-2104720712
@@ -41,7 +45,7 @@
       vim
       vscode
     ];
-  
+
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
     # introduces backwards incompatible changes.
@@ -51,7 +55,7 @@
     # release notes.
     stateVersion = "24.05";
 
-    username = user.name;  
+    username = user.name;
   };
 
   programs = {
@@ -74,8 +78,8 @@
       };
       sessionVariables = {
         ZSH_COMPDUMP = "$HOME/.cache/.zcompdump-$HOST";
-        MANROFFOPT="-c";
-        MANPAGER="sh -c 'col -bx | bat -l man -p'";
+        MANROFFOPT = "-c";
+        MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       };
       shellAliases = {
         cdp = "cd /media/d/Projects";
