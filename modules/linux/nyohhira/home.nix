@@ -31,6 +31,7 @@
     };
     homeDirectory = user.home-dir;
     packages = with pkgs; [
+      alejandra
       awscli2
       bat
       cascadia-code
@@ -40,10 +41,10 @@
       google-cloud-sdk
       htop
       jetbrains-mono
+      nil
       oh-my-zsh
       uv
       vim
-      vscode
     ];
 
     # This value determines the Home Manager release that your configuration is
@@ -91,6 +92,23 @@
         distrobox = "env -u ZDOTDIR -u PATH $__distrobox_bin";
       };
       syntaxHighlighting.enable = true;
+    };
+  };
+
+  xdg = {
+    desktopEntries = {
+      htop = {
+        name = "Htop";
+        noDisplay = true;
+      };
+      gvim = {
+        name = "GVim";
+        noDisplay = true;
+      };
+      vim = {
+        name = "Vim";
+        noDisplay = true;
+      };
     };
   };
 }
