@@ -12,6 +12,7 @@
       "dive"
       "gh"
       "grpcurl"
+      "pre-commit"
       "tree"
       "uv"
     ];
