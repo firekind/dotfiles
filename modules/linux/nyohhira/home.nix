@@ -31,6 +31,7 @@
     };
     homeDirectory = user.home-dir;
     packages = with pkgs; [
+      _1password-gui
       alejandra
       awscli2
       bat
@@ -39,12 +40,16 @@
       eza
       gh
       google-cloud-sdk
+      grpcurl
       htop
+      insomnia
       jetbrains-mono
+      keymapp
       nil
       oh-my-zsh
       uv
       vim
+      yq-go
     ];
 
     # This value determines the Home Manager release that your configuration is
