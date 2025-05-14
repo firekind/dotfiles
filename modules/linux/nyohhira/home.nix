@@ -44,7 +44,6 @@
       htop
       insomnia
       jetbrains-mono
-      keymapp
       nil
       oh-my-zsh
       uv
