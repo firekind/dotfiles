@@ -27,31 +27,37 @@
   networking = {
     hostName = "yoitsu";
   };
-  nix.settings.experimental-features = "nix-command flakes";
+  nix = {
+    enable = true;
+    settings.experimental-features = "nix-command flakes";
+  };
   nixpkgs.hostPlatform = "aarch64-darwin";
-  security.pam.enableSudoTouchIdAuth = true;
-  services.nix-daemon.enable = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   system = {
     # Used for backwards compatibility. please read the changelog
     # before changing: `darwin-rebuild changelog`.
-    stateVersion = 4;
+    stateVersion = 6;
 
-    activationScripts.extraUserActivation = {
-      enable = true;
-      text = let
-        hotkeysToDisable = [
-          64 # Spotlight -> Show Spotlight search
-          65 # Spotlight -> Show finder search window
-        ];
-        disableHotkeysCmd =
-          map (
-            key: "plutil -replace AppleSymbolicHotKeys.${toString key}.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist"
-          )
-          hotkeysToDisable;
-      in ''
-        ${lib.concatStringsSep "\n" disableHotkeysCmd}
-        /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-      '';
+    primaryUser = "firekind";
+
+    activationScripts = {
+      disableHotKeys = {
+        enable = true;
+        text = let
+          hotkeysToDisable = [
+            64 # Spotlight -> Show Spotlight search
+            65 # Spotlight -> Show finder search window
+          ];
+          disableHotkeysCmd =
+            map (
+              key: "plutil -replace AppleSymbolicHotKeys.${toString key}.enabled -bool NO ~/Library/Preferences/com.apple.symbolichotkeys.plist"
+            )
+            hotkeysToDisable;
+        in ''
+          ${lib.concatStringsSep "\n" disableHotkeysCmd}
+          /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+        '';
+      };
     };
 
     defaults = {
@@ -71,6 +77,7 @@
 
       dock = {
         autohide = true;
+        mru-spaces = false;
         persistent-apps = [
           "/System/Applications/Launchpad.app"
         ];
@@ -108,5 +115,4 @@
     name = "firekind";
     home = "/Users/firekind";
   };
-  programs.zsh.enable = true;
 }

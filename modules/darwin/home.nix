@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   home = {
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
@@ -39,9 +39,9 @@
       syntaxHighlighting.enable = true;
       sessionVariables = {
         ZSH_COMPDUMP = "$HOME/.cache/.zcompdump-$HOST";
-        MANROFFOPT="-c";
-        MANPAGER="sh -c 'col -bx | bat -l man -p'";
-        SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+        MANROFFOPT = "-c";
+        MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+        SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
       };
       shellAliases = {
         ls = "eza -al";
@@ -50,7 +50,7 @@
         cdmr = "cd ~/Projects/MR";
         cdw = "cd ~/Projects/workbench";
       };
-      initExtra = "${builtins.readFile ../../data/zsh/darwin-config.zsh}";
+      initContent = "${builtins.readFile ../../data/zsh/darwin-config.zsh}";
       oh-my-zsh = {
         enable = true;
         plugins = [
