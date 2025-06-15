@@ -7,18 +7,12 @@
       upgrade = true;
     };
     brews = [
-      "awscli"
       "cocoapods"
       "dive"
-      "gh"
-      "grpcurl"
-      "pre-commit"
       "tree"
       "uv"
     ];
     casks = [
-      "docker"
-      "google-cloud-sdk"
       "keymapp"
       "postman"
     ];
