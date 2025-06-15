@@ -21,8 +21,8 @@
       vim
     ];
     file = {
-      ".vimrc".source = ../../data/vim/config;
-      "Pictures/dotfiles-wallpapers".source = ../../data/wallpapers;
+      ".vimrc".source = ../../../data/vim/config;
+      "Pictures/dotfiles-wallpapers".source = ../../../data/wallpapers;
     };
   };
 
@@ -50,7 +50,7 @@
         cdmr = "cd ~/Projects/MR";
         cdw = "cd ~/Projects/workbench";
       };
-      initContent = "${builtins.readFile ../../data/zsh/darwin-config.zsh}";
+      initContent = "${builtins.readFile ../../../data/zsh/darwin-config.zsh}";
       oh-my-zsh = {
         enable = true;
         plugins = [

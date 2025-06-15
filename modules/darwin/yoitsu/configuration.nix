@@ -21,7 +21,6 @@
       "google-cloud-sdk"
       "keymapp"
       "postman"
-      "raycast"
     ];
   };
   networking = {

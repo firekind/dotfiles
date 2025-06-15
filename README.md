@@ -15,13 +15,13 @@ Set up via nix-darwin:
 For first run:
 
 ```
-nix run nix-darwin -- switch --flake ./modules/darwin
+sudo nix run nix-darwin -- switch --flake ./modules/darwin
 ```
 
 Subsequent runs can use:
 
 ```
-darwin-rebuild switch --flake ./modules/darwin
+sudo darwin-rebuild switch --flake ./modules/darwin
 ```
 
 instead
