@@ -12,6 +12,7 @@
     packages = with pkgs; [
       alejandra
       bat
+      binutils
       cascadia-code
       eza
       htop
