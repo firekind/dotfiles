@@ -7,6 +7,7 @@
       upgrade = true;
     };
     brews = [
+      "binutils"
       "cocoapods"
       "dive"
       "tree"
