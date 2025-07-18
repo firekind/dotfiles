@@ -49,6 +49,7 @@
         less = "bat";
         cdp = "cd ~/Projects";
         cdmr = "cd ~/Projects/MR";
+        cdfe = "cd ~/Projects/federate";
         cdw = "cd ~/Projects/workbench";
       };
       initContent = "${builtins.readFile ../../../data/zsh/darwin-config.zsh}";

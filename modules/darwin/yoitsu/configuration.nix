@@ -9,6 +9,8 @@
     brews = [
       "cocoapods"
       "dive"
+      "docker-compose"
+      "podman"
       "tree"
       "uv"
     ];
@@ -51,6 +53,19 @@
           /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
         '';
       };
+
+      postActivation.text = ''
+        # Check if /usr/local/bin/docker is a symlink to /opt/homebrew/bin/podman
+        if [ -L /usr/local/bin/docker ] && [ "$(readlink /usr/local/bin/docker)" = "/opt/homebrew/bin/podman" ]; then
+          # If podman no longer exists, remove the symlink
+          if [ ! -f /opt/homebrew/bin/podman ]; then
+            rm /usr/local/bin/docker
+          fi
+        # If no docker command exists and podman exists, create the symlink
+        elif ! command -v docker >/dev/null 2>&1 && [ -f /opt/homebrew/bin/podman ]; then
+          ln -sfn /opt/homebrew/bin/podman /usr/local/bin/docker
+        fi
+      '';
     };
 
     defaults = {
