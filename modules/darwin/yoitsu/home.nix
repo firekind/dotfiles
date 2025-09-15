@@ -14,9 +14,11 @@
       bat
       binutils
       cascadia-code
+      doctl
       eza
       htop
       jetbrains-mono
+      just
       nil
       oh-my-zsh
       vim
