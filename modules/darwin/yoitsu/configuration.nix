@@ -72,7 +72,7 @@
         autohide = true;
         mru-spaces = false;
         persistent-apps = [
-          "/System/Applications/Launchpad.app"
+          "/System/Applications/Apps.app"
         ];
         show-recents = false;
         tilesize = 48;
